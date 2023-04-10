@@ -1,5 +1,5 @@
 <?php 
-$currentMainPage ="adminHome";
+$currentMainPage ="EmpManage";
 include "adminHeader.php"; ?>
 <nav class="navbar navbar-expand-lg myNavbarSub" >
     <div class="container">
@@ -10,18 +10,14 @@ include "adminHeader.php"; ?>
     <div class="collapse navbar-collapse" id="navbarSupportedContentSub">
         <ul class="navbar-nav myNavbarNavSub justify-content-center">
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub"  href="admin.php">Sales Progress</a>
+                <a class="nav-link mynavLinkSub"  href="admin.php">Register Employee</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub active"  href="admin.php">Manage Admin</a>
-            </li>
-            <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub"  href="admin.php">Change Password</a>
+                <a class="nav-link mynavLinkSub"  href="admin.php">View Employees</a>
             </li>
         </ul>
 
     </div>
     </div>
 </nav>
-
 <?php include "adminFooter.php"; ?>
