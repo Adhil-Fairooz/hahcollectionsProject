@@ -18,7 +18,7 @@
 <nav class="navbar navbar-expand-lg my-navcolor" style="background-color: #7f8db4;">
     <div class="container-fluid ">
         <span class="navbar-brand mb-0 heading">
-            <img src="assets/imgs/hah-collection-logo.png" alt="Logo" class="logo">HAH <span class="post">Collections </span>
+            <img src="assets/imgs/hah-collection-logo1.png" alt="Logo" class="logo">HAH <span class="post">Collections </span>
         </span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
