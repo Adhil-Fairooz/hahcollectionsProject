@@ -10,14 +10,13 @@ include "adminHeader.php"; ?>
     <div class="collapse navbar-collapse" id="navbarSupportedContentSub">
         <ul class="navbar-nav myNavbarNavSub justify-content-center">
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub"  href="admin.php">Register Employee</a>
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'addEmp' ? 'active' : '' ?>"  href="AddEmp.php">Register Employee</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub"  href="admin.php">View Employees</a>
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'ViewEmp' ? 'active' : '' ?>"  href="ViewEmp.php">View Employees</a>
             </li>
         </ul>
 
     </div>
     </div>
 </nav>
-<?php include "adminFooter.php"; ?>

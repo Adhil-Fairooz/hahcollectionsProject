@@ -1,0 +1,11 @@
+.main-container{
+    border-radius: 0px;
+    margin: auto;
+}
+
+.main-container .main-body .main-row .main-col.sub-card{
+    margin: auto;
+}
+.main-container .main-body .main-row{
+    margin-bottom:2%;
+}

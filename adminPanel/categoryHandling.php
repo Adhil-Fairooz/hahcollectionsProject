@@ -10,13 +10,13 @@ include "adminHeader.php"; ?>
     <div class="collapse navbar-collapse" id="navbarSupportedContentSub">
         <ul class="navbar-nav myNavbarNavSub justify-content-center">
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub active"  href="admin.php">Add Main Category</a>
+                <a class="nav-link mynavLinkSub active"  href="#">Add Main Category</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub"  href="admin.php">Add Sub Category</a>
+                <a class="nav-link mynavLinkSub"  href="#">Add Sub Category</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub"  href="admin.php">Add Brand Names</a>
+                <a class="nav-link mynavLinkSub"  href="#">Add Brand Names</a>
             </li>
         </ul>
 

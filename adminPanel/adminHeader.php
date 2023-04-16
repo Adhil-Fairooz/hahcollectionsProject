@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  myNavbarNav justify-content-center">
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'adminHome' ? 'active' : '' ?>"  href="admin.php">Dashboard</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'adminHome' ? 'active' : '' ?>"  href="sales.php">Dashboard</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'EmpManage' ? 'active' : '' ?>"  href="employeeManagement.php">Employee Management</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'EmpManage' ? 'active' : '' ?>"  href="AddEmp.php">Employee Management</a>
                     </li>
                     <li class="nav-item mynavitem">
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'CategoryPage' ? 'active' : '' ?>"  href="categoryHandling.php">Category Handling</a>
