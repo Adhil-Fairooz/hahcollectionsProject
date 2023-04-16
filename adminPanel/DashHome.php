@@ -6,7 +6,7 @@ include "admin.php"; ?>
     <div class="card-body main-body">
         <div class="row main-row">
             <div class="col main-col">
-                <div class="card">
+                <div class="card sub-card">
                     <div class="card-header">Category Status</div>
                     <div class="card-body">
                         <div class="row">
@@ -48,8 +48,6 @@ include "admin.php"; ?>
                                     </div>
                                 </div>
                             </div>
-                            
-                            
                         </div>
                     </div>
                 </div>
