@@ -1,7 +1,6 @@
 <?php 
-$currentMainPage ="adminHome";
-include "adminHeader.php"; 
-?>
+$currentMainPage ="CategoryPage";
+include "adminHeader.php"; ?>
 <nav class="navbar navbar-expand-lg myNavbarSub" >
     <div class="container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContentSub" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,20 +10,17 @@ include "adminHeader.php";
     <div class="collapse navbar-collapse" id="navbarSupportedContentSub">
         <ul class="navbar-nav myNavbarNavSub justify-content-center">
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'adminHome' ? 'active' : '' ?>"  href="DashHome.php">Home</a>
+                <a class="nav-link mynavLinkSub active"  href="#">Add Main Category</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'sales' ? 'active' : '' ?>"  href="sales.php">Sales Progress</a>
+                <a class="nav-link mynavLinkSub"  href="#">Add Sub Category</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'manageAdmin' ? 'active' : '' ?>"  href="ManageAdmin.php">Manage Admin</a>
-            </li>
-            <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'adminPass' ? 'active' : '' ?>"  href="adminChangePassword.php">Change Password</a>
+                <a class="nav-link mynavLinkSub"  href="#">Add Brand Names</a>
             </li>
         </ul>
 
     </div>
     </div>
 </nav>
-
+<?php include "adminFooter.php"; ?>

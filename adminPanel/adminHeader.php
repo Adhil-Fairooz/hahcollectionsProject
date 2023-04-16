@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HAH collections</title>
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css" />
+    <!--fontawsome icons -->
+    <link rel="stylesheet" href="../assets/icons/css/all.min.css">
+    <!-- custom style -->
+    <link rel="stylesheet" href="../assets/css/admin-navbar-style-A.css" />
+</head>
+<body>  
+    <nav class="navbar navbar-expand-lg myNavbar" >
+        <div class="container-fluid">
+            <span class="navbar-band myNavbarBand">
+                <img src="../assets/imgs/hah-collection-logo1.png" alt="logo" class="logo"> Admin Panel
+            </span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav  myNavbarNav justify-content-center">
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'adminHome' ? 'active' : '' ?>"  href="sales.php">Dashboard</a>
+                    </li>
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'EmpManage' ? 'active' : '' ?>"  href="AddEmp.php">Employee Management</a>
+                    </li>
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'CategoryPage' ? 'active' : '' ?>"  href="categoryHandling.php">Category Handling</a>
+                    </li>
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink"  href="#">Product Management</a>
+                    </li>
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink"  href="#">Order Management</a>
+                    </li>
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink"  href="#">Delivery Handling</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </nav>
