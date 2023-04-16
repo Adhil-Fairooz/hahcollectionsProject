@@ -28,14 +28,10 @@
                 <li class="nav-item mynavitem">
                 <a class="nav-link mynavLink"  href="index.php">Home</a>
                 </li>
-                <li class="nav-item mynavitem dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Products</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
+                <form class="d-flex search-box">
+                    <input class="form-control search-input " type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
+                 </form>
             </ul>
                 <a class="btn btn-outline my-btn" href="login.php"><i class="far fa-user-circle fa-lg"></i> Sign In</a>
                 <button class="btn btn-outline my-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-cart-plus fa-lg"></i> Cart</button>
