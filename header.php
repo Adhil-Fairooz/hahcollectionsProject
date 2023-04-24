@@ -33,6 +33,7 @@
                     <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
                  </form>
             </ul>
+            
                 <a class="btn btn-outline my-btn" href="login.php"><i class="far fa-user-circle fa-lg"></i> Sign In</a>
                 <button class="btn btn-outline my-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-cart-plus fa-lg"></i> Cart</button>
             
