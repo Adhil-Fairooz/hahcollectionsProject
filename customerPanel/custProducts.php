@@ -254,5 +254,6 @@ include "customerHeader.php"; ?>
         $("#sidebar").toggleClass("active");
       });
     });
+
   </script>
 <?php include "customerFooter.php"; ?>

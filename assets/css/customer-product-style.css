@@ -66,6 +66,18 @@ body {
       margin-left: -250px;
     }
     #sidebar.active {
+      min-width: 90%;
+      max-width: 90%;
+      margin-left: 0;
+    }
+  }
+  @media (max-width: 450px) {
+    #sidebar {
+      margin-left: -250px;
+    }
+    #sidebar.active {
+      min-width: 90%;
+      max-width: 90%;
       margin-left: 0;
     }
   }
