@@ -7,48 +7,76 @@ include "ProductManagement.php"; ?>
     <div class="card mt-3">
         <div class="card-header mycardheader">Add New Product</div>
         <div class="card-body">
-            <form action="#" method="post">
+            <form action="#" method="post" enctype="multipart/form-data">
                 <div class="row myrow">
                     <div class="col-md-3">
                         <div class="form-floating myFormFloating">
-                            <select class="form-select myselect" id="floatingSelect">
+                            <select class="form-select myselect" id="floatingSelect" name="pMainCat">
                                 <option value="0">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php
+                                    $mainCat = $categoryObj->getMainCategoryData();
+                                    if($mainCat){
+                                    foreach($mainCat as $row){
+                                    ?>
+                                    <option value="<?=$row['Main_ID']?>"><?=$row['Name']?></option>
+                                    <?php
+                                    }
+                                }
+                                ?>
                             </select>
                             <label for="floatingSelect">Select Main category</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-floating myFormFloating">
-                            <select class="form-select myselect" id="floatingSelect" aria-label="Floating label select example">
+                            <select class="form-select myselect" id="floatingSelect" name="psubCat">
                                 <option value="0">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php
+                                    $subCat = $categoryObj->getSubCategoryData();
+                                    if($subCat){
+                                    foreach($subCat as $row){
+                                    ?>
+                                    <option value="<?=$row['Sub_ID']?>"><?=$row['Name']?></option>
+                                    <?php
+                                    }
+                                }
+                                ?>
                             </select>
                             <label for="floatingSelect">Select Sub category</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-floating myFormFloating">
-                            <select class="form-select myselect" id="floatingSelect" aria-label="Floating label select example">
-                                <option value="0">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="form-select myselect" id="floatingSelect" name="pBrand">
+                            <option value="0">Select</option>
+                            <?php
+                                $brand = $categoryObj->getBrandData();
+                                if($brand){
+                                    foreach($brand as $row){
+                                    ?>
+                                    <option value="<?=$row['Brand_ID']?>"><?=$row['Name']?></option>
+                                    <?php
+                                    }
+                                }
+                                ?>
                             </select>
                             <label for="floatingSelect">Select Brand Name</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-floating myFormFloating">
-                            <select class="form-select myselect" id="floatingSelect" aria-label="Floating label select example">
+                            <select class="form-select myselect" id="floatingSelect" name="pSupplier">
                                 <option value="0">Select</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <?php
+                                $supplier = $supplierObj->getsupplierData();
+                                if($supplier){
+                                    foreach($supplier as $row){
+                                    ?>
+                                    <option value="<?=$row['Sup_ID']?>"><?=$row['Sup_Name']?></option>
+                                    <?php
+                                    }
+                                }
+                                ?>
                             </select>
                             <label for="floatingSelect">Select Supplier</label>
                         </div>
@@ -57,13 +85,13 @@ include "ProductManagement.php"; ?>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating">
-                            <input type="text" class="form-control myinputText" id="floatingInput" placeholder=" ">
+                            <input type="text" class="form-control myinputText" name="pName" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">Product Name</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating">
-                            <textarea class="form-control myinputTextArea" placeholder=" " id="floatingTextarea"></textarea>
+                            <textarea class="form-control myinputTextArea" name="pDesc"  placeholder=" " id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Product Description</label>
                         </div>
                     </div>
@@ -71,13 +99,13 @@ include "ProductManagement.php"; ?>
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <div class="form-floating mb-3 myFormFloating">
-                            <input type="text" class="form-control myinputText" id="floatingInput" placeholder=" ">
+                            <input type="text" class="form-control myinputText" name="pUnitPrice" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">Product Unit Price (Rs.)</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating mb-3">
-                            <input type="text" class="form-control myinputText" id="floatingInput" placeholder=" ">
+                            <input type="text" class="form-control myinputText" name="pSalePrice" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">Product Selling Price (Rs.)</label>
                         </div>
                     </div>
@@ -101,7 +129,7 @@ include "ProductManagement.php"; ?>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="btn-col">
-                            <button class="btn myBtn" id="btnAdd">Add Product</button>
+                            <button class="btn myBtn" id="btnAdd" type="submit" name="btnProduct">Add Product</button>
                         </div>
                         
                     </div>
@@ -111,4 +139,32 @@ include "ProductManagement.php"; ?>
         </div>
     </div>
 </div>
+<?php 
+if(isset($_POST['btnProduct'])){
+    $productData = [
+        "pName" => mysqli_real_escape_string($db->conn,$_POST['pName']),
+        "pDesc" => mysqli_real_escape_string($db->conn,$_POST['pDesc']),
+        "pUnitPrice" => mysqli_real_escape_string($db->conn,$_POST['pUnitPrice']),
+        "pSalePrice" => mysqli_real_escape_string($db->conn,$_POST['pSalePrice'])
+    ];
+    $categorize = [
+        "MId" => mysqli_real_escape_string($db->conn,$_POST['pMainCat']),
+        "SId" => mysqli_real_escape_string($db->conn,$_POST['psubCat']),
+        "BId" => mysqli_real_escape_string($db->conn,$_POST['pBrand']),
+        "Sup_ID" => mysqli_real_escape_string($db->conn,$_POST['pSupplier'])
+    ]; 
+    $resProduct = $productObj->addNewProduct($productData,$_FILES['imageFile']['tmp_name'][0],$_FILES['imageFile']['tmp_name'][1],$_FILES['imageFile']['tmp_name'][2]);
+    if($resProduct){
+        $resCategorize = $productObj->categorizeProduct($categorize);
+        if($resCategorize){
+            echo"<script>Swal.fire({icon:'success',title:'Done !',text:'A new product added successfully'});</script>";
+        }else{
+            echo"<script>Swal.fire({icon:'error',title:'Something is not right',text:'Query Failed : Categorize'});</script>";
+        }
+    }else{
+        echo"<script>Swal.fire({icon:'error',title:'Something is not right',text:'Query Failed : Product'});</script>";
+    }
+}
+
+?>
 <?php include "adminFooter.php"; ?>

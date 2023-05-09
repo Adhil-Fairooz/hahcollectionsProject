@@ -1,6 +1,16 @@
 <?php 
 $currentMainPage ="products";
 include "adminHeader.php"; 
+include "..\classes\DBConnect.php";
+include "..\classes\ProductController.php";
+include "..\classes\CategoryController.php";
+include "..\classes\SupplierController.php";
+$db = new DatabaseConnection;
+$colorObj = new ProductController;
+$sizeObj = new ProductController;
+$productObj = new ProductController;
+$categoryObj = new CategoryController;
+$supplierObj = new SupplierController;
 ?>
 <nav class="navbar navbar-expand-lg myNavbarSub" >
     <div class="container">

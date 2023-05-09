@@ -1,11 +1,6 @@
 <?php 
 $currentSubPage="colorSize";
 include "ProductManagement.php"; 
-include "..\classes\DBConnect.php";
-include "..\classes\ProductController.php";
-$db = new DatabaseConnection;
-$colorObj = new ProductController;
-$sizeObj = new ProductController;
 ?>
 
 <script type="module" src="../assets/js/datalist-css.min.js"></script>

@@ -1,18 +1,28 @@
 <?php
+require_once "GenerateID.php";
 class CategoryController{
     public function __construct(){
         $db = new DatabaseConnection;
-        $generateId = new GenerateID;
+        $this->generateId = new GenerateID;
         $this->conn = $db ->conn;
     }
     /*Main category*/
     public function addNewMainCategory($mainName){
         $idType = "mainCat";
-        $mainId = $generateId->getNewID($idType);
+        $mainId = $this->generateId->getNewID($idType);
         $sql_add_mainCat = "INSERT INTO main_category VALUES('$mainId','$mainName');";
         if($this->conn->query($sql_add_mainCat)){
-            $generateId->updatetID($idType);
+            $this->generateId->updatetID($idType);
             return true;
+        }else{
+            return false;
+        }
+    }
+    public function getMainCategoryData(){
+        $sql_get_main_data = "SELECT * FROM main_category;";
+        $results = $this->conn->query($sql_get_main_data);
+        if($results->num_rows > 0){
+            return $results;
         }else{
             return false;
         }
@@ -20,11 +30,20 @@ class CategoryController{
     /*Sub category*/
     public function addNewSubCategory($subName){
         $idType = "subCat";
-        $subId = $generateId->getNewID($idType);
+        $subId = $this->generateId->getNewID($idType);
         $sql_add_subCat = "INSERT INTO sub_category VALUES('$subId','$subName');";
         if($this->conn->query($sql_add_subCat)){
-            $generateId->updatetID($idType);
+            $this->generateId->updatetID($idType);
             return true;
+        }else{
+            return false;
+        }
+    }
+    public function getSubCategoryData(){
+        $sql_get_sub_data = "SELECT * FROM sub_category;";
+        $results = $this->conn->query($sql_get_sub_data);
+        if($results->num_rows > 0){
+            return $results;
         }else{
             return false;
         }
@@ -32,11 +51,20 @@ class CategoryController{
     /*brand category*/
     public function addNewBrand($brandName){
         $idType = "brand";
-        $brandId = $generateId->getNewID($idType);
+        $brandId = $this->generateId->getNewID($idType);
         $sql_add_brand = "INSERT INTO brand VALUES('$brandId','$brandName');";
         if($this->conn->query($sql_add_brand)){
-            $generateId->updatetID($idType);
+            $this->generateId->updatetID($idType);
             return true;
+        }else{
+            return false;
+        }
+    }
+    public function getBrandData(){
+        $sql_get_brand_data = "SELECT * FROM brand;";
+        $results = $this->conn->query($sql_get_brand_data);
+        if($results->num_rows > 0){
+            return $results;
         }else{
             return false;
         }

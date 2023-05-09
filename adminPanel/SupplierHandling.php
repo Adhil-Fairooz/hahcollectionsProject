@@ -1,8 +1,10 @@
 <?php 
-$currentMainPage ="CategoryPage";
-include "adminHeader.php"; 
+$currentMainPage ="Supplier";
+include "adminHeader.php";
 include "..\classes\DBConnect.php";
-include "..\classes\CategoryController.php";
+include "..\classes\SupplierController.php";
+$db = new DatabaseConnection;
+$supplierObj = new SupplierController; 
 ?>
 <nav class="navbar navbar-expand-lg myNavbarSub" >
     <div class="container">
@@ -13,17 +15,16 @@ include "..\classes\CategoryController.php";
     <div class="collapse navbar-collapse" id="navbarSupportedContentSub">
         <ul class="navbar-nav myNavbarNavSub justify-content-center">
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'mainCat' ? 'active' : '' ?>"  href="addMainCategory.php">Add Main Category</a>
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'viewSup' ? 'active' : '' ?>"  href="viewSupplier.php">View suppliers</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'subCat' ? 'active' : '' ?>"  href="addSubCategory.php">Add Sub Category</a>
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'addSup' ? 'active' : '' ?>"  href="addSupplier.php">Add New Suppliers</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'Brand' ? 'active' : '' ?>"  href="addBrandName.php">Add Brand Names</a>
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'reOrderStock' ? 'active' : '' ?>"  href="reOrder.php">Reorder stock</a>
             </li>
         </ul>
 
     </div>
     </div>
 </nav>
-<?php include "adminFooter.php"; ?>

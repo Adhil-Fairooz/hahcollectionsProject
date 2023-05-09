@@ -1,7 +1,7 @@
 <?php 
-include "GenerateID.php";
+require_once "GenerateID.php";
 class ProductController{
-
+    private $productId;
     public function __construct(){
         $db = new DatabaseConnection;
         $this->conn = $db ->conn;
@@ -64,29 +64,53 @@ class ProductController{
             return false;
         }
     }
+    public function getSizeValue($sizeType){
+        $sql_get_Type = "SELECT Size_ID,Size_Value FROM size WHERE Size_Type = '$sizeType';";
+        $results = $this->conn->query($sql_get_Type);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    
     /*product Data*/
     private function imgDbFormat($file){
-        $imageTempName = $file['tmp_Name'];
-        $imageContent = addslashes(file_get_contents($imageTempName));
+        /*$imageTempName = $file['tmp_Name'];*/
+        $imageContent = addslashes(file_get_contents($file));
         return $imageContent;
     }
     public function addNewProduct($productData,$image1,$image2,$image3){
        $idType = "product";
-       $productId = $this->generateId->getNewID($idType);
+       $this->productId = $this->generateId->getNewID($idType);
        $productName = $productData['pName'];
        $productDesc = $productData['pDesc'];
        $productUnitPrice = $productData['pUnitPrice'];
        $productSalePrice = $productData['pSalePrice'];
        $productImg1 = $this->imgDbFormat($image1);
-       $productImg1 = $this->imgDbFormat($image2);
-       $productImg1 = $this->imgDbFormat($image3);
-       $sql_add_product = "INSERT INTO product VALUES('$productId','$productName','$productDesc','$productUnitPrice','$productSalePrice','$productImg1','$productImg2','$productImg3')";
+       $productImg2 = $this->imgDbFormat($image2);
+       $productImg3 = $this->imgDbFormat($image3);
+       $sql_add_product = "INSERT INTO product VALUES('$this->productId','$productName','$productDesc','$productUnitPrice','$productSalePrice','$productImg1','$productImg2','$productImg3')";
        if($this->conn->query($sql_add_product)){
         $this->generateId->updatetID($idType);
         return true;
        }else{
         return false;
        }
+    }
+    /* product categoriation*/
+    public function categorizeProduct($CategoryData){
+        $productId = $this->productId;
+        $mainId = $CategoryData['MId'];
+        $subId = $CategoryData['SId'];
+        $brandId = $CategoryData['BId'];
+        $supplyID = $CategoryData['Sup_ID'];
+        $sql_categorizeProduct = "INSERT INTO categorization VALUES('$productId','$mainId','$subId','$brandId','$supplyID')";
+        if($this->conn->query($sql_categorizeProduct)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /* Product stock based on color and size */
@@ -103,6 +127,28 @@ class ProductController{
             return false;
         }
     }
+
+    public function getProductDataForStock(){
+        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_Desc, SUM(s.Stock_Qty) FROM product p, product_variation s WHERE p.Product_ID = s.Product_ID GROUP BY(p.Product_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
+    public function getProductName($productId){
+        $sql_get_data = "SELECT Pro_Name FROM product WHERE Product_ID = '$productId';";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            $row = $results -> fetch_assoc();
+            return $row['Pro_Name'];
+        }else{
+            return false;
+        }
+    }
+
 }
 
 ?>
