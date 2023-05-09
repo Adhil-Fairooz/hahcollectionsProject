@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="../assets/icons/css/all.min.css">
     <!-- custom style -->
     <link rel="stylesheet" href="../assets/css/admin-navbar-style-A.css" />
+    <!-- Sweet Alert 2-->
+    <script src="..\assets\sweetalert2\jquery-3.5.1.min.js"></script>
+    <script src="..\assets\sweetalert2\sweetalert2.all.min.js"></script>
 </head>
 <body>  
     <nav class="navbar navbar-expand-lg myNavbar" >
@@ -25,16 +28,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  myNavbarNav justify-content-center">
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'adminHome' ? 'active' : '' ?>"  href="sales.php">Dashboard</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'adminHome' ? 'active' : '' ?>"  href="DashHome.php">Dashboard</a>
                     </li>
                     <li class="nav-item mynavitem">
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'EmpManage' ? 'active' : '' ?>"  href="AddEmp.php">Employee Management</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'CategoryPage' ? 'active' : '' ?>"  href="categoryHandling.php">Category Handling</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'CategoryPage' ? 'active' : '' ?>"  href="addMainCategory.php">Category Handling</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink"  href="#">Product Management</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'Supplier' ? 'active' : '' ?>"  href="viewSupplier.php">Supplier</a>
+                    </li>
+                    <li class="nav-item mynavitem">
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'products' ? 'active' : '' ?>"  href="viewProduct.php">Product Management</a>
                     </li>
                     <li class="nav-item mynavitem">
                         <a class="nav-link mynavLink"  href="#">Order Management</a>

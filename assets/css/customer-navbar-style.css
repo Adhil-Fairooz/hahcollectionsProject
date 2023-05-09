@@ -1,0 +1,75 @@
+.myNavbar{
+    background-color: #7f8db4;
+}
+
+.myNavbar .myNavbarBand{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.myNavbar .myNavbarBand .logo{
+    width:45px;
+    height:45px;
+}
+
+.myNavbar .myNavbarNav{
+    width:100%;
+}
+
+.myNavbar .myNavbarNav .mynavitem{
+    margin: auto;
+}
+
+.myNavbar .myNavbarNav .mynavitem:hover{
+    border-radius: 10px;
+    background-color: #f1f2f6;
+    transition: 0.2s ease-in-out;
+}
+.myNavbar .myNavbarNav .mynavitem .mynavLink{
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+}
+.myNavbar .myNavbarNav .mynavitem .active{
+    width: 100%;
+    border-radius: 10px;
+    background-color: #f1f2f6;
+    color: #353b48 ;
+}
+.myNavbar .myNavbarNav .mynavitem .mynavLink:hover{
+    color: #353b48;
+}
+.navbar .myNavbarBand{
+    font-size: 25px;
+    font-family: oblique;
+}
+.navbar .myNavbarBand .post{
+    font-size: 25px;
+    font-family: Lucida Handwriting;
+} 
+
+.myNavbar .btn-box{
+    display:flex;
+    width: 20%;   
+}
+.myNavbar .btn-box .my-btn{
+    margin: auto;
+    font-weight: 600;
+}
+.myNavbar .btn-box .my-btn:hover{
+    border : 4px solid #f1f2f6;
+    color : #f1f2f6;
+}
+.myNavbar .btn-box .my-btn-signout:hover{
+    background-color: #ff6b6b;
+}
+
+/*responsive*/
+
+@media screen and (max-width:990px) {
+    .myNavbar .btn-box{
+        width: 100%;        
+    }
+}
