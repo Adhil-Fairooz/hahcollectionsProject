@@ -69,5 +69,14 @@ class CategoryController{
             return false;
         }
     }
+    public function getCategorizationData($mainCategory){
+        $sql_get_data = "SELECT s.Sub_ID,s.Name FROM categorization c, sub_category s WHERE c.Main_ID = '$mainCategory' AND s.Sub_ID = c.Sub_ID GROUP BY(s.Name)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
 }
 ?>
