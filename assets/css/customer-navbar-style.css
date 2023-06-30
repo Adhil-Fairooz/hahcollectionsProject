@@ -1,5 +1,5 @@
 .myNavbar{
-    background-color: #7f8db4;
+    background-color: #686de0;
 }
 
 .myNavbar .myNavbarBand{
@@ -52,7 +52,7 @@
 
 .myNavbar .btn-box{
     display:flex;
-    width: 20%;   
+    width: 30%;   
 }
 .myNavbar .btn-box .my-btn{
     margin: auto;
@@ -64,6 +64,39 @@
 }
 .myNavbar .btn-box .my-btn-signout:hover{
     background-color: #ff6b6b;
+}
+
+.cart-product-card .cart-product-header{
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    background-color: #b9bcf1;
+}
+.cart-product-card .cart-product-header span{
+    font-weight: 600;
+}
+.cart-product-card .cart-product-header .btn-removeproduct{
+    margin-left: auto;
+    order: 2;
+    height: 2rem;
+    border: none;
+}
+.cart-product-card .cart-product-header .btn-removeproduct:hover{
+    color: red;
+}
+.cart-product-card .cart-product-body .cart-img{
+    width:60px;
+    height: 70px;
+}
+.cart-product-card .cart-product-body .col-img{
+    border: 2px solid grey;
+}
+.cart-product-card .cart-product-body p{
+    margin-bottom: 0px;
+}
+
+.cart-footer{
+    background-color: #b9bcf1;
 }
 
 /*responsive*/
