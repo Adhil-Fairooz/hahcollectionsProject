@@ -98,6 +98,42 @@ class ProductController{
         return false;
        }
     }
+    public function getProductInfomation($productId){
+        $sql_get_data = "SELECT * FROM product WHERE Product_ID='$productId'";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getallProducts(){
+        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_IMG_1, SUM(s.Stock_Qty) FROM product p, product_variation s WHERE p.Product_ID = s.Product_ID GROUP BY(p.Product_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getallProductsOnMainSub($main,$sub){
+        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_IMG_1, SUM(s.Stock_Qty) FROM product p, product_variation s, categorization c WHERE p.Product_ID = s.Product_ID AND p.Product_ID = c.Product_ID AND c.Main_ID ='$main' AND c.Sub_ID = '$sub' GROUP BY(p.Product_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getallProductsOnMain($main){
+        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_IMG_1, SUM(s.Stock_Qty) FROM product p, product_variation s, categorization c WHERE p.Product_ID = s.Product_ID AND p.Product_ID = c.Product_ID AND c.Main_ID ='$main' GROUP BY(p.Product_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
     /* product categoriation*/
     public function categorizeProduct($CategoryData){
         $productId = $this->productId;
@@ -112,7 +148,6 @@ class ProductController{
             return false;
         }
     }
-
     /* Product stock based on color and size */
 
     public function addStockInfo($stockData){
@@ -127,9 +162,35 @@ class ProductController{
             return false;
         }
     }
-
+    public function getProductColors($productId){
+        $sql_get_data = "SELECT c.Color_ID,c.Color_Value FROM color c,product_variation pv WHERE c.Color_ID = pv.Color_ID AND pv.Product_ID = '$productId' GROUP BY(c.Color_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getProductSize($productId){
+        $sql_get_data = "SELECT s.Size_ID,s.Size_Value FROM size s,product_variation pv WHERE s.Size_ID = pv.Size_ID AND pv.Product_ID = '$productId' GROUP BY(s.Size_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
     public function getProductDataForStock(){
-        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_Desc, SUM(s.Stock_Qty) FROM product p, product_variation s WHERE p.Product_ID = s.Product_ID GROUP BY(p.Product_ID)";
+        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_Desc FROM product p";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getStockQuantity($pid,$sid,$cid){
+        $sql_get_data = "SELECT Stock_Qty  FROM product_variation WHERE Product_ID='$pid' AND Size_ID='$sid' AND Color_ID='$cid'";
         $results = $this->conn->query($sql_get_data);
         if($results->num_rows > 0){
             return $results;
