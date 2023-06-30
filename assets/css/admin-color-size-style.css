@@ -61,6 +61,11 @@ datalist {
 .myrow{
   margin-bottom: 20px;
 }
+label{
+  color:#487eb0;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
 
 table{
   border: 2px solid #273c75;
