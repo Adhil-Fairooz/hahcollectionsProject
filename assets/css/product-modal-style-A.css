@@ -1,5 +1,7 @@
 /*modal styles*/
-
+.my-modal-content{
+    background-color: #f1f2f6;
+}
 .my-modal-content .my-modal-header .checked{
     color:orange;
 }
@@ -7,6 +9,7 @@
 .my-modal-content .my-modal-header h5{
     font-size: 25px;
     font-weight: bold;
+
 }
 
 .my-modal-content .my-modal-header .rating{
@@ -21,6 +24,8 @@
 }
 
 .my-modal-body .my-modal-container .my-modal-slider-img{
+    max-height: 390px;
+    max-width: 340px;
     filter:brightness(1);
 }
 
@@ -71,5 +76,66 @@
     font-size: 16px;
 
 }
+.my-modal-body .my-modal-container .product-details .col-data .stock-in{
+    color: green;
+    font-weight: 500;
+}
+.my-modal-body .my-modal-container .product-details .col-data .stock-out{
+    color: red;
+    font-weight: 500;
+}
 
+/* -- quantity box -- */
+
+.quantity {
+    display: inline-block; }
+   
+   .quantity .input-text.qty {
+    width: 35px;
+    height: 39px;
+    padding: 0 5px;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid #efefef;
+   }
+   
+   .quantity.buttons_added {
+    text-align: left;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: top; }
+   
+   .quantity.buttons_added input {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+    box-shadow: none;
+   }
+   
+   .quantity.buttons_added .minus,
+   .quantity.buttons_added .plus {
+    padding: 7px 10px 8px;
+    height: 41px;
+    background-color: #ffffff;
+    border: 1px solid #efefef;
+    cursor:pointer;}
+   
+   .quantity.buttons_added .minus {
+    border-right: 0; }
+   
+   .quantity.buttons_added .plus {
+    border-left: 0; }
+   
+   .quantity.buttons_added .minus:hover,
+   .quantity.buttons_added .plus:hover {
+    background: #eeeeee; }
+   
+   .quantity input::-webkit-outer-spin-button,
+   .quantity input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+    
+    .quantity.buttons_added .minus:focus,
+   .quantity.buttons_added .plus:focus {
+    outline: none; }
 
