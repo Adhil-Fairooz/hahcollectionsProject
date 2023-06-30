@@ -27,7 +27,10 @@ $supplierObj = new SupplierController;
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'add' ? 'active' : '' ?>"  href="addProduct.php">New Product</a>
             </li>
             <li class="nav-item mynavitemSub">
-                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'colorSize' ? 'active' : '' ?>"  href="addcolorsize.php">New Color \ Size</a>
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'colorSize' ? 'active' : '' ?>"  href="addcolorsize.php">New Color</a>
+            </li>
+            <li class="nav-item mynavitemSub">
+                <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'Size' ? 'active' : '' ?>"  href="addSize.php">New Size</a>
             </li>
             <li class="nav-item mynavitemSub">
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'stock' ? 'active' : '' ?>"  href="manageStock.php">Manage Stock</a>
