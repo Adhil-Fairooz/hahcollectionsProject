@@ -26,6 +26,11 @@ body{
     letter-spacing: 1px;
 
 }
+label{
+    color:#487eb0;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
 
 .myFormFloating{
     border-color:none;
