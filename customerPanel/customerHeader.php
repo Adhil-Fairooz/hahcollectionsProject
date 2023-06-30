@@ -1,3 +1,9 @@
+<?php 
+session_start();
+$customerID = "C001";
+$_SESSION['cart_customerID'] = $customerID;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +19,12 @@
     <!-- custom style -->
     <link rel="stylesheet" href="../assets/css/customer-navbar-style.css" />
     <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="..\assets\sweetalert2\jquery-3.5.1.min.js"></script>
+    <script src="..\assets\sweetalert2\sweetalert2.all.min.js"></script>
+    <script src="..\assets\js\customer-cart.js"></script>
+    
 </head>
-<body>  
+<body onload="loadAllProducts()">  
     <nav class="navbar navbar-expand-lg myNavbar" >
         <div class="container-fluid">
             <span class="navbar-band myNavbarBand">
@@ -44,20 +53,40 @@
                 </ul>
                 <div class="btn-box">
                     <a class="btn btn-outline my-btn my-btn-signout" href="../login.php"><i class="far fa-user-circle fa-lg"></i> Sign out</a>
-                    <button class="btn btn-outline my-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-cart-plus fa-lg"></i> Cart</button>
+                    <button class="btn btn-outline my-btn" id="addtocart" type="button" data-custId="<?php echo $customerID; ?>" onclick="loadCart()"><i class="fas fa-cart-plus fa-lg"></i> Cart
+                    <span class="badge rounded-pill bg-danger" id="cartBadge">
+                        
+                    </span>
+                </button>
                 </div>
             </div>
         </div>
         
     </nav>
     <div class="container">
-    <div class="offcanvas offcanvas-end my-canvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Your Cart</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body my-canvas-body">
+        <div class="offcanvas offcanvas-end my-canvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Your Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
 
+            <div class="offcanvas-body my-canvas-body">
+                
+
+            </div>
+
+            <div class="offcanvas-footer">
+                <div class="card">
+                    <div class="card-body cart-footer">
+                        <div class="row" id="cartTotal">
+                            <span class="h5">Your Total is : Rs 0.00</span>
+                        </div>
+                        <div class="row">
+                        <a class="btn btn-primary" href="checkout.php"><i class="far fa-arrow-alt-circle-right"></i> Checkout</a>
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+        </div>
     </div>
-    </div>
-</div>
