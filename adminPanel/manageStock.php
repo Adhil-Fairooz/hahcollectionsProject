@@ -12,7 +12,6 @@ include "ProductManagement.php"; ?>
                         <th scope="col">Product ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Total Qty</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -25,7 +24,6 @@ include "ProductManagement.php"; ?>
                                     <th scope="row"><?=$row['Product_ID']?></th>
                                     <td><?=$row['Pro_Name']?></td>
                                     <td><?=$row['Pro_Desc']?></td>
-                                    <td><?=$row['SUM(s.Stock_Qty)']?></td>
                                     <td>
                                         <button class="btn btn-outline-success viewStockModal" data-productId = "<?=$row['Product_ID']?>"><i class="fas fa-folder-plus"></i> Add New Stock</button>
                                         <button class="btn btn-outline-danger"><i class="fas fa-edit"></i> Update Stock</button>
