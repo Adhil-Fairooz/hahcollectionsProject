@@ -46,21 +46,38 @@ body {
     color: #fff;
   }
   #sidebar ul.components {
-    padding: 20px 0;
+    padding: 10px 0;
   }
   #sidebar ul li {
-    margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 16px;
+    list-style: none;
   }
   #sidebar ul li a {
     padding: 10px;
-    font-size: 18px;
+    font-size: 16px;
     display: block;
+    text-decoration: none;
   }
   #sidebar ul li a:hover {
     color: #fff;
     background-color: #6d7fcc;
   }
+  .my-accordion-item{
+    background-color: white;
+  }
+  .my-accordion-item .my-accordion-body{
+    padding: 0px 0px 0px 0px;
+  }
+  .my-accordion-item .my-accordion-header .my-accordion-button:focus{
+      box-shadow: none;
+      background-color: white;
+      border-color: rgba(0,0,0,.125);
+  }
+  .my-accordion-item .my-accordion-header .my-accordion-button:hover{
+    background-color: #6d7fcc;
+    color : #fff
+}
+  
   @media (max-width: 375px) {
     #sidebar {
       margin-left: -250px;
@@ -119,6 +136,8 @@ body {
 
 .my-card-content .my-card-body .row .items .card-img{
     margin-top: 5px;
+    max-height: 262px;
+    max-width: 262px;
     
 }
 .my-card-content .my-card-body .row .items .card-img:hover{
