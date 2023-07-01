@@ -26,6 +26,7 @@ include "OfferManagement.php";
                     <thead>
                         <tr>
                             <th scope="col">Promo ID</th>
+                            <th scope="col">Offer Name</th>
                             <th scope="col">Offer Title</th>
                             <th scope="col">Description</th>
                             <th scope="col">Discount Type</th>
@@ -43,6 +44,7 @@ include "OfferManagement.php";
                                 foreach($results as $row){?>
                                     <tr>
                                         <th scope="col"><?=$row['Promo_ID']?></th>
+                                        <td><?=$row['Offer_Name']?></td>
                                         <td><?=$row['Offer_Title']?></td>
                                         <td><?=$row['Description']?></td>
                                         <td><?=$row['Discount_Type']?></td>
@@ -51,14 +53,14 @@ include "OfferManagement.php";
                                         <td><?=$row['Valid_To_Date']?></td>
                                         <td><?=$row['claimed_Status']?></td>
                                         <td>
-                                            <button class="btn btn-outline-danger" data-offerId="<?=$row['Promo_ID']?>" id="del-offer"><i class="fas fa-trash-alt"></i></button>
-                                            <button class="btn btn-outline-success" data-offerId="<?=$row['Promo_ID']?>" id="update-offer"><i class="fas fa-edit"></i></button>
+                                            <a class="btn btn-outline-danger" data-offerId="<?=$row['Promo_ID']?>" id="del-offer" onclick = "deletePrivate(this)"><i class="fas fa-trash-alt"></i></a>
+                                            <button class="btn btn-outline-success" data-offerId="<?=$row['Promo_ID']?>" onclick = "showupdatePrivateOffer(this)" id="update-offer"><i class="fas fa-edit"></i></button>
                                         </td>
                                     </tr>
                             <?php
                             }
                             }else{
-                                echo "<tr><td colspan='5'>No Records found</td></tr>";
+                                echo "<tr><td colspan='9'><label>No Records found</td><label></tr>";
                             }
                         ?>
                     </tbody>
@@ -80,6 +82,7 @@ include "OfferManagement.php";
 if(isset($_POST['offer-private-add'])){
     $data = [
         "title" => mysqli_real_escape_string($db->conn,$_POST['off_title']),
+        "name" => mysqli_real_escape_string($db->conn,$_POST['off_name']),
         "desc" => mysqli_real_escape_string($db->conn,$_POST['off_Desc']),
         "type" => mysqli_real_escape_string($db->conn,$_POST['off_type']),
         "value" => mysqli_real_escape_string($db->conn,$_POST['off_value']),
@@ -89,6 +92,26 @@ if(isset($_POST['offer-private-add'])){
     $result = $offerObj->addPrivateOffers($data);
     if($result){
         echo"<script>Swal.fire({icon:'success',title:'Done !',text:'A new offer added successfully'});</script>";
+    }else{
+        echo"<script>Swal.fire({icon:'error',title:'Something is not right',text:'Query Failed : addOffer'});</script>";
+    }
+}
+
+if(isset($_POST['offer-private-update'])){
+    $data = [
+        "ID" => mysqli_real_escape_string($db->conn,$_POST['promoID']),
+        "title" => mysqli_real_escape_string($db->conn,$_POST['off_title']),
+        "name" => mysqli_real_escape_string($db->conn,$_POST['off_name']),
+        "desc" => mysqli_real_escape_string($db->conn,$_POST['off_Desc']),
+        "type" => mysqli_real_escape_string($db->conn,$_POST['off_type']),
+        "value" => mysqli_real_escape_string($db->conn,$_POST['off_value']),
+        "FDate" => mysqli_real_escape_string($db->conn,$_POST['off_from_Date']),
+        "TDate" => mysqli_real_escape_string($db->conn,$_POST['off_to_Date']),
+        "status" => mysqli_real_escape_string($db->conn,$_POST['off_status'])
+    ];
+    $result = $offerObj->UpdatePrivateOffer($data);
+    if($result){
+        echo"<script>Swal.fire({icon:'success',title:'Done !',text:' offer Updated successfully'});</script>";
     }else{
         echo"<script>Swal.fire({icon:'error',title:'Something is not right',text:'Query Failed : addOffer'});</script>";
     }
