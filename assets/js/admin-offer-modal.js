@@ -26,6 +26,88 @@ $(document).ready(function(){
     });
 });
 
+function showupdatePublicOffer(element){
+    var offerID = $(element).attr('data-offerId');
+    $.ajax({
+        url:"addOffer.php",
+        type:"post",
+        data:{offer_id:offerID,task:'update',mode:'public'},
+        success: function(response){
+            $(".modal-content").html(response);
+            $("#add-Offer-modal").modal('show');
+        }
+    });
+
+}
+function showupdatePrivateOffer(element){
+    var offerID = $(element).attr('data-offerId');
+    $.ajax({
+        url:"addOffer.php",
+        type:"post",
+        data:{offer_id:offerID,task:'update',mode:'private'},
+        success: function(response){
+            $(".modal-content").html(response);
+            $("#add-Offer-modal").modal('show');
+        }
+    });
+
+}
+
+function deletePrivate(element){
+    var offerID = $(element).attr('data-offerId');
+    Swal.fire({
+        title: 'Do you want to delete '+offerID+'?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url:"addOffer.php",
+                data:{offer_id:offerID,task:'delete',mode:'private'},
+                success: function(response){
+                    if(parseInt(response) === 1){
+                        Swal.fire({icon:'info',title:'Done !',text:'Offer Deleted'});
+                    }else{
+                        console.log(response);
+                        Swal.fire({icon:'warning',title:'Something is not right',text:''});
+                    }
+                }
+            });
+        }
+      });
+    
+}
+function deletePublic(element){
+    var offerID = $(element).attr('data-offerId');
+    Swal.fire({
+        title: 'Do you want to delete '+offerID+'?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url:"addOffer.php",
+                data:{offer_id:offerID,task:'delete',mode:'private'},
+                success: function(response){
+                    if(parseInt(response) === 1){
+                        Swal.fire({icon:'info',title:'Done !',text:'Offer Deleted'});
+                    }else{
+                        console.log(response);
+                        Swal.fire({icon:'warning',title:'Something is not right',text:''});
+                    }
+                }
+            });
+        }
+      });
+    
+}
+
 function preview(){
     let btnAdd = document.getElementById("btnAdd");
     let fileInput = document.getElementById("file-input");
