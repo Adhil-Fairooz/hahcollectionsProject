@@ -26,6 +26,7 @@ include "OfferManagement.php";
                     <thead>
                         <tr>
                             <th scope="col">Promo ID</th>
+                            <th scope="col">Offer Name</th>
                             <th scope="col">Offer Title</th>
                             <th scope="col">Description</th>
                             <th scope="col">Discount Type</th>
@@ -37,20 +38,31 @@ include "OfferManagement.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="col">#</td>
-                            <td>#</td>
-                            <td>#</td>
-                            <td>#</td>
-                            <td>#</td>
-                            <td>#</td>
-                            <td class="img">#</td>
-                            <td>#</td>
-                            <td>
-                                <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                                <button class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
-                            </td>
-                        </tr>
+                    <?php 
+                            $results = $offerObj->displayPublicOffers();
+                            if($results){
+                                foreach($results as $row){?>
+                                    <tr>
+                                        <th scope="col"><?=$row['Promo_ID']?></th>
+                                        <td><?=$row['Offer_Name']?></td>
+                                        <td><?=$row['Offer_Title']?></td>
+                                        <td><?=$row['Description']?></td>
+                                        <td><?=$row['Discount_Type']?></td>
+                                        <td><?=$row['Discount']?></td>
+                                        <td><?=$row['Valid_From_Date']?></td>
+                                        <td><?=$row['Valid_To_Date']?></td>
+                                        <td><img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($row['IMG'])?>" class="img-fluid td-img"></td>
+                                        <td>
+                                            <a class="btn btn-outline-danger" data-offerId="<?=$row['Promo_ID']?>" id="del-offer" onclick = "deletePublic(this)"><i class="fas fa-trash-alt"></i></a>
+                                            <a class="btn btn-outline-success" data-offerId="<?=$row['Promo_ID']?>" id="update-offer" onclick = "showupdatePublicOffer(this)"><i class="fas fa-edit"></i></a>
+                                        </td>
+                                    </tr>
+                            <?php
+                            }
+                            }else{
+                                echo "<tr><td colspan='7'>No Records found</td></tr>";
+                            }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -66,5 +78,44 @@ include "OfferManagement.php";
     </div>
 </div>
 <script src="..\assets\js\admin-offer-modal.js"></script>
+
+<?php 
+if(isset($_POST['offer-public-add'])){
+    $data = [
+        "title" => mysqli_real_escape_string($db->conn,$_POST['off_title']),
+        "name" => mysqli_real_escape_string($db->conn,$_POST['off_name']),
+        "desc" => mysqli_real_escape_string($db->conn,$_POST['off_Desc']),
+        "type" => mysqli_real_escape_string($db->conn,$_POST['off_type']),
+        "value" => mysqli_real_escape_string($db->conn,$_POST['off_value']),
+        "FDate" => mysqli_real_escape_string($db->conn,$_POST['off_from_Date']),
+        "TDate" => mysqli_real_escape_string($db->conn,$_POST['off_to_Date'])
+    ];
+    $result = $offerObj->addPublicOffers($data,$_FILES['imageFile']['tmp_name'][0]);
+    if($result){
+        echo"<script>Swal.fire({icon:'success',title:'Done !',text:'A new offer added successfully'});</script>";
+    }else{
+        echo"<script>Swal.fire({icon:'error',title:'Something is not right',text:'Query Failed : addOffer'});</script>";
+    }
+}
+
+if(isset($_POST['offer-public-update'])){
+    $data = [
+        "ID" => mysqli_real_escape_string($db->conn,$_POST['promoID']),
+        "title" => mysqli_real_escape_string($db->conn,$_POST['off_title']),
+        "name" => mysqli_real_escape_string($db->conn,$_POST['off_name']),
+        "desc" => mysqli_real_escape_string($db->conn,$_POST['off_Desc']),
+        "type" => mysqli_real_escape_string($db->conn,$_POST['off_type']),
+        "value" => mysqli_real_escape_string($db->conn,$_POST['off_value']),
+        "FDate" => mysqli_real_escape_string($db->conn,$_POST['off_from_Date']),
+        "TDate" => mysqli_real_escape_string($db->conn,$_POST['off_to_Date'])
+    ];
+    $result = $offerObj->UpdatePublicOffer($data);
+    if($result){
+        echo"<script>Swal.fire({icon:'success',title:'Done !',text:' offer Updated successfully'});</script>";
+    }else{
+        echo"<script>Swal.fire({icon:'error',title:'Something is not right',text:'Query Failed : addOffer'});</script>";
+    }
+}
+?>
 
 <?php include "adminFooter.php"; ?>
