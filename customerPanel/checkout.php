@@ -21,6 +21,7 @@ include "customerHeader.php"; ?>
       <div class="carousel-content my-carousel-content">
         <div class="row my-content-row">
           <div class="col-lg-8 my-content-col">
+            <span data-customerID = "<?=$customerID?>" id="getCustID"></span>
           <div class="table-responsive">
               <table class="table">
               <thead>
@@ -35,17 +36,8 @@ include "customerHeader.php"; ?>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td><img src="..\assets\imgs\sampleImgs\men\Maroon-Mens-Long-Sleeve-T-Shirt.jpg" class="img-fluid cart-img" alt="..."></td>
-                  <td>#</td>
-                  <td>#</td>
-                  <td>#</td>
-                  <td>#</td>
-                  <td>#</td>
-                  <td>#</td>
-                  <td><button class="btn btn-danger"><i class="far fa-trash-alt"></i></button></td>
-                </tr>
+              <tbody class="tbody">
+                
               </tbody>
               </table>
             </div>
@@ -56,12 +48,12 @@ include "customerHeader.php"; ?>
               <div class="card-header"> Discount</div>
               <div class="card-body">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                  <label class="form-check-label" for="inlineRadio1">Store Promotion Discount</label>
+                  <input class="form-check-input" type="radio" name="offerTable" id="publicOffer" value="public">
+                  <label class="form-check-label" for="publicOffer">Store Promotion Discount</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                  <label class="form-check-label" for="inlineRadio2">Your available Offers</label>
+                  <input class="form-check-input" type="radio" name="offerTable" id="privateOffer" value="private">
+                  <label class="form-check-label" for="privateOffer">Your available Offers</label>
                 </div>
               <select class="form-select" name="discount" id="discount">
                 <option value="0" selected>Select</option>
@@ -76,8 +68,8 @@ include "customerHeader.php"; ?>
             <div class="card">
               
               <div class="card-body text-center">
-              <p class="fs-6">Your Discount Amount : Rs 0.00 </p>
-                <p class="fs-5 fw-bold">Your Total : Rs 0.00</p>
+              <p class="fs-6" id="discountAmount">Your Discount Amount : Rs 0.00 </p>
+                <p class="fs-5 fw-bold">Your Total : Rs <span id ="total"></span></p>
               </div>
             </div>
           </div>
@@ -130,6 +122,6 @@ include "customerHeader.php"; ?>
 </div>
 
 
-
+<script src="..\assets\js\customer-checkout.js"></script>
 <script src="..\assets\js\checkout-slider.js"></script>
 <?php include "customerFooter.php"; ?>
