@@ -153,6 +153,26 @@ class offerController{
         }
     }
 
+    public function loadPrivateOffer($sustomerID){
+        $sql_get_data = "SELECT * FROM public_offers";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results->num_rows;
+        }else{
+            return 0;
+        }
+    }
+    public function loadPublicOffer(){
+        $currentDate = date('Y-m-d');
+        $sql_get_data = "SELECT Promo_ID,Offer_Name FROM public_offers WHERE '$currentDate' BETWEEN Valid_From_Date AND Valid_To_Date";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
     
 
 }
