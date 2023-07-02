@@ -15,16 +15,33 @@
                         </div>
 
                         <div class="form-floating my-form mb-4">
-                            <input type="password" id="password" name="password" class="form-control my-input shadow-none" placeholder="Password"/>
+                            <input type="password" id="userpassword" name="password" class="form-control my-input shadow-none" placeholder="Password"/>
                             <label class="" for="password"><i class="fas fa-lock me-2"></i>Password</label>
                         </div>
                         <button type="submit" name="login" class="btn  btn-lg btn-block mybtn mb-4">Sign in</button>
                     </form>
+                    <div class="row mb-2">
+                        <div class="col-md-12 bt-divs">
+                            <span>New customer? <a href="#" onclick="displayForm()">Create your account</a></span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-12 bt-divs">
+                            <span>Lost password? <a href="#">Recover password</a></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-
 </div>
+<div class="modal fade" id="register-form-modal" data-bs-backdrop="static" data-bs-keyboard="false">     
+    <div class="modal-dialog modal-xl">
+        <link rel="stylesheet" href="assets\css\reg-modal-style.css">
+        <div class="modal-content">
+           
+        </div>
+    </div>
+</div>
+<script src="assets\js\account-creation.js"></script>
 <?php include "footer.php"; ?>
