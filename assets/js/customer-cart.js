@@ -94,7 +94,6 @@ function addtoCart(element){
 
 $( document ).ready(function() {
     getCount();
-    
 });
 
 
