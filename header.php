@@ -12,10 +12,13 @@
     <link rel="stylesheet" href="assets/icons/css/all.min.css">
     <!-- custom style -->
     <link rel="stylesheet" href="assets/css/navbar-style-A.css" />
+    <!-- JQuery and Sweet Alert-->
+    <script src="assets\sweetalert2\jquery-3.5.1.min.js"></script>
+    <script src="assets\sweetalert2\sweetalert2.all.min.js"></script>
 </head>
 <body>    
 
-<nav class="navbar navbar-expand-lg my-navcolor" style="background-color: #7f8db4;">
+<nav class="navbar navbar-expand-lg my-navcolor">
     <div class="container-fluid ">
         <span class="navbar-brand mb-0 heading">
             <img src="assets/imgs/hah-collection-logo1.png" alt="Logo" class="logo">HAH <span class="post">Collections </span>
