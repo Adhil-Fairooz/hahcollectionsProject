@@ -122,3 +122,20 @@ table{
     letter-spacing: 1px;
     font-weight: 500;
 }
+
+.myBtn{
+    background-color: #696dc9;
+    color: white;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    font-size: 17px; 
+}
+.myBtn:hover{
+    background-color: white;
+    color: #696dc9;
+    font-weight: bold;
+    border: 2px solid #696dc9;
+    
+}
+

@@ -28,6 +28,15 @@ class CartController{
             return false;
         }
     }
+    public function get_productFromCartFinal($customerID){
+        $sql_get_cart_data = "SELECT p.Pro_Name,p.Pro_SalePrice,s.Size_Value,c.Color_Name,ct.Qty FROM product p, size s, color c, cart ct WHERE p.Product_ID = ct.Product_ID AND s.Size_ID = ct.Size_ID AND c.Color_ID = ct.Color_ID AND ct.Customer_ID = '$customerID'";
+        $results = $this->conn->query($sql_get_cart_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
 
     public function get_productCount($customerID){
         $sql_get_cart_data = "SELECT * FROM cart WHERE Customer_ID = '$customerID' ";

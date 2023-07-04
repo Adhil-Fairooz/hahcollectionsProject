@@ -30,6 +30,24 @@ class ChargeController{
             return false;
         }
     }
+    public function displaychargesForPaymentMethods($paymentMethod){
+        $sql = "SELECT * FROM charges WHERE Charge_Type='$paymentMethod';";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    public function getChargeValueByID($id){
+        $sql = "SELECT `Value` FROM charges WHERE charge_ID='$id';";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
 
     public function UpdateCharges($data){
         $chargeID= $data['ID'];

@@ -2,9 +2,11 @@
 include "..\classes\DBConnect.php";
 include "..\classes\cartController.php";
 include "..\classes\offerController.php";
+include "..\classes\ChargeController.php";
 $db = new DatabaseConnection;
 $cartObj = new CartController();
 $offerObj = new offerController();
+$chargeObj = new ChargeController();
 ?>
 <?php 
 if(isset($_REQUEST['cid']) && $_REQUEST['task']=== 'show'){
@@ -20,6 +22,22 @@ if(isset($_REQUEST['cid']) && $_REQUEST['task']=== 'show'){
                 <td><?=$item['Qty']?></td>
                 <td><?php echo $item['Pro_SalePrice'] * $item['Qty'];?></td>
                 <td><a class="btn btn-danger" id="cart-tbl-del" data-pid="<?=$item['Product_ID']?>" data-sid="<?=$item['Size_ID']?>" data-cid="<?=$item['Color_ID']?>" data-custid="<?=$_REQUEST['cid']?>" onclick="removeFromCarttbl(this)"><i class="far fa-trash-alt"></i></a></td>
+            </tr>
+
+       <?php }
+    }
+}
+if(isset($_REQUEST['cid']) && $_REQUEST['task']=== 'finalDisplay'){
+    $result = $cartObj->get_productFromCartFinal($_REQUEST['cid']);
+    if($result){
+        foreach($result as $item){?>
+            <tr>
+                <td><?=$item['Pro_Name']?></td>
+                <td><?=$item['Size_Value']?></td>
+                <td><?=$item['Color_Name']?></td>
+                <td><?=$item['Pro_SalePrice']?></td>
+                <td><?=$item['Qty']?></td>
+                <td><?php echo $item['Pro_SalePrice'] * $item['Qty'];?></td>
             </tr>
 
        <?php }
@@ -69,6 +87,16 @@ if(isset($_REQUEST['offerID']) && isset($_REQUEST['subtotal'])){
             "discountAmount" => $discountAmount
         );
         echo json_encode($data);
+    }
+}
+
+if(isset($_REQUEST['chargeID']) && $_REQUEST['task'] === 'getValue'){
+    $result =  $chargeObj->getChargeValueByID($_REQUEST['chargeID']);
+    if($result){
+        $item = $result->fetch_assoc();
+        echo $item['Value'];
+    }else{
+        echo 0;
     }
 }
 

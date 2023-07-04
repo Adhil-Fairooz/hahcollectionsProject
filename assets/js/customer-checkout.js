@@ -1,3 +1,84 @@
+var subtotal= 0.0; // stores the value subtotal
+var conditionAmount = 0.0; // stores the offer max bill value
+var discountvalue = 0.0; // store the Discount value
+var chargesForDelivery =0.0; // stores the delivery charges.
+var total = 0.0; // store the final charges
+
+var paymentMethod; //store paymentMethod
+var address; // store address
+var contact; // store contact
+
+$( document ).ready(function() {
+    loadCarttbl();
+    getCounttbl();
+    getTotaltbl();
+
+    $('input[name="offerTable"]').click(function(){
+        var table = $('input[name="offerTable"]:checked').val();
+        loadOptions(table);
+    });
+    $('#discount').change(function(){
+        var offerID = $(this).val();
+        if(parseInt(offerID) === 0){
+            $('#discountAmount').html("0.00");
+            getTotaltbl();
+        }else{
+            $.ajax({
+                url: "checkoutPage.php",
+                dataType : 'json',
+                data:{offerID:offerID,subtotal:subtotal},
+                success:function(response){
+                    conditionAmount = response.billValue;
+                    discountvalue = response.discountAmount;
+                    setAmounts();
+                }
+
+            });
+        }
+    });
+/* Slide 2 : payment */
+    $('input[name="paymentMethod"]').click(function(){
+        $('#bill-subtotal').html(parseFloat("0.0").toFixed(2));
+        $('#bill-discount').html(parseFloat("0.0").toFixed(2));
+        $('#bill-delivery-Fees').html(parseFloat("0.0").toFixed(2));
+        var type = $('input[name="paymentMethod"]:checked').val();
+        paymentMethod = type;
+        loadPaymentMethodForm(type);
+        $('#bill-subtotal').html(parseFloat(subtotal).toFixed(2));
+        $('#bill-discount').html(parseFloat(discountvalue).toFixed(2));
+    });
+
+    $('#my-payment-card').on('click','#location',function(){
+        var chargeID = $(this).val();
+        $.ajax({
+            url: "checkoutPage.php",
+            data:{chargeID:chargeID,task:"getValue"},
+            success : function(response){
+                console.log(response);
+                if(parseFloat(response) != 0){
+                    chargesForDelivery = parseFloat(response);
+                    
+                }else{
+                    chargesForDelivery = 0.0;
+                }
+                $('#deliveryFee').html(chargesForDelivery.toFixed(2));
+                $('#bill-delivery-Fees').html(chargesForDelivery.toFixed(2));
+            }
+        })
+    });
+    
+    $('#my-payment-card').on('change', 'textarea', function() {
+        address = $(this).val();
+    });
+    $('#my-payment-card').on('change', 'input', function() {
+        contact = $(this).val();
+    });
+    $('#next').click(function(){
+        loadValuesToBilling();
+    })
+    loadCarttblFinal();   
+
+});
 function loadCarttbl(){
     var customer_id = $('#getCustID').attr('data-customerID'); 
     console.log(customer_id);
@@ -6,6 +87,20 @@ function loadCarttbl(){
         data:{cid:customer_id,task:"show"},
         success: function(response){
             $('.tbody').html(response);          
+        },
+        error: function(xhr, status, error) {
+            console.log('An error occurred: ' + error);
+          }
+      });
+}
+function loadCarttblFinal(){
+    var customer_id = $('#getCustID').attr('data-customerID'); 
+    console.log(customer_id);
+    $.ajax({
+        url: "checkoutPage.php",
+        data:{cid:customer_id,task:"finalDisplay"},
+        success: function(response){
+            $('.tbodyFinal').html(response);          
         },
         error: function(xhr, status, error) {
             console.log('An error occurred: ' + error);
@@ -34,7 +129,7 @@ function removeFromCarttbl(element){
                     getCounttbl();
                     getTotaltbl();
                     $("#discount").val(0);
-                    $('#discountAmount').html("0.00");
+                    $('#discountAmount').html(parseFloat("0.00"));
                 }
             });
         }
@@ -42,7 +137,7 @@ function removeFromCarttbl(element){
     
 
 }
-var subtotal;
+
 function getTotaltbl(){
     var customer_id = $('#getCustID').attr('data-customerID'); 
     $.ajax({
@@ -53,8 +148,8 @@ function getTotaltbl(){
                 $('#total').html("0.00");
                 response = 0;
             }else{
-                $('#total').html(response);
-                subtotal = response;
+                $('#total').html(parseFloat(response).toFixed(2));
+                subtotal = parseFloat(response);
             }
         }
     })
@@ -73,58 +168,21 @@ function getCounttbl(){
         }
     })
 }
-var conditionAmount;
-var discountvalue;
+
 
 function setAmounts(){
     if(subtotal >= parseFloat(conditionAmount)){
         $('#discountAmount').html(discountvalue);
-        var total = subtotal - parseFloat(discountvalue);
-        $('#total').html(total);
+        total = subtotal - parseFloat(discountvalue);
     }else{
+        Swal.fire({icon:'warning',title:'Your Bill Amount',text:'should be greater than Rs '+conditionAmount+'/= to use this offer'});
         $('#discountAmount').html("0.00");
-        $('#total').html(subtotal);
+        total = subtotal - 0.0;
     }
+    $('#total').html(total.toFixed(2));
     
 }
-$( document ).ready(function() {
-    loadCarttbl();
-    getCounttbl();
-    getTotaltbl();
 
-    $('input[name="offerTable"]').click(function(){
-        var table = $('input[name="offerTable"]:checked').val();
-        loadOptions(table);
-    });
-    $('#discount').click(function(){
-        var offerID = $(this).val();
-        if(parseInt(offerID) === 0){
-            $('#discountAmount').html("0.00");
-            getTotaltbl();
-        }else{
-            $.ajax({
-                url: "checkoutPage.php",
-                dataType : 'json',
-                data:{offerID:offerID,subtotal:subtotal},
-                success:function(response){
-                    conditionAmount = response.billValue;
-                    discountvalue = response.discountAmount;
-                    setAmounts();
-                }
-
-            });
-        }
-    });
-/* Slide 2 : payment */
-    $('input[name="paymentMethod"]').click(function(){
-        var type = $('input[name="paymentMethod"]:checked').val();
-        loadPaymentMethodForm(type);
-
-    });
-
-    
-
-});
 
 
 function loadOptions(table){
@@ -157,7 +215,51 @@ function loadForm(type){
         data:{form:type,task:"show"},
         success: function(response){
             $('#my-payment-card').html(response);
+            address = $('#my-payment-card textarea').val();
+            contact = $('#my-payment-card input').val();
         }
 
     });
+    
+}
+function loadValuesToBilling(){
+    if(paymentMethod === 'COD'){
+        $('#paymentMethod').html("Cash On Delivery");
+        $('#address').html(address);
+        $('#contact').html(contact);
+        var dSub = parseFloat(subtotal);
+        var dDiscount = parseFloat(discountvalue);
+        var dcharge = parseFloat(chargesForDelivery);
+        var Ftotal = dSub + dcharge - dDiscount;
+        $('#finalSubTotal').html(dSub.toFixed(2));
+        $('#FinalDiscount').html(dDiscount.toFixed(2));
+        $('#FinalCharges').html(dcharge.toFixed(2));
+        $('#FinalTotal').html(Ftotal.toFixed(2));
+    }else if(paymentMethod === 'BD'){
+        $('#paymentMethod').html("Bank Deposit");
+      
+        $('#address').html(address);
+        $('#contact').html(contact);
+        var dSub = parseFloat(subtotal);
+        var dDiscount = parseFloat(discountvalue);
+        var dcharge = parseFloat(chargesForDelivery);
+        var Ftotal = dSub + dcharge - dDiscount;
+        $('#finalSubTotal').html(dSub.toFixed(2));
+        $('#FinalDiscount').html(dDiscount.toFixed(2));
+        $('#FinalCharges').html(dcharge.toFixed(2));
+        $('#FinalTotal').html(Ftotal.toFixed(2));
+    }else{
+        $('#paymentMethod').html("Pick Up");
+        
+        $('#address').html("none");
+        $('#contact').html(contact);
+        var dSub = parseFloat(subtotal);
+        var dDiscount = parseFloat(discountvalue);
+        var dcharge = 0.0;
+        var Ftotal = dSub + dcharge - dDiscount;
+        $('#finalSubTotal').html(dSub.toFixed(2));
+        $('#FinalDiscount').html(dDiscount.toFixed(2));
+        $('#FinalCharges').html(dcharge.toFixed(2));
+        $('#FinalTotal').html(Ftotal.toFixed(2));
+    }
 }

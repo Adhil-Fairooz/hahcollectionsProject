@@ -15,6 +15,29 @@ $( document ).ready(function() {
         COD_contact_enable();
     });
     //*************************************** */
+    BD_ADDRESS_enable();
+    BD_contact_enable();
+    $('#BD_Address_edit').click(function(){
+        BD_ADDRESS_disable();
+    });
+    $('#BD_Address_save').click(function(){
+        BD_ADDRESS_enable();
+    });
+    $('#BD_Contact_edit').click(function(){
+        BD_contact_disable();
+    });
+    $('#BD_Contact_save').click(function(){
+        BD_contact_enable();
+    });
+    //****************************************** */
+    P_contact_enable();
+    $('#P_Contact_edit').click(function(){
+        P_contact_disable();
+    });
+    $('#P_Contact_save').click(function(){
+        P_contact_enable();
+    });
+
 });
 //COD
 function COD_ADDRESS_enable(){
@@ -36,4 +59,38 @@ function COD_contact_disable(){
     $('input[name="CODContact"]').prop('disabled',false);
     $('#COD_Contact_edit').hide();
     $('#COD_Contact_save').show();
+}
+
+//BD
+
+function BD_ADDRESS_enable(){
+    $('textarea[name="BDdeliveryAddress"]').prop('disabled',true);
+    $('#BD_Address_edit').show();
+    $('#BD_Address_save').hide();
+}
+function BD_ADDRESS_disable(){
+    $('textarea[name="BDdeliveryAddress"]').prop('disabled',false);
+    $('#BD_Address_edit').hide();
+    $('#BD_Address_save').show();
+}
+function BD_contact_enable(){
+    $('input[name="BDContact"]').prop('disabled',true);
+    $('#BD_Contact_edit').show();
+    $('#BD_Contact_save').hide();
+}
+function BD_contact_disable(){
+    $('input[name="BDContact"]').prop('disabled',false);
+    $('#BD_Contact_edit').hide();
+    $('#BD_Contact_save').show();
+}
+// p
+function P_contact_enable(){
+    $('input[name="PContact"]').prop('disabled',true);
+    $('#P_Contact_edit').show();
+    $('#P_Contact_save').hide();
+}
+function P_contact_disable(){
+    $('input[name="PContact"]').prop('disabled',false);
+    $('#P_Contact_edit').hide();
+    $('#P_Contact_save').show();
 }
