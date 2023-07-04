@@ -91,7 +91,22 @@ function addtoCart(element){
         }
     })
  }
-
+ $('#signout').on('click',function(e){
+    e.preventDefault();
+    const href="../logoutprocess.php";
+    Swal.fire({
+        title: 'Do you wish to sign out?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            document.location.href=href;
+        }
+      });
+ });
 $( document ).ready(function() {
     getCount();
 });

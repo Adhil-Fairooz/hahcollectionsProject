@@ -68,7 +68,7 @@ include "customerHeader.php"; ?>
             <div class="card">
               
               <div class="card-body text-center">
-              <p class="fs-6" id="discountAmount">Your Discount Amount : Rs 0.00 </p>
+              <p class="fs-6" >Your Discount Amount : Rs <span id="discountAmount"></span></p>
                 <p class="fs-5 fw-bold">Your Total : Rs <span id ="total"></span></p>
               </div>
             </div>
@@ -91,8 +91,70 @@ include "customerHeader.php"; ?>
         </div>
     </div>
       <div class="carousel-content">
-        <h3>Slide 2</h3>
-        <p>This is the content for slide 2.</p>
+        <div class="row">
+          <div class="col-md-8">
+          <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label for="selectPaymentMethod" class="form-label">Select Payment Method</label>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="COD" value="COD">
+                        <label class="form-check-label" for="COD"><i class="fas fa-truck me-2"></i> Cash on Delivery</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="BD" value="BD">
+                        <label class="form-check-label" for="BD"><i class="fas fa-receipt me-2"></i> Bank Deposit</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="Pick" value="Pick">
+                        <label class="form-check-label" for="Pickup"><i class="fas fa-store-alt me-2"></i> Pick up</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="card my-payment-card" id="my-payment-card">
+              
+            </div>
+          </div>
+        </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header billinfoheader">Billing info</div>
+              <div class="card-body billingbody">
+                <div class="row">
+                  <div class="col-md-4 mb-2 bill-label">Sub Total</div>
+                  <div class="col-md-8"></div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-4 mb-2 bill-label">Discount</div>
+                  <div class="col-md-8"></div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-4 mb-2 bill-label">Delivery fees</div>
+                  <div class="col-md-8"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
     <div class="carousel-item">

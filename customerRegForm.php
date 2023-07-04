@@ -4,6 +4,9 @@ include "classes\DBConnect.php";
 include "classes\CustomerController.php";
 $db = new DatabaseConnection;
 $customerObj = new CustomerController();
+session_start();
+$userPassword = $_SESSION['CurrentPassword'];
+$CustomerID = $_SESSION['customerID'];
 ?>
 <?php
 if(isset($_POST['task']) && $_POST['task'] == 'create'){ ?>
@@ -93,4 +96,41 @@ if(isset($_REQUEST['validateEmail'])){
     }
 }
 
+if(isset($_REQUEST['fname']) && isset($_REQUEST['lname']) && isset($_REQUEST['address']) && isset($_REQUEST['customer']) && isset($_REQUEST['contact'])){
+    $data_update = [
+        "cid" => mysqli_real_escape_string($db->conn,$_REQUEST['customer']),
+        "fname" => mysqli_real_escape_string($db->conn,$_REQUEST['fname']),
+        "lname" => mysqli_real_escape_string($db->conn,$_REQUEST['lname']),
+        "address" => mysqli_real_escape_string($db->conn,$_REQUEST['address']),
+        "contact" => mysqli_real_escape_string($db->conn,$_REQUEST['contact'])
+    ];
+    $result = $customerObj -> updateCustomerInfo($data_update);
+    if($result){
+        echo 1;
+    }else{
+        echo 0;
+    }
+}
+
+if(isset($_REQUEST['password'])){
+    $verify = password_verify($_REQUEST['password'],$userPassword);
+    if($verify){
+        echo 1;
+    }else{
+        echo 2;
+    }
+}
+if(isset($_REQUEST['newPassword'])){
+    $password = password_hash($_REQUEST['newPassword'],PASSWORD_DEFAULT);
+    $update = [
+        "cid" => mysqli_real_escape_string($db->conn,$CustomerID),
+        "password" => mysqli_real_escape_string($db->conn,$password)
+    ];
+    $result = $customerObj -> changePassword($update);
+    if($result){
+        echo 1;
+    }else{
+        echo 0;
+    }
+}
 ?>

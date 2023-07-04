@@ -1,8 +1,10 @@
 <?php 
 include "..\classes\DBConnect.php";
 include "..\classes\cartController.php";
+include "..\classes\offerController.php";
 $db = new DatabaseConnection;
 $cartObj = new CartController();
+$offerObj = new offerController();
 ?>
 <?php 
 if(isset($_REQUEST['cid']) && $_REQUEST['task']=== 'show'){
@@ -41,6 +43,32 @@ if(isset($_REQUEST['custTotalcart'])){
         }
     }else{
         echo "0";
+    }
+}
+
+if(isset($_REQUEST['offerID']) && isset($_REQUEST['subtotal'])){
+    $subTotal = doubleval($_REQUEST['subtotal']);
+    $discountAmount = 0;
+    $result = $offerObj->getofferDetails($_REQUEST['offerID']);
+    if($result){
+        $data = $result-> fetch_assoc();
+        $billValue = doubleval($data['TotalBillValue']);
+        if($subTotal >= $billValue){
+            if($data['Discount_Type'] === 'percentage'){
+                $percentage = doubleval($data['Discount']);
+                $discountAmount = $subTotal * ($percentage / 100);
+            }else{
+                $discountAmount = doubleval($data['Discount']);
+            }
+        }else{
+            $discountAmount = 0;
+        }
+        
+        $data = array(
+            "billValue" => $billValue,
+            "discountAmount" => $discountAmount
+        );
+        echo json_encode($data);
     }
 }
 

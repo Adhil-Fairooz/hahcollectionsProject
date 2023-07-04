@@ -30,5 +30,56 @@ class CustomerController{
             return false;
         }
     }
+
+    public function getLoginData($username){
+        $sql_get_login_data = "SELECT * FROM customer WHERE Email = '$username';";
+        $result = $this->conn->query($sql_get_login_data);
+        if($result){
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+            
+        }else{
+            false;
+        }
+    }
+
+    public function getInfoForUpate($customerID){
+        $sql_getData = "SELECT FName,LName,Email,`Address`,Contact_NO FROM customer WHERE Customer_ID = '$customerID';";
+        $result = $this->conn->query($sql_getData);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function updateCustomerInfo($data){
+        $customerID = $data['cid'];
+        $fname = $data['fname'];
+        $lname = $data['lname'];
+        $address = $data['address'];
+        $contact = $data['contact'];
+        $sql_update = "UPDATE customer SET FName = '$fname',LName = '$lname',`Address` = '$address', Contact_NO = '$contact' WHERE Customer_ID = '$customerID';";
+        $result = $this->conn->query($sql_update);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function changePassword($data){
+        $customerID = $data['cid'];
+        $password = $data['password'];
+        $sql_update = "UPDATE customer SET `Password`='$password' WHERE Customer_ID = '$customerID';";
+        $result = $this->conn->query($sql_update);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 ?>

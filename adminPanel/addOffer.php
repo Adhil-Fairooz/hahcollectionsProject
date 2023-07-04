@@ -15,24 +15,30 @@ if(isset($_POST['value']) && $_POST['value'] === 'private'){?>
 <div class="modal-body">
     <form method="post">
         <div class="row mt-3">
-            <div class="col-md-12">
-            <div class="form-floating myFormFloating">
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_title" id="floatingInput" placeholder=" ">
                     <label for="floatingInput">Offer Title</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_name" id="floatingInput" placeholder=" ">
                     <label for="floatingInput">Offer Name</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <textarea class="form-control myinputTextArea" name="off_Desc"  placeholder=" " id="floatingTextarea"></textarea>
                     <label for="floatingTextarea">Offer Description</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
+                    <input type="text" class="form-control myinputText" name="off_billValue" id="floatingInput" placeholder=" ">
+                    <label for="floatingInput">Total Bill Value</label>
                 </div>
             </div>
         </div>
@@ -94,24 +100,30 @@ if(isset($_POST['value']) && $_POST['value'] === 'public'){?>
 <div class="modal-body">
     <form method="post" enctype="multipart/form-data">
         <div class="row mt-3">
-            <div class="col-md-12">
-            <div class="form-floating myFormFloating">
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_title" id="floatingInput" placeholder=" ">
                     <label for="floatingInput">Offer Title</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_Name" id="floatingInput" placeholder=" ">
                     <label for="floatingInput">Offer Name</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <textarea class="form-control myinputTextArea" name="off_Desc"  placeholder=" " id="floatingTextarea"></textarea>
                     <label for="floatingTextarea">Offer Description</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
+                    <input type="text" class="form-control myinputText" name="off_billValue" id="floatingInput" placeholder=" ">
+                    <label for="floatingInput">Total Bill Value</label>
                 </div>
             </div>
         </div>
@@ -216,24 +228,30 @@ if(isset($_POST['offer_id']) && $_POST['mode'] === 'public' && $_POST['task'] ==
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="promoID" value="<?=$_POST['offer_id']?>">
         <div class="row mt-3">
-            <div class="col-md-12">
-            <div class="form-floating myFormFloating">
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_title" id="floatingInput" placeholder=" " value = "<?=$row['Offer_Title']?>">
                     <label for="floatingInput">Offer Title</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_name" id="floatingInput" placeholder=" " value = "<?=$row['Offer_Name']?>">
                     <label for="floatingInput">Offer Name</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <textarea class="form-control myinputTextArea" name="off_Desc"  placeholder=" " id="floatingTextarea"><?=$row['Description']?></textarea>
                     <label for="floatingTextarea">Offer Description</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
+                    <input type="text" class="form-control myinputText" name="off_billValue" id="floatingInput" placeholder=" " value = "<?=$row['TotalBillValue']?>">
+                    <label for="floatingInput">Total Bill Value</label>
                 </div>
             </div>
         </div>
@@ -300,24 +318,30 @@ if(isset($_POST['offer_id']) && $_POST['mode'] === 'private' && $_POST['task'] =
     <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="promoID" value="<?=$_POST['offer_id']?>">
         <div class="row mt-3">
-            <div class="col-md-12">
-            <div class="form-floating myFormFloating">
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_title" id="floatingInput" placeholder=" " value = "<?=$row['Offer_Title']?>">
                     <label for="floatingInput">Offer Title</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <input type="text" class="form-control myinputText" name="off_name" id="floatingInput" placeholder=" " value = "<?=$row['Offer_Name']?>">
                     <label for="floatingInput">Offer Name</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="form-floating myFormFloating">
                     <textarea class="form-control myinputTextArea" name="off_Desc"  placeholder=" " id="floatingTextarea"><?=$row['Description']?></textarea>
                     <label for="floatingTextarea">Offer Description</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating myFormFloating">
+                    <input type="text" class="form-control myinputText" name="off_billValue" id="floatingInput" placeholder=" " value = "<?=$row['TotalBillValue']?>">
+                    <label for="floatingInput">Total Bill Value</label>
                 </div>
             </div>
         </div>

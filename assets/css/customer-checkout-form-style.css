@@ -90,3 +90,35 @@
 table{
     border: 2px solid #686de0;
 }
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mydeliveryHeader{
+    font-size: 20px;
+    text-align: center;
+    background-color: #686de0;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.billinfoheader{
+    font-size: 20px;
+    text-align: center;
+    background-color: #d63031;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.mylabel{
+    color:#696dc9;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+.bill-label{
+    color:#636e72;
+    letter-spacing: 1px;
+    font-weight: 500;
+}

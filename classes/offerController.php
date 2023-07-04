@@ -22,10 +22,11 @@ class offerController{
         $desc = $offerData['desc'];
         $type = $offerData['type'];
         $disValue = $offerData['value'];
+        $bill = $offerData['bill'];
         $ValidFrom = date("Y-m-d", strtotime($offerData['FDate']));
         $ValidTo = date("Y-m-d", strtotime($offerData['TDate']));
         $OfferImg1 = $this->imgDbFormat($img);
-        $sql_addOfferData = "INSERT INTO public_offers VALUES('$promoID','$offerName','$offerTitle','$desc','$type','$disValue','$ValidFrom','$ValidTo','$OfferImg1')";
+        $sql_addOfferData = "INSERT INTO public_offers VALUES('$promoID','$offerName','$offerTitle','$desc','$type','$disValue','$bill','$ValidFrom','$ValidTo','$OfferImg1')";
         if($this->conn->query($sql_addOfferData)){
             $this->generateId->updatetID($idType);
             return true;
@@ -42,10 +43,11 @@ class offerController{
         $desc = $offerData['desc'];
         $type = $offerData['type'];
         $disValue = $offerData['value'];
+        $bill = $offerData['bill'];
         $ValidFrom = date("Y-m-d", strtotime($offerData['FDate']));
         $ValidTo = date("Y-m-d", strtotime($offerData['TDate']));
         $status = "NO";
-        $sql_addOfferData = "INSERT INTO private_offers VALUES('$promoID','$offerName','$offerTitle','$desc','$type','$disValue','$ValidFrom','$ValidTo','$status')";
+        $sql_addOfferData = "INSERT INTO private_offers VALUES('$promoID','$offerName','$offerTitle','$desc','$type','$disValue','$bill','$ValidFrom','$ValidTo','$status')";
         if($this->conn->query($sql_addOfferData)){
             $this->generateId->updatetID($idType);
             return true;
@@ -116,9 +118,10 @@ class offerController{
         $desc = $offerData['desc'];
         $type = $offerData['type'];
         $disValue = $offerData['value'];
+        $bill = $offerData['bill'];
         $ValidFrom = date("Y-m-d", strtotime($offerData['FDate']));
         $ValidTo = date("Y-m-d", strtotime($offerData['TDate']));
-        $sql_updateOfferData = "UPDATE public_offers SET Offer_Name = '$offerName',Offer_Title = '$offerTitle', `Description` = '$desc',Discount_Type = '$type',Discount = '$disValue',Valid_From_Date = '$ValidFrom',Valid_To_Date = '$ValidTo' WHERE Promo_ID = '$promoID';";
+        $sql_updateOfferData = "UPDATE public_offers SET Offer_Name = '$offerName',Offer_Title = '$offerTitle', `Description` = '$desc',Discount_Type = '$type',Discount = '$disValue',TotalBillValue = '$bill',Valid_From_Date = '$ValidFrom',Valid_To_Date = '$ValidTo' WHERE Promo_ID = '$promoID';";
         if($this->conn->query($sql_updateOfferData)){
             return true;
         }else{
@@ -132,10 +135,11 @@ class offerController{
         $desc = $offerData['desc'];
         $type = $offerData['type'];
         $disValue = $offerData['value'];
+        $bill = $offerData['bill'];
         $ValidFrom = date("Y-m-d", strtotime($offerData['FDate']));
         $ValidTo = date("Y-m-d", strtotime($offerData['TDate']));
         $status = $offerData['status'];
-        $sql_updateOfferData = "UPDATE private_offers SET Offer_Name = '$offerName',Offer_Title = '$offerTitle', `Description` = '$desc',Discount_Type = '$type',Discount = '$disValue',Valid_From_Date = '$ValidFrom',Valid_To_Date = '$ValidTo', claimed_Status='$status' WHERE Promo_ID = '$promoID';";
+        $sql_updateOfferData = "UPDATE private_offers SET Offer_Name = '$offerName',Offer_Title = '$offerTitle', `Description` = '$desc',Discount_Type = '$type',Discount = '$disValue',TotalBillValue = '$bill',Valid_From_Date = '$ValidFrom',Valid_To_Date = '$ValidTo', claimed_Status='$status' WHERE Promo_ID = '$promoID';";
         if($this->conn->query($sql_updateOfferData)){
             return true;
         }else{
@@ -172,7 +176,21 @@ class offerController{
             return false;
         }
     }
-
+    public function getofferDetails($ID){
+        $sql_tbl_private = "SELECT Discount_Type,Discount,TotalBillValue FROM private_offers WHERE Promo_ID = '$ID';";
+        $sql_tbl_public = "SELECT Discount_Type,Discount,TotalBillValue FROM public_offers WHERE Promo_ID = '$ID';";
+        $result_private = $this->conn->query($sql_tbl_private);
+        if($result_private->num_rows == 0){
+            $result_public = $this->conn->query($sql_tbl_public);
+            if($result_public->num_rows > 0){
+                return $result_public;
+            }else{
+                return false;
+            }
+        }else{
+            return $result_private;
+        }
+    }
     
 
 }

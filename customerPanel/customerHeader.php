@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$customerID = "C001";
+$customerID =  $_SESSION['customerID'];
 $_SESSION['cart_customerID'] = $customerID;
 
 ?>
@@ -52,7 +52,7 @@ $_SESSION['cart_customerID'] = $customerID;
                     </li>
                 </ul>
                 <div class="btn-box">
-                    <a class="btn btn-outline my-btn my-btn-signout" href="../login.php"><i class="far fa-user-circle fa-lg"></i> Sign out</a>
+                    <a class="btn btn-outline my-btn my-btn-signout" href="" id="signout"><i class="far fa-user-circle fa-lg" ></i> Sign out</a>
                     <button class="btn btn-outline my-btn" id="addtocart" type="button" data-custId="<?php echo $customerID; ?>" onclick="loadCart()"><i class="fas fa-cart-plus fa-lg"></i> Cart
                     <span class="badge rounded-pill bg-danger" id="cartBadge">
                         
@@ -61,6 +61,24 @@ $_SESSION['cart_customerID'] = $customerID;
                 </div>
             </div>
         </div>
+        <script>
+             $('#signout').on('click',function(e){
+                e.preventDefault();
+                const href="../logoutprocess.php";
+                Swal.fire({
+                    title: 'Do you wish to sign out?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.location.href=href;
+                    }
+                });
+            });
+        </script>
         
     </nav>
     <div class="container">

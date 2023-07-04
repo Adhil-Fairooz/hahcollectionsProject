@@ -31,6 +31,7 @@ include "OfferManagement.php";
                             <th scope="col">Description</th>
                             <th scope="col">Discount Type</th>
                             <th scope="col">Discount</th>
+                            <th scope="col">For Bill Value</th>
                             <th scope="col">Valid From</th>
                             <th scope="col">Valid Till</th>
                             <th scope="col">Claimed Status</th>
@@ -49,6 +50,7 @@ include "OfferManagement.php";
                                         <td><?=$row['Description']?></td>
                                         <td><?=$row['Discount_Type']?></td>
                                         <td><?=$row['Discount']?></td>
+                                        <td><?=$row['TotalBillValue']?></td>
                                         <td><?=$row['Valid_From_Date']?></td>
                                         <td><?=$row['Valid_To_Date']?></td>
                                         <td><?=$row['claimed_Status']?></td>
@@ -86,6 +88,7 @@ if(isset($_POST['offer-private-add'])){
         "desc" => mysqli_real_escape_string($db->conn,$_POST['off_Desc']),
         "type" => mysqli_real_escape_string($db->conn,$_POST['off_type']),
         "value" => mysqli_real_escape_string($db->conn,$_POST['off_value']),
+        "bill" => mysqli_real_escape_string($db->conn,$_POST['off_billValue']),
         "FDate" => mysqli_real_escape_string($db->conn,$_POST['off_from_Date']),
         "TDate" => mysqli_real_escape_string($db->conn,$_POST['off_to_Date'])
     ];
@@ -105,6 +108,7 @@ if(isset($_POST['offer-private-update'])){
         "desc" => mysqli_real_escape_string($db->conn,$_POST['off_Desc']),
         "type" => mysqli_real_escape_string($db->conn,$_POST['off_type']),
         "value" => mysqli_real_escape_string($db->conn,$_POST['off_value']),
+        "bill" => mysqli_real_escape_string($db->conn,$_POST['off_billValue']),
         "FDate" => mysqli_real_escape_string($db->conn,$_POST['off_from_Date']),
         "TDate" => mysqli_real_escape_string($db->conn,$_POST['off_to_Date']),
         "status" => mysqli_real_escape_string($db->conn,$_POST['off_status'])

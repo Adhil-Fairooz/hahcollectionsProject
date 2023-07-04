@@ -46,7 +46,7 @@
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'offers' ? 'active' : '' ?>"  href="privateOffer.php">Offer Management</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink"  href="#">Order Management</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'orders' ? 'active' : '' ?>"  href="viewOrders.php">Order Management</a>
                     </li>
                     <li class="nav-item mynavitem">
                         <a class="nav-link mynavLink"  href="#">Delivery Handling</a>

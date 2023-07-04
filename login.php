@@ -8,7 +8,16 @@
                 <div class="col-md-8 col-lg-7 col-xl-6 "><img src="assets\imgs\hah-collections-img-signin.png" class="img-fluid my-img" /></div>
                 <div class="col-md-7 col-lg-5 col-xl-5 my-col">
                     <p class ="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4 title">Sign in</p>
-                    <form method="POST" action = "customerPanel/customer.php">
+                    <?php
+                        if(isset($_GET['status'])){
+                            $status=$_GET['status'];
+                            echo "<div class='alert alert-danger alert-dismissible fade show mt-1' role='alert' >
+                                    $status
+                                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                </div>";
+                        }
+                    ?>
+                    <form method="POST" action = "loginProcess.php">
                         <div class="form-floating my-form  mb-4">
                             <input type="email" id="username" name="username" class="form-control my-input shadow-none" placeholder="Username"/>
                             <label class="" for="username"><i class="fas fa-user me-2"></i>Username</label>
