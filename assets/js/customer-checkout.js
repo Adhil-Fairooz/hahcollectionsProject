@@ -2,11 +2,12 @@ var subtotal= 0.0; // stores the value subtotal
 var conditionAmount = 0.0; // stores the offer max bill value
 var discountvalue = 0.0; // store the Discount value
 var chargesForDelivery =0.0; // stores the delivery charges.
-var total = 0.0; // store the final charges
+var FinalTotal;
 
 var paymentMethod; //store paymentMethod
 var address; // store address
 var contact; // store contact
+var customerID;
 
 $( document ).ready(function() {
     loadCarttbl();
@@ -76,12 +77,44 @@ $( document ).ready(function() {
     $('#next').click(function(){
         loadValuesToBilling();
     })
-    loadCarttblFinal();   
+    loadCarttblFinal(); 
+    
+    $('#PlaceOrder').click(function(){
+        
+        $.ajax({
+            url:"placeOrder.php",
+            data:{
+                task:'placeOrder',
+                customerID:customerID,
+                paymentMode:paymentMethod,
+                charges:chargesForDelivery,
+                total:FinalTotal,
+                address:address,
+                contact:contact,
+                subtotal:subtotal,
+                discount:discountvalue   
+            },
+            success:function(response){
+                console.log("success: response");
+                if(parseInt(response) === 1){
+                    Swal.fire({icon:'success',title:'Done !',text:'Your Order was placed successfully'});
+                }else{
+                    console.log(response);
+                    Swal.fire({icon:'warning',title:'Something is not right',text:''});
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('An error occurred: ' + error);
+              }
+
+        });
+
+    });
 
 });
 function loadCarttbl(){
     var customer_id = $('#getCustID').attr('data-customerID'); 
-    console.log(customer_id);
+    customerID = customer_id;
     $.ajax({
         url: "checkoutPage.php",
         data:{cid:customer_id,task:"show"},
@@ -231,6 +264,7 @@ function loadValuesToBilling(){
         var dDiscount = parseFloat(discountvalue);
         var dcharge = parseFloat(chargesForDelivery);
         var Ftotal = dSub + dcharge - dDiscount;
+        FinalTotal = Ftotal;
         $('#finalSubTotal').html(dSub.toFixed(2));
         $('#FinalDiscount').html(dDiscount.toFixed(2));
         $('#FinalCharges').html(dcharge.toFixed(2));
@@ -244,6 +278,7 @@ function loadValuesToBilling(){
         var dDiscount = parseFloat(discountvalue);
         var dcharge = parseFloat(chargesForDelivery);
         var Ftotal = dSub + dcharge - dDiscount;
+        FinalTotal = Ftotal;
         $('#finalSubTotal').html(dSub.toFixed(2));
         $('#FinalDiscount').html(dDiscount.toFixed(2));
         $('#FinalCharges').html(dcharge.toFixed(2));
@@ -261,5 +296,8 @@ function loadValuesToBilling(){
         $('#FinalDiscount').html(dDiscount.toFixed(2));
         $('#FinalCharges').html(dcharge.toFixed(2));
         $('#FinalTotal').html(Ftotal.toFixed(2));
+        FinalTotal = Ftotal;
     }
+    console.log(FinalTotal);
+
 }
