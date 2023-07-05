@@ -18,6 +18,15 @@ class CartController{
             return false;
         }
     }
+    public function getcartInfoDirect($customerID){
+        $sql_get_cart_data = "SELECT * From cart WHERE Customer_ID = '$customerID'";
+        $results = $this->conn->query($sql_get_cart_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
 
     public function get_productFromCart($customerID){
         $sql_get_cart_data = "SELECT p.Product_ID,s.Size_ID,c.Color_ID,p.Pro_Name,p.Pro_IMG_1,p.Pro_SalePrice,(Select b.Name From brand b, categorization cat WHERE b.Brand_ID = cat.Brand_ID AND cat.Product_ID = ct.Product_ID LIMIT 1) AS Brand,s.Size_Value,c.Color_Value,ct.Qty FROM product p, size s, color c, cart ct WHERE p.Product_ID = ct.Product_ID AND s.Size_ID = ct.Size_ID AND c.Color_ID = ct.Color_ID AND ct.Customer_ID = '$customerID'";
