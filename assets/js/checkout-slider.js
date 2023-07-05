@@ -6,10 +6,8 @@ $(document).ready(function() {
 
   var currentIndex = 0;
   var lastIndex = slides.length - 1;
-  console.log("currentIndex"+currentIndex+" lastIndex"+lastIndex);
 
   function showSlide(index) {
-    console.log("show slide activated");
     if (index >= 0 && index <= lastIndex) {
       slides[currentIndex].classList.remove('active');
       slides[index].classList.add('active');
@@ -34,7 +32,6 @@ $(document).ready(function() {
     var newIndex = currentIndex - 1;
     if (newIndex >= 0) {
       showSlide(newIndex);
-      console.log("currentIndex"+currentIndex+" lastIndex"+lastIndex);
     }
   }
 
@@ -42,17 +39,14 @@ $(document).ready(function() {
     var newIndex = currentIndex + 1;
     if (newIndex <= lastIndex) {
       showSlide(newIndex);
-      console.log("currentIndex"+currentIndex+" lastIndex"+lastIndex);
     }
   }
 
   carouselControls.find('.carousel-control').eq(0).click(function() {
-    console.log("previous clicked");
     prevSlide();
   });
 
   carouselControls.find('.carousel-control').eq(1).click(function() {
-    console.log("next clicked");
     nextSlide();
   });
 
