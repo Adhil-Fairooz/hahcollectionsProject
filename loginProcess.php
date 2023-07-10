@@ -26,8 +26,15 @@ if(isset($_POST['login'])){
             $_SESSION['customerID']=$customer_id;
             $_SESSION['Name']=$fname." ".$lname;
             $_SESSION['CurrentPassword'] = $password;
-            echo"<meta http-equiv='refresh' content='2;url=customerPanel/customer.php'>";
-            echo"<div class='container mt-5'><div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'><span class='itext'>Please Wait Customer !...</span></div></div><br>
+            $_SESSION['USerEmail'] = $user;
+            echo"<meta http-equiv='refresh' content='2;url=customerPanel/index.php'>";
+            echo"<div class='container mt-5'>
+                    <div class='progress'>
+                        <div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'>
+                        <span class='itext'>Please Wait Customer !...</span>
+                        </div>
+                    </div>
+                <br>
             </div>";
         }else{
             $status="Incorrect Password Customer !";
