@@ -2,12 +2,19 @@
 include "..\classes\DBConnect.php";
 include "..\classes\OrderController.php";
 include "..\classes\CartController.php";
+include "..\classes\ProductController.php";
+include "..\classes\EmailController.php";
 $db = new DatabaseConnection;
 $orderObj = new OrderController;
 $cartObj = new CartController;
+$productObj = new ProductController;
+$emailObj = new EmailController();
 
 if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
+    $cartResultForEmail;
+    $paymentMethod;
     if($_REQUEST['paymentMode'] === 'COD'){
+        $paymentMethod = "Cash On Delivery";
         $paymentData = [
             "del_Fee" => mysqli_real_escape_string($db->conn,$_REQUEST['charges']),
             "total" => mysqli_real_escape_string($db->conn,$_REQUEST['total']),
@@ -23,6 +30,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
             $invoiceResult = $orderObj->addInVoice($invoiceData);
             if($invoiceResult){
                 $cartResult = $cartObj->getcartInfoDirect($_REQUEST['customerID']);
+                $cartResultForEmail = $cartObj->get_productFromCartFinal($_REQUEST['customerID']);
                 if($cartResult){
                     foreach ($cartResult as $row){
                         $orderData = [
@@ -32,8 +40,22 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                             "qty" => mysqli_real_escape_string($db->conn,$row['Qty']),
                             "custId" => mysqli_real_escape_string($db->conn,$row['Customer_ID'])
                         ];
+                        $updateResult = $productObj->reduceFromStock($orderData['pid'],$orderData['cid'],$orderData['sid'],$orderData['qty']);
                         $orderResult = $orderObj->addOrder($orderData);
+                        $cartResult = $cartObj->remove_productFromCart($orderData['pid'],$orderData['sid'],$orderData['cid'],$orderData['custId']);
                     }
+                    $emailbillingInfo=[
+                        "payment"=> $paymentMethod,
+                        "name" => $_REQUEST['user'],
+                        "address" => $_REQUEST['address'],
+                        "contact" => $_REQUEST['contact'],
+                        "charges" => $_REQUEST['charges'],
+                        "discount" => $_REQUEST['discount'],
+                        "total" => $_REQUEST['total'],
+                        "subtotal" => $_REQUEST['subtotal'],
+                    ];
+                    $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
+                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email']);
                     echo 1;
                 }
             }
@@ -42,6 +64,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
         }
 
     }else if($_REQUEST['paymentMode'] === 'BD'){
+        $paymentMethod = "Bank Deposit";
         $paymentData = [
             "del_Fee" => mysqli_real_escape_string($db->conn,$_REQUEST['charges']),
             "total" => mysqli_real_escape_string($db->conn,$_REQUEST['total']),
@@ -57,6 +80,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
             $invoiceResult = $orderObj->addInVoice($invoiceData);
             if($invoiceResult){
                 $cartResult = $cartObj->getcartInfoDirect($_REQUEST['customerID']);
+                $cartResultForEmail = $cartObj->get_productFromCartFinal($_REQUEST['customerID']);
                 if($cartResult){
                     foreach ($cartResult as $row){
                         $orderData = [
@@ -66,13 +90,28 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                             "qty" => mysqli_real_escape_string($db->conn,$row['Qty']),
                             "custId" => mysqli_real_escape_string($db->conn,$row['Customer_ID'])
                         ];
+                        $updateResult = $productObj->reduceFromStock($orderData['pid'],$orderData['cid'],$orderData['sid'],$orderData['qty']);
                         $orderResult = $orderObj->addOrder($orderData);
+                        $cartResult = $cartObj->remove_productFromCart($orderData['pid'],$orderData['sid'],$orderData['cid'],$orderData['custId']);
                     }
+                    $emailbillingInfo=[
+                        "payment"=> $paymentMethod,
+                        "name" => $_REQUEST['user'],
+                        "address" => $_REQUEST['address'],
+                        "contact" => $_REQUEST['contact'],
+                        "charges" => $_REQUEST['charges'],
+                        "discount" => $_REQUEST['discount'],
+                        "total" => $_REQUEST['total'],
+                        "subtotal" => $_REQUEST['subtotal'],
+                    ];
+                    $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
+                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email']);
                     echo 1;
                 }
             }
         }
     }else{
+        $paymentMethod = "PickUp";
         $paymentData = [
             "total" => mysqli_real_escape_string($db->conn,$_REQUEST['total']),
             "contact" => mysqli_real_escape_string($db->conn,$_REQUEST['contact']),
@@ -86,6 +125,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
             $invoiceResult = $orderObj->addInVoice($invoiceData);
             if($invoiceResult){
                 $cartResult = $cartObj->getcartInfoDirect($_REQUEST['customerID']);
+                $cartResultForEmail = $cartObj->get_productFromCartFinal($_REQUEST['customerID']);
                 if($cartResult){
                     foreach ($cartResult as $row){
                         $orderData = [
@@ -95,14 +135,29 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                             "qty" => mysqli_real_escape_string($db->conn,$row['Qty']),
                             "custId" => mysqli_real_escape_string($db->conn,$row['Customer_ID'])
                         ];
+                        $updateResult = $productObj->reduceFromStock($orderData['pid'],$orderData['cid'],$orderData['sid'],$orderData['qty']);
                         $orderResult = $orderObj->addOrder($orderData);
+                        $cartResult = $cartObj->remove_productFromCart($orderData['pid'],$orderData['sid'],$orderData['cid'],$orderData['custId']);
                     }
+                    $emailbillingInfo=[
+                        "payment"=> $paymentMethod,
+                        "name" => $_REQUEST['user'],
+                        "address" => $_REQUEST['address'],
+                        "contact" => $_REQUEST['contact'],
+                        "charges" => $_REQUEST['charges'],
+                        "discount" => $_REQUEST['discount'],
+                        "total" => $_REQUEST['total'],
+                        "subtotal" => $_REQUEST['subtotal'],
+                    ];
+                    $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
+                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email']);
                     echo 1;
                 }
             }
         }
 
     }
+
 }
 ?>
 
