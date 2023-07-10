@@ -68,8 +68,9 @@ class OrderController{
         $subTotal = $data['subTotal'];
         $discount = $data['discount'];
         $currentDate = date('Y-m-d');
+        $status = "Pending";
         $paymentID = $this->paymentID;
-        $sql_invoice = "INSERT INTO `invoice`(`Invoice_ID`, `sub_Total`, `Discount`, `Order_Date`, `Payment_ID`) VALUES ('$this->invoiceID','$subTotal','$discount','$currentDate','$paymentID')";
+        $sql_invoice = "INSERT INTO `invoice`(`Invoice_ID`, `sub_Total`, `Discount`, `Order_Date`,order_status ,`Payment_ID`) VALUES ('$this->invoiceID','$subTotal','$discount','$currentDate','$status','$paymentID')";
         if($this->conn->query($sql_invoice)){
             $this->generateId->updatetID($idType);
             return true;
@@ -92,6 +93,39 @@ class OrderController{
             $this->generateId->updatetID($idType);
         }
     }
+
+    public function DisplayOrders(){
+        $sql = "SELECT * FROM invoice";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getOrderInFoTable($invoiceID){
+        $sql = "SELECT p.Product_ID,s.Size_ID,c.Color_ID,p.Pro_Name,s.Size_Value,c.Color_Value,c.Color_Name,o.Order_Qty FROM product p, size s, color c, order_tbl o WHERE p.Product_ID = o.Product_ID AND s.Size_ID = o.Size_ID AND c.Color_ID = o.Color_ID AND o.Invoice_ID = '$invoiceID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function getPaymentMethod($paymentID){
+        $sql_query = "SELECT 'COD' AS Payment_METHOD,Delivery_Address,Contact_NO FROM payment_cod WHERE Payment_ID = '$paymentID' UNION ALL SELECT 'BD' AS Payment_METHOD,Delivery_Address,Contact_NO FROM payment_bankdeposit WHERE Payment_ID = '$paymentID' UNION ALL SELECT 'Pick' AS Payment_METHOD,Contact_NO,`Total` FROM payment_pickup WHERE Payment_ID = '$paymentID'";
+        $result = $this->conn->query($sql_query);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+
+    }
+    
+
 }
 
 ?>
