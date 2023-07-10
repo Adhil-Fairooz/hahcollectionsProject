@@ -67,8 +67,8 @@
     margin-right: 15%;
     transition: 0.3s ease-in-out;
 }
-#strLnameError,#strFnameError,#strPasswordError,#strEmailError,#strRePasswordError{
+#strLnameError,#strFnameError,#strPasswordError,#strEmailError,#strRePasswordError,#strOTPError{
     font-size: 12px;
-    color: #c23616;
+    color: #c23516;
     margin-left: 10px;
 }
