@@ -1,12 +1,14 @@
 <?php
 $currentMainPage = "";
-include "customerHeader.php"; ?>
+include "customerHeader.php"; 
+?>
 <link rel="stylesheet" href="..\assets\css\customer-checkout-form-style.css">
 <div class="container">
   <div id="carouselExample" class="carousel slide my-Carousel-Slide"  data-bs-pause="false">
   <!-- Slider Start-->
     <div class="carousel-inner">
     <span data-customerID = "<?=$customerID?>" id="getCustID"></span>
+    <span data-user = "<?=$_SESSION['Name']?>" id="getuser"></span>
       <!-- Slide 1: Order review -->
       <div class="carousel-item  my-carousel-item active">
 
@@ -185,21 +187,32 @@ include "customerHeader.php"; ?>
           <div class="carousel-content">
             <div class="row">
               <div class="col-md-6">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Color</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody class="tbodyFinal"></tbody>
-                  </table>
+                <div class="row">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Product Name</th>
+                          <th scope="col">Size</th>
+                          <th scope="col">Color</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody class="tbodyFinal"></tbody>
+                    </table>
+                  </div>
                 </div>
+                <div class="row mt-2">
+                  <div class="col-md-12 mylabel mb-1">Email Address</div>
+                  <div class="col-md-11"><input type="text" class="form-control" name="SNDEmail" value="<?=$_SESSION['USerEmail']?>"></div>
+                  <div class="col-1 icon">
+                    <button class="btn btn-outline-danger" id="SNDEmail_edit"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-outline-success" id="SNDEmail_save"><i class="far fa-save"></i></button>
+                  </div>
+                </div>
+                
               </div>
               <div class="col-md-6">
                 <div class="card">
@@ -207,7 +220,7 @@ include "customerHeader.php"; ?>
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-4 mylabel">Name</div>
-                      <div class="col-md-8"><?=$_SESSION['Name']?></div>
+                      <div class="col-md-8"><span><?=$_SESSION['Name']?></span></div>
                     </div>
                     <div class="row mt-2">
                       <div class="col-md-4 mylabel">Payment Method</div>
@@ -238,7 +251,7 @@ include "customerHeader.php"; ?>
                       <div class="col-md-8">Rs. <span class="fw-bold fs-3" id="FinalTotal">0.00</span></div>
                     </div>
                     <div class="row mt-3">
-                      <div class="col-12"><button id="PlaceOrder" class="btn myBtn"><i class="fas fa-shopping-bag"></i> Place Order</button>
+                      <div class="col-12"><button id="PlaceOrder" href="custOrders.php" class="btn myBtn"><i class="fas fa-shopping-bag"></i> Place Order</button>
                     </div>
                     </div>
                   </div>
