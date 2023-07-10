@@ -209,6 +209,29 @@ class ProductController{
             return false;
         }
     }
+    private function getcurrentStockQty($productID,$colorID,$sizeID){
+        $sql_get_data = "SELECT Stock_Qty FROM product_variation WHERE Product_ID = '$productID' AND Size_ID = '$sizeID' AND Color_ID = '$colorID' ;";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            $row = $results -> fetch_assoc();
+            return $row['Stock_Qty'];
+        }else{
+            return false;
+        }
+    }
+
+    public function reduceFromStock($productID,$colorID,$sizeID,$orderQty){
+        $currentStock = $this->getcurrentStockQty($productID,$colorID,$sizeID);
+        $updatedStock = 0;
+        if($currentStock > 0){
+            $updatedStock = $currentStock - $orderQty;
+        }else{
+            $updatedStock = 0;
+        }
+        $sql_update = "UPDATE product_variation SET Stock_Qty = '$updatedStock' WHERE Product_ID = '$productID' AND Size_ID = '$sizeID' AND Color_ID = '$colorID'";
+        $result = $this->conn->query($sql_update);
+
+    }
 
 }
 
