@@ -66,7 +66,11 @@ label{
     text-align: center;
     font-weight: 500;
 }
-
+#strUserError,#strpasswordError{
+    font-size: 12px;
+    color: #c23616;
+    margin-left: 10px;
+}
 .bt-divs a{
     text-decoration: none;
     color: #706fd3;
