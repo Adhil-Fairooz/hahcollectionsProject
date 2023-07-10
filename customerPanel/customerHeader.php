@@ -1,5 +1,8 @@
 <?php 
 session_start();
+if(!isset( $_SESSION['customerID'])){
+    header("location:../login.php");
+}
 $customerID =  $_SESSION['customerID'];
 $_SESSION['cart_customerID'] = $customerID;
 
@@ -36,7 +39,7 @@ $_SESSION['cart_customerID'] = $customerID;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav  myNavbarNav justify-content-center">
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'Home' ? 'active' : '' ?>"  href="customer.php">Home</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'Home' ? 'active' : '' ?>"  href="index.php">Home</a>
                     </li>
                     <li class="nav-item mynavitem">
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'products' ? 'active' : '' ?>"  href="custProducts.php">Products</a>
@@ -61,24 +64,6 @@ $_SESSION['cart_customerID'] = $customerID;
                 </div>
             </div>
         </div>
-        <script>
-             $('#signout').on('click',function(e){
-                e.preventDefault();
-                const href="../logoutprocess.php";
-                Swal.fire({
-                    title: 'Do you wish to sign out?',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        document.location.href=href;
-                    }
-                });
-            });
-        </script>
         
     </nav>
     <div class="container">
