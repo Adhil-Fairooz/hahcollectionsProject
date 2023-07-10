@@ -81,5 +81,17 @@ class CustomerController{
             return false;
         }
     }
+    public function changePasswordByEmail($data){
+        $email = $data['email'];
+        $password = password_hash($data['password'],PASSWORD_DEFAULT);
+
+        $sql_update = "UPDATE customer SET `Password`='$password' WHERE Email = '$email';";
+        $result = $this->conn->query($sql_update);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 ?>
