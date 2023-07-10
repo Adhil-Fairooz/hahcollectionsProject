@@ -5,8 +5,11 @@ include "classes\CustomerController.php";
 $db = new DatabaseConnection;
 $customerObj = new CustomerController();
 session_start();
-$userPassword = $_SESSION['CurrentPassword'];
-$CustomerID = $_SESSION['customerID'];
+if(isset($_SESSION['customerID'])){
+    $userPassword = $_SESSION['CurrentPassword'];
+    $CustomerID = $_SESSION['customerID'];
+}
+
 ?>
 <?php
 if(isset($_POST['task']) && $_POST['task'] == 'create'){ ?>
