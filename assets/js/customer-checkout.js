@@ -8,6 +8,8 @@ var paymentMethod; //store paymentMethod
 var address; // store address
 var contact; // store contact
 var customerID;
+var emailAddress;
+var user;
 
 $( document ).ready(function() {
     loadCarttbl();
@@ -76,11 +78,22 @@ $( document ).ready(function() {
     });
     $('#next').click(function(){
         loadValuesToBilling();
+        emailAddress = $('input[name="SNDEmail"]').val();
     })
     loadCarttblFinal(); 
     
     $('#PlaceOrder').click(function(){
-        
+        var redirectPage = $(this).attr('href');
+        Swal.fire({
+            title: 'Please Wait...',
+            html: '<div class="loading-spinner"></div>',
+            text: 'placing your order',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            }
+        });
         $.ajax({
             url:"placeOrder.php",
             data:{
@@ -92,12 +105,29 @@ $( document ).ready(function() {
                 address:address,
                 contact:contact,
                 subtotal:subtotal,
-                discount:discountvalue   
+                discount:discountvalue,
+                email:emailAddress,
+                user:user
             },
             success:function(response){
                 console.log("success: response");
                 if(parseInt(response) === 1){
-                    Swal.fire({icon:'success',title:'Done !',text:'Your Order was placed successfully'});
+                    Swal.close();
+                    getCount();
+                    Swal.fire({
+                        title: 'Done !',
+                        text: 'Your Order was placed successfully',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#686de0',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.location.href=redirectPage;
+                        }
+                    });
+                    
                 }else{
                     console.log(response);
                     Swal.fire({icon:'warning',title:'Something is not right',text:''});
@@ -105,15 +135,26 @@ $( document ).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.log('An error occurred: ' + error);
-              }
+              },
+
 
         });
 
     });
 
+    SNDEmail_enable();
+    $('#SNDEmail_edit').click(function(){
+        SNDEmail_disable();
+    });
+    $('#SNDEmail_save').click(function(){
+        SNDEmail_enable();
+        emailAddress = $('input[name="SNDEmail"]').val();
+    });
+
 });
 function loadCarttbl(){
-    var customer_id = $('#getCustID').attr('data-customerID'); 
+    var customer_id = $('#getCustID').attr('data-customerID');
+    user = $('#getuser').attr('data-user');
     customerID = customer_id;
     $.ajax({
         url: "checkoutPage.php",
@@ -128,7 +169,6 @@ function loadCarttbl(){
 }
 function loadCarttblFinal(){
     var customer_id = $('#getCustID').attr('data-customerID'); 
-    console.log(customer_id);
     $.ajax({
         url: "checkoutPage.php",
         data:{cid:customer_id,task:"finalDisplay"},
@@ -300,4 +340,30 @@ function loadValuesToBilling(){
     }
     console.log(FinalTotal);
 
+}
+
+function getCount(){
+    var customer_id = $('#addtocart').attr('data-custId');
+    $.ajax({
+        url: "loadCartInfo.php",
+        data:{customerID:customer_id},
+        success: function(response){
+            if(parseInt(response) === 0){
+                $('#cartBadge').html("");
+            }else{
+                $('#cartBadge').html(response);
+            }
+        }
+    })
+}
+/*Email*/
+function SNDEmail_enable(){
+    $('input[name="SNDEmail"]').prop('disabled',true);
+    $('#SNDEmail_edit').show();
+    $('#SNDEmail_save').hide();
+}
+function SNDEmail_disable(){
+    $('input[name="SNDEmail"]').prop('disabled',false);
+    $('#SNDEmail_edit').hide();
+    $('#SNDEmail_save').show();
 }
