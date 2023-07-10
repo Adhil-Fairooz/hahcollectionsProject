@@ -7,43 +7,40 @@ include "admin.php"; ?>
         <div class="row main-row">
             <div class="col main-col">
                 <div class="card sub-card">
-                    <div class="card-header">Category Status</div>
+                    <div class="card-header my-card-header">Category Status</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Main</h5>
-                                        <div class="card-text">4</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Main</div>
+                                        <div class="card-text my-content-box-text">4</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Sub</h5>
-                                        <div class="card-text">16</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Sub</div>
+                                        <div class="card-text my-content-box-text">16</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Brand</div>
+                                        <div class="card-text my-content-box-text">5</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Brands</h5>
-                                        <div class="card-text">5</div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Suppliers</h5>
-                                        <div class="card-text">5</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Supplier</div>
+                                        <div class="card-text my-content-box-text">5</div>
                                         
                                     </div>
                                 </div>
@@ -53,35 +50,33 @@ include "admin.php"; ?>
                 </div>
             </div>
             <div class="col main-col">
-                <div class="card">
-                    <div class="card-header">Order Status</div>
+                <div class="card sub-card">
+                    <div class="card-header my-card-header">Order Status</div>
                     <div class="card-body">
                     <div class="row">
                             <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">New Orders</h5>
-                                        <div class="card-text">4</div>
+                            <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">New Orders</div>
+                                        <div class="card-text my-content-box-text">4</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Ready Orders</h5>
-                                        <div class="card-text">16</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Ready Orders</div>
+                                        <div class="card-text my-content-box-text">16</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Completed orders</h5>
-                                        <div class="card-text">5</div>
+                            <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Completed Orders</div>
+                                        <div class="card-text my-content-box-text">4</div>
                                         
                                     </div>
                                 </div>
@@ -93,35 +88,32 @@ include "admin.php"; ?>
         </div>
         <div class="row main-row">
             <div class="col main-col">
-                <div class="card">
-                    <div class="card-header">Product Returns</div>
+                <div class="card sub-card">
+                    <div class="card-header my-card-header">Product Returns</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">New Return Requests</h5>
-                                        <div class="card-text">4</div>
+                            <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Return Requests</div>
+                                        <div class="card-text my-content-box-text">4</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Rejected Requests</h5>
-                                        <div class="card-text">5</div>
-                                        
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Rejected Requests</div>
+                                        <div class="card-text my-content-box-text">5</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Approved Requests</h5>
-                                        <div class="card-text">5</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Approved Requests</div>
+                                        <div class="card-text my-content-box-text">5</div>
                                         
                                     </div>
                                 </div>
@@ -133,35 +125,33 @@ include "admin.php"; ?>
                 </div>
             </div>
             <div class="col main-col">
-                <div class="card">
-                    <div class="card-header">Products</div>
+                <div class="card sub-card">
+                    <div class="card-header my-card-header">Products</div>
                     <div class="card-body">
                     <div class="row">
                             <div class="col">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Instock</h5>
-                                        <div class="card-text">4</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Instock</div>
+                                        <div class="card-text my-content-box-text">4</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">out of Stock</h5>
-                                        <div class="card-text"> 0 </div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Out of stock</div>
+                                        <div class="card-text my-content-box-text">4</div>
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="card">
-                                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">Low in Stock</h5>
-                                        <div class="card-text">5</div>
+                                <div class="card my-card-content-box">
+                                    <div class="card-body my-content-box-body">
+                                        <div class="card-title my-content-box-title">Low in Stock</div>
+                                        <div class="card-text my-content-box-text">5</div>
                                         
                                     </div>
                                 </div>
