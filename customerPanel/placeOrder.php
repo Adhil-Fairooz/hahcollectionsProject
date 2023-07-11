@@ -4,12 +4,13 @@ include "..\classes\OrderController.php";
 include "..\classes\CartController.php";
 include "..\classes\ProductController.php";
 include "..\classes\EmailController.php";
+include "..\classes\PDFController.php";
 $db = new DatabaseConnection;
 $orderObj = new OrderController;
 $cartObj = new CartController;
 $productObj = new ProductController;
 $emailObj = new EmailController();
-
+$pdfObj = new PDFController();
 if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
     $cartResultForEmail;
     $paymentMethod;
@@ -53,9 +54,13 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "discount" => $_REQUEST['discount'],
                         "total" => $_REQUEST['total'],
                         "subtotal" => $_REQUEST['subtotal'],
+                        "invoiceNo" => $orderObj->getInvoiceID()
                     ];
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
-                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email']);
+                    $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
+                    $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
+                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email'],$orderObj->getInvoiceID());
+                    $pdfObj->removeBillPDFs($orderObj->getInvoiceID());
                     echo 1;
                 }
             }
@@ -103,9 +108,13 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "discount" => $_REQUEST['discount'],
                         "total" => $_REQUEST['total'],
                         "subtotal" => $_REQUEST['subtotal'],
+                        "invoiceNo" => $orderObj->getInvoiceID()
                     ];
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
-                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email']);
+                    $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
+                    $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
+                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email'],$orderObj->getInvoiceID());
+                    $pdfObj->removeBillPDFs($orderObj->getInvoiceID());
                     echo 1;
                 }
             }
@@ -148,9 +157,13 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "discount" => $_REQUEST['discount'],
                         "total" => $_REQUEST['total'],
                         "subtotal" => $_REQUEST['subtotal'],
+                        "invoiceNo" => $orderObj->getInvoiceID()
                     ];
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
-                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email']);
+                    $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
+                    $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
+                    $emailObj->sendBillInfoEmail("Your Order has been Placed",$_REQUEST['email'],$orderObj->getInvoiceID());
+                    $pdfObj->removeBillPDFs($orderObj->getInvoiceID());
                     echo 1;
                 }
             }
