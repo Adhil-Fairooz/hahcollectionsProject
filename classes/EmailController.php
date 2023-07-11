@@ -1,5 +1,4 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -8,11 +7,15 @@ class EmailController
 {
     private $EmailBillBody;
     private $EmailOTPBody;
+
+    private $BillContent;
+    public function getbillcontent(){
+        return $this->BillContent;
+    }
     private function Intialize(){
         require 'includes/PHPMailer.php';
         require 'includes/SMTP.php';
         require 'includes/Exception.php';
-
         $this->mail = new PHPMailer();
         $this->mail->isSMTP();
         $this->mail->Host = "smtp.gmail.com";
@@ -23,12 +26,15 @@ class EmailController
         $this->mail->Password = "rfyvbhwlwrmthmso";
 
     }
-    public function sendBillInfoEmail($subject,$email){
+    public function sendBillInfoEmail($subject,$email,$filename){
         $this->Intialize();
         $this->mail->Subject = $subject;
         $this->mail->setFrom('hahcollections.store@gmail.com');
         $this->mail->isHTML(true);
-        $this->mail->Body = $this->getMailHeader()." ".$this->EmailBillBody;
+        $this->BillContent = $this->getMailHeader()." ".$this->EmailBillBody;
+        $this->mail->Body = $this->BillContent;
+        $this->mail->addAttachment('../exludes/billFolder/'.$filename.'.pdf');
+
         $this->mail->addAddress($email);
 
         if ($this->mail->send()) {
@@ -201,6 +207,7 @@ class EmailController
                 
                 <div class="billing-details">
                     <h2>Billing Details</h2>
+                    <p>INVOICE NO: <span class="data">'.$billingInfo['invoiceNo'].'</span></p>
                     <p>Name: <span class="data">'.$billingInfo['name'].'</span></p>
                     <p>Payment Method: <span class="data">'.$billingInfo['payment'].'</span></p>
                     <p>Address: <span class="data">'.$billingInfo['address'].'</span></p>
