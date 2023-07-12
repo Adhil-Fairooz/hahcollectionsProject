@@ -9,7 +9,7 @@ include "ProductManagement.php"; ?>
     <div class="card mt-3">
         <div class="card-header mycardheader">Add New Product</div>
         <div class="card-body">
-            <form action="#" method="post" enctype="multipart/form-data" id="AddProduct">
+            <form id="AddProduct" action="#" method="post" enctype="multipart/form-data" >
                 <div class="row myrow">
                     <div class="col-md-3">
                         <div class="form-floating myFormFloating">
@@ -139,7 +139,7 @@ include "ProductManagement.php"; ?>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="btn-col">
-                            <button class="btn myBtn" id="btnAdd" type="submit" name="btnProduct">Add Product</button>
+                            <button class="btn myBtn" type="submit" name="btnProduct">Add Product</button>
                         </div>
                         
                     </div>
