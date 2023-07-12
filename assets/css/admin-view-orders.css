@@ -16,13 +16,12 @@ table thead{
     color: white;
     width: 50%;
     font-size: 17px; 
+    border: 2px solid #487eb0;
 }
 .viewbtn:hover{
     background-color: white;
-    color: #487eb0;
-    font-weight: bold;
-    border: 2px solid #487eb0;
-    
+    color: #487eb0; 
+    border: 2px solid #487eb0;   
 }
 
 .my-modal-footer {
@@ -54,4 +53,34 @@ table thead{
     font-weight: 600;
     letter-spacing: 1px;
 
+}
+.search-box .search-input{
+    border-radius: 0px;
+    border: 1px solid black;
+    border-right: none;
+}
+.search-box .search-input:focus{
+    border-color: none;
+    box-shadow: none;
+}
+.search-box .search-btn{
+    border-radius: 0px;
+    border: 1px solid black;
+    border-left: none;
+    background-color: #686de0;
+    color: white;
+}
+.search-box .search-btn:hover{
+    background-color: #636e72;
+    color: white;
+    border: 2px solid black;
+    border-left: none;
+}
+.myFormFloating .myselect{
+    border : 0px;
+    border : 1px solid #dcdde1;
+}
+.myFormFloating .myselect:focus{
+    box-shadow: none;
+    border : 1px solid #273c75;
 }
