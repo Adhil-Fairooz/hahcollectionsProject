@@ -2,6 +2,9 @@
 $currentSubPage="add";
 include "ProductManagement.php"; ?>
 <link rel="stylesheet" href="..\assets\css\admin-product-new-product-style.css">
+<script src="..\assets\js\form-validation\admin-product-form-validation.js"></script>
+<script src="..\assets\js\admin-product-add.js"></script>
+
 <div class="container">
     <div class="card mt-3">
         <div class="card-header mycardheader">Add New Product</div>
@@ -174,5 +177,4 @@ if(isset($_POST['btnProduct'])){
 }
 
 ?>
-<script src="..\assets\js\form-validation\admin-product-form-validation.js"></script>
 <?php include "adminFooter.php"; ?>
