@@ -42,6 +42,3 @@ function preview(){
 
 }
 
-function invalidComment(strComment){
-
-}
