@@ -6,13 +6,54 @@ $(document).ready(function(){
         loadViewOrder(invoiceID,paymentID);
     });
 
+    $('[name="orderStatus"]').change(function(){
+        var orderStatus = $(this).val();
+        var pm = $('[name="paymentMethods"]').val();
+        loadOrderOnCondition(pm,orderStatus);
+    });
+    $('[name="paymentMethods"]').change(function(){
+        var paymentMethods = $(this).val();
+        var os = $('[name="orderStatus"]').val();
+        loadOrderOnCondition(paymentMethods,os);
+    });
+
 });
 
+function loadOrderOnCondition(pm,os){
+    Swal.fire({
+        title: 'Loading...',
+        html: '<div class="loading-spinner"></div>',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        willOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    $.ajax({
+        url: "orderAjaxCalls.php",
+        data: {pm:pm,os:os,task:"loadOnCondition"},
+        success:function(response){
+            Swal.close();
+            $('tbody').html(response);
+        }
+    });  
+}
+
 function loadOrders(){
+    Swal.fire({
+        title: 'Loading...',
+        html: '<div class="loading-spinner"></div>',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        willOpen: () => {
+            Swal.showLoading();
+        }
+    });
     $.ajax({
         url: "orderAjaxCalls.php",
         data: {task:"loadTable"},
         success:function(response){
+            Swal.close();
             $('tbody').html(response);
         }
     });
@@ -24,6 +65,7 @@ function loadViewOrder(invoiceID,paymentID){
         success:function(response){
             $('.modal-content').html(response);
             $('#viewEachOrder').modal('show');
+            
         }
     })
 }
