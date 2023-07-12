@@ -124,6 +124,55 @@ class OrderController{
         }
 
     }
+
+    public function getImgProofBDPayment($paymentID){
+        $sql = "SELECT `Payment_Proof` FROM `payment_bankdeposit` WHERE `Payment_ID` = '$paymentID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+
+    }
+
+    public function getInvoiceData($orderStatus){
+        $sql = "SELECT * FROM `invoice` WHERE order_status='$orderStatus'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function getInvoiceDataCODAndOS($orderStatus){
+        $sql = "SELECT i.* FROM invoice i INNER JOIN payment_cod p ON i.Payment_ID = p.Payment_ID WHERE i.order_status = '$orderStatus';";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    public function getInvoiceDataBDAndOS($orderStatus){
+        $sql = "SELECT i.* FROM invoice i INNER JOIN payment_bankdeposit p ON i.Payment_ID = p.Payment_ID WHERE i.order_status = '$orderStatus';";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    public function getInvoiceDataPKAndOS($orderStatus){
+        $sql = "SELECT i.* FROM invoice i INNER JOIN payment_pickup p ON i.Payment_ID = p.Payment_ID WHERE i.order_status = '$orderStatus';";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
     
 
 }
