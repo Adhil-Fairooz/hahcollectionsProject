@@ -139,6 +139,7 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                                         }else if($pmValue === 'BD'){
                                             ?>
                                             Bank Deposit
+
                                             <?php
                                         }else{
                                             ?>
@@ -147,7 +148,31 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                                         }
                                     ?>
                                 </div>
+
                             </div>
+                            <?php if($pmValue === 'BD'){
+                                ?>
+                                <div class="row mt-3">
+                                    <div class="col-md-6 label">Payment Proof:</div>
+                                    <div class="col">
+                                        <?php 
+                                        $payBDResult=$orderObj->getImgProofBDPayment($_REQUEST['paymentID']);
+                                        if($payBDResult){
+                                            $pBDData = $payBDResult->fetch_assoc();
+                                            $payProof = $pBDData['Payment_Proof'];
+                                            if(is_null($payProof)){
+                                                ?><a href="#" class="btn btn-outline-danger">No Image</a><?php
+                                            }else{
+                                                ?><a href="data:image/jpeg;base64,<?=$payProof?>" class="btn btn-outline-success" id="proofimgview">view Image</a><?php
+                                            }
+                                        }
+                                        ?>
+                                        
+                                    </div>
+                                </div>
+                                <?php
+                            } ?>
+                            
                         </div>
                     </div>
 
@@ -170,4 +195,36 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
     <?php
 }
 
+?>
+
+<?php 
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadOnCondition'){
+    if($_REQUEST['pm'] ==='all'){
+        $invoiceRes = $orderObj->getInvoiceData($_REQUEST['os']);
+    }else if($_REQUEST['pm'] ==='COD'){
+        $invoiceRes = $orderObj->getInvoiceDataCODAndOS($_REQUEST['os']);
+    }else if($_REQUEST['pm'] ==='BD'){
+        $invoiceRes = $orderObj->getInvoiceDataBDAndOS($_REQUEST['os']);
+    }else{
+        $invoiceRes = $orderObj->getInvoiceDataPKAndOS($_REQUEST['os']);
+    }
+    if($invoiceRes){
+        foreach($invoiceRes as $row){
+            ?>
+            <tr>
+                <th scope="col"><?=$row['Invoice_ID']?></th>
+                <td><?=$row['Order_Date']?></td>
+                <td><?=$row['order_status']?></td>
+                <td><button class="btn viewbtn" id="view" data-paymentID="<?=$row['Payment_ID']?>" data-invoiceID = "<?=$row['Invoice_ID']?>"><i class="far fa-eye"></i> View</button></td>
+            </tr>
+            <?php
+        }
+    }else{
+        ?>
+        
+        <tr><td colspan="4" class="label">No Records</td></tr>
+        
+        <?php
+    }
+}
 ?>
