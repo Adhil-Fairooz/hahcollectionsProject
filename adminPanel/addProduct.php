@@ -2,12 +2,11 @@
 $currentSubPage="add";
 include "ProductManagement.php"; ?>
 <link rel="stylesheet" href="..\assets\css\admin-product-new-product-style.css">
-<script src="..\assets\js\admin-product-add.js"></script>
 <div class="container">
     <div class="card mt-3">
         <div class="card-header mycardheader">Add New Product</div>
         <div class="card-body">
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" enctype="multipart/form-data" id="AddProduct">
                 <div class="row myrow">
                     <div class="col-md-3">
                         <div class="form-floating myFormFloating">
@@ -25,6 +24,7 @@ include "ProductManagement.php"; ?>
                                 ?>
                             </select>
                             <label for="floatingSelect">Select Main category</label>
+                            <div id="strMainError"></div>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -43,6 +43,7 @@ include "ProductManagement.php"; ?>
                                 ?>
                             </select>
                             <label for="floatingSelect">Select Sub category</label>
+                            <div id="strSubError"></div>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -61,6 +62,7 @@ include "ProductManagement.php"; ?>
                                 ?>
                             </select>
                             <label for="floatingSelect">Select Brand Name</label>
+                            <div id="strBrandError"></div>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -79,6 +81,7 @@ include "ProductManagement.php"; ?>
                                 ?>
                             </select>
                             <label for="floatingSelect">Select Supplier</label>
+                            <div id="strSupError"></div>
                         </div>
                     </div>
                 </div>
@@ -87,12 +90,14 @@ include "ProductManagement.php"; ?>
                         <div class="form-floating myFormFloating">
                             <input type="text" class="form-control myinputText" name="pName" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">Product Name</label>
+                            <div id="strPNameError"></div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating">
                             <textarea class="form-control myinputTextArea" name="pDesc"  placeholder=" " id="floatingTextarea"></textarea>
                             <label for="floatingTextarea">Product Description</label>
+                            <div id="strPDescError"></div>
                         </div>
                     </div>
                 </div>
@@ -101,12 +106,14 @@ include "ProductManagement.php"; ?>
                         <div class="form-floating mb-3 myFormFloating">
                             <input type="text" class="form-control myinputText" name="pUnitPrice" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">Product Unit Price (Rs.)</label>
+                            <div id="strPUnitError"></div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating mb-3">
                             <input type="text" class="form-control myinputText" name="pSalePrice" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">Product Selling Price (Rs.)</label>
+                            <div id="strPSellError"></div>
                         </div>
                     </div>
                 </div>
@@ -167,4 +174,5 @@ if(isset($_POST['btnProduct'])){
 }
 
 ?>
+<script src="..\assets\js\form-validation\admin-product-form-validation.js"></script>
 <?php include "adminFooter.php"; ?>
