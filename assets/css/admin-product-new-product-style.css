@@ -81,3 +81,8 @@ label{
     border: 2px solid #487eb0;
     
 }
+#strMainError,#strSubError,#strBrandError,#strSupError,#strPNameError,#strPDescError,#strPUnitError,#strPSellError{
+    font-size: 12px;
+    color: #c23616;
+    margin-left: 10px;
+}
