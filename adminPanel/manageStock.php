@@ -26,7 +26,7 @@ include "ProductManagement.php"; ?>
                                     <td><?=$row['Pro_Desc']?></td>
                                     <td>
                                         <button class="btn btn-outline-success viewStockModal" data-productId = "<?=$row['Product_ID']?>"><i class="fas fa-folder-plus"></i> Add New Stock</button>
-                                        <button class="btn btn-outline-danger"><i class="fas fa-edit"></i> Update Stock</button>
+                                        <button class="btn btn-outline-danger" data-productId = "<?=$row['Product_ID']?>"><i class="fas fa-edit"></i> Update Stock</button>
                                         
                                     </td>
                                     </tr>
