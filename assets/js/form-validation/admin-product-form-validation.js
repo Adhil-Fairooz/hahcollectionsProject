@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('#AddProduct').submit(function(event) {
-      console.log("Validation works");
       var select_main = $('select[name="pMainCat"]');
       var select_sub = $('select[name="psubCat"]');
       var select_brand = $('select[name="pBrand"]');
