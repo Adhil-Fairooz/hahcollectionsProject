@@ -15,7 +15,7 @@ $(document).ready(function() {
       $('.myselect').removeClass('is-invalid');
       $('.myinputTextArea').removeClass('is-invalid');
       resetError();
-  
+      
       var isValid_select_main = true;
       var isValid_select_sub = true;
       var isValid_select_brand = true;
