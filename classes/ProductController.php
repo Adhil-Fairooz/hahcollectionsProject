@@ -233,6 +233,76 @@ class ProductController{
 
     }
 
+    public function getProductDetails(){
+        $sql = "SELECT * FROM product";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
+    public function getViewProductDetails($id){
+        $sql = "SELECT p.*,m.Main_ID,m.name as mName,s.Sub_ID,s.name as sName,b.Brand_ID,b.Name as bName,su.Sup_ID,su.Sup_Name FROM product p, main_category m, sub_category s, brand b, supplier su, categorization c WHERE p.Product_ID = c.Product_ID AND m.Main_ID = c.Main_ID AND s.Sub_ID = c.Sub_ID AND b.Brand_ID = C.Brand_ID AND su.Sup_ID = c.Sup_ID AND p.Product_ID = '$id'";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
+    public function getProductVariationOnID($id){
+        $sql = "SELECT s.Size_ID,s.Size_Value,c.Color_ID,c.Color_Name,c.Color_Value,pv.Stock_Qty FROM size s, color c, product_variation pv WHERE s.Size_ID = pv.Size_ID AND c.Color_ID = pv.Color_ID AND Product_ID = '$id'";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
+    public function updateProductImage($image1,$image2,$image3,$pid){
+        $productImg1 = $this->imgDbFormat($image1);
+        $productImg2 = $this->imgDbFormat($image2);
+        $productImg3 = $this->imgDbFormat($image3);
+
+        $sql = "UPDATE product SET Pro_IMG_1 = '$productImg1',Pro_IMG_2 = '$productImg2',Pro_IMG_3 = '$productImg3' WHERE Product_ID = '$pid'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
+    public function updateProductInfo($NewData){
+        $productId = $NewData['pId'];
+        $productName = $NewData['pName'];
+        $productDesc = $NewData['pDesc'];
+        $productUnitPrice = $NewData['pUnitPrice'];
+        $productSalePrice = $NewData['pSalePrice'];
+        $sql = "UPDATE product SET Pro_Name = '$productName',Pro_Desc = '$productDesc',Pro_UnitPrice = '$productUnitPrice',Pro_SalePrice = '$productSalePrice' WHERE Product_ID = '$productId';";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+    public function updateCategorization($NewData){
+        $mainId = $NewData['mainId'];
+        $subId = $NewData['subId'];
+        $brandId = $NewData['brandId'];
+        $supId = $NewData['supId'];
+        $productId = $NewData['pId'];
+        $sql = "UPDATE categorization SET Main_ID = '$mainId', Sub_ID = '$subId', Brand_ID = '$brandId', Sup_ID = '$supId' WHERE Product_ID = '$productId'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
 }
 
 ?>
