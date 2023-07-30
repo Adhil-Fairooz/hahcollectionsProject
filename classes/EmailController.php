@@ -7,6 +7,7 @@ class EmailController
 {
     private $EmailBillBody;
     private $EmailOTPBody;
+    private $EmailCredentialsBody;
 
     private $BillContent;
     public function getbillcontent(){
@@ -157,6 +158,24 @@ class EmailController
                         color: #777;
                         font-size: 14px;
                     }
+                    .credentials-label {
+                        font-size: 18px;
+                        margin-bottom: 10px;
+                    }
+
+                    .username,
+                    .password {
+                        font-size: 16px;
+                        padding: 5px 10px;
+                        background-color: #f0f0f0;
+                        border-radius: 4px;
+                        border: 1px solid #ccc;
+                        width: 100%;
+                    }
+
+                    .credentials-group {
+                        margin-bottom: 20px;
+                    }
                 </style>
             </head>
             <body>
@@ -233,7 +252,7 @@ class EmailController
         ';
     }
     public function sendOTPCode($email){
-        $subject = "You On Time Password to Recover your Account";
+        $subject = "Your One Time Password to Recover your Account";
         $this->Intialize();
         $this->mail->Subject = $subject;
         $this->mail->setFrom('hahcollections.store@gmail.com');
@@ -248,5 +267,40 @@ class EmailController
 
         $this->mail->smtpClose();
         
+    }
+
+    public function sendEmpCredentials($email){
+        $subject = "New Employee Credentials";
+        $this->Intialize();
+        $this->mail->Subject = $subject;
+        $this->mail->setFrom('hahcollections.store@gmail.com');
+        $this->mail->isHTML(true);
+        $this->mail->Body = $this->getMailHeader()." ".$this->EmailCredentialsBody;
+        $this->mail->addAddress($email);
+
+        if ($this->mail->send()) {
+        } else {
+            echo "Message could not be sent. Mailer Error: " . $this->mail->ErrorInfo;
+        }
+        $this->mail->smtpClose();
+    }
+    public function setEmpCredentialsBody($email,$pass){
+        $this->EmailCredentialsBody = '
+        <div class="box">
+                    <div class="card">
+                        <div class="card-header">User Credentials For Login</div>
+                        <div class="card-body">
+                            <div class="credentials-group">
+                                <label for="username" class="credentials-label">Username:</label>
+                                <span class="username">'.$email.'</span>
+                            </div>
+                            <div class="credentials-group">
+                                <label for="password" class="credentials-label">Password:</label>
+                                <span class="password">'.$pass.'</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+        ';
     }
 }
