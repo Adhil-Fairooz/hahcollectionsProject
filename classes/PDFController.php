@@ -18,8 +18,6 @@ class PDFController{
         
         $this->dompdf->loadHtml($billHTML);
         
-        
-
         // (Optional) Set paper size and orientation
         $this->dompdf->setPaper('A4', 'landscape');
 
