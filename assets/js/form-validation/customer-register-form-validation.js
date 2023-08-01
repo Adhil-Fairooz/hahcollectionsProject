@@ -13,7 +13,7 @@ function checkEmailinDB(email,callback){
             if(parseInt(response) === 1){
                 callback(true);
             }else{
-                callback(false);
+                callback(false); 
             }
         }
     });
