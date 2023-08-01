@@ -11,15 +11,16 @@ function displayForm(){
 }
 
 $(document).ready(function(){
+
     $("#login").submit(function(event) {
         
         var username = $('#username').val();
         var password = $('#userpassword').val();
 
+        // reset validating conditions
         $('.form-control').removeClass('is-invalid');
         var isUsernameValid = true;
         var isPasswordValid = true;
-
         $('strUserError').html('');
         $('strpasswordError').html('');
 
