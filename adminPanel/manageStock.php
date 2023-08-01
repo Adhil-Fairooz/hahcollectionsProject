@@ -26,7 +26,7 @@ include "ProductManagement.php"; ?>
                                     <td><?=$row['Pro_Desc']?></td>
                                     <td>
                                         <button class="btn btn-outline-success viewStockModal" data-productId = "<?=$row['Product_ID']?>"><i class="fas fa-folder-plus"></i> Add New Stock</button>
-                                        <button class="btn btn-outline-danger" data-productId = "<?=$row['Product_ID']?>"><i class="fas fa-edit"></i> Update Stock</button>
+                                        <button class="btn btn-outline-danger updateStock" data-productId = "<?=$row['Product_ID']?>"><i class="fas fa-edit"></i> Update Stock</button>
                                         
                                     </td>
                                     </tr>
@@ -49,6 +49,13 @@ include "ProductManagement.php"; ?>
         </div>
     </div>
 </div>
+<div class="modal fade" id="updateModalStock" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content updateStockContent">
+        </div>
+    </div>
+</div>
+
 <script src="..\assets\js\viewManageStockModal.js"></script>
 <script src="..\assets\js\ajaxGetSizeValue.js"></script>
 <?php 
