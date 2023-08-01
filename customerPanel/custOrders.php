@@ -2,6 +2,7 @@
 $currentMainPage = "MyOrders";
 include "customerHeader.php"; ?>
 <link rel="stylesheet" href="..\assets\css\delivery-order-style.css">
+<link rel="stylesheet" href="..\assets\css\customer-delivery-order-style.css">
 <div class="d-flex mywrapper" id="wrapper">
 
 <!-- Sidebar -->
@@ -23,6 +24,13 @@ include "customerHeader.php"; ?>
 <!-- /#page-content-wrapper -->
 <div class="card my-card-content">
     <div class="card-body my-card-body">
+
+    <div class="row">
+      <div class="card">
+        
+      </div>
+    </div>
+
     </div>
 </div>
 </div>
