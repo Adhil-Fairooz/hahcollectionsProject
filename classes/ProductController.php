@@ -303,6 +303,24 @@ class ProductController{
         }
     }
 
+    public function getProductVariationData($pid){
+        $sql = "SELECT pv.*, s.Size_Type FROM product_variation pv, size s WHERE Product_ID = '$pid' AND pv.`Size_ID` = s.Size_ID";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function updateProductVariation($pid,$sizeID,$colorID,$qty){
+        $sql = "UPDATE product_variation SET Size_ID='$sizeID',Color_ID='$colorID',Stock_Qty='$qty' WHERE Product_ID = '$pid'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
 }
 
 ?>
