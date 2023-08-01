@@ -8,7 +8,7 @@ $(document).ready(function(){
     // update button
     $('#pro_Data').on('click',"#p_update",function(){
         var productId = $(this).attr("data-productID");
-        viewUpdateForm(productId)
+        viewUpdateForm(productId);
     });
 
     // form
