@@ -15,7 +15,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadTable'){
                 <th scope="col"><?=$row['Invoice_ID']?></th>
                 <td><?=$row['Order_Date']?></td>
                 <td><?=$row['order_status']?></td>
-                <td><button class="btn viewbtn" id="view" data-paymentID="<?=$row['Payment_ID']?>" data-invoiceID = "<?=$row['Invoice_ID']?>"><i class="far fa-eye"></i> View</button></td>
+                <td><button class="btn viewbtn" id="view" data-paymentID="<?=$row['Payment_ID']?>" data-invoiceID = "<?=$row['Invoice_ID']?>" data-orderStatus ='<?=$row['order_status']?>'><i class="far fa-eye"></i> View</button></td>
             </tr>
             <?php
         }
@@ -30,6 +30,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadTable'){
 
 if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']==='viewOrder'){
     $pmResult = $orderObj->getPaymentMethod($_REQUEST['paymentID']);
+    $orderStatus = $_REQUEST['orderStatus'];
     $pmData = $pmResult->fetch_assoc();
     $pmValue = $pmData['Payment_METHOD'];
     $contact;$address;
@@ -163,7 +164,7 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                                             if(is_null($payProof)){
                                                 ?><a href="#" class="btn btn-outline-danger">No Image</a><?php
                                             }else{
-                                                ?><a href="data:image/jpeg;base64,<?=$payProof?>" class="btn btn-outline-success" id="proofimgview">view Image</a><?php
+                                                ?><a href="data:image/jpg;base64,<?=base64_encode($payProof)?>"  target="_blank" class="btn btn-outline-success" id="proofimgview">view Image</a><?php
                                             }
                                         }
                                         ?>
@@ -186,10 +187,56 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
 
     </div>
     <div class="modal-footer my-modal-footer">
-        <button class="btn btn-success">Confirm Order</button>
-        <button class="btn btn-danger">Cancel</button>
-        <button class="btn btn-info">Ready</button>
-        <button class="btn btn-warning">Dispatch</button>
+        <?php 
+        if($pmValue === 'Pick'){
+            if($orderStatus === 'Pending'){
+                ?>
+                <button class="btn myBtn confirmBtn" id="confirmOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>" >Confirm Order</button>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else if($orderStatus === 'Confirmed'){
+                ?>
+                <button class="btn myBtn readybtn" id="readyOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Ready</button>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else if($orderStatus === 'Ready'){
+                ?>
+                <button class="btn myBtn confirmBtn" id="complete" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Compelete</button>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else{
+                ?>
+                <button class="btn myBtn cancelBtn" disabled id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }
+        }else{
+            if($orderStatus === 'Pending'){
+                ?>
+                <button class="btn myBtn confirmBtn" id="confirmOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>" >Confirm Order</button>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else if($orderStatus === 'Confirmed'){
+                ?>
+                <button class="btn myBtn readybtn" id="readyOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Ready</button>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else if($orderStatus === 'Ready'){
+                ?>
+                <button class="btn myBtn dispatchbtn" id="dispatch" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Dispatch</button>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else if($orderStatus === 'Dispatched'){
+                ?>
+                <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }else{
+                ?>
+                <button class="btn myBtn cancelBtn" disabled id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
+                <?php
+            }
+
+        }
+        ?>
     </div>
     <!-- ------------- -->
     <?php
@@ -215,7 +262,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadOnCondition'){
                 <th scope="col"><?=$row['Invoice_ID']?></th>
                 <td><?=$row['Order_Date']?></td>
                 <td><?=$row['order_status']?></td>
-                <td><button class="btn viewbtn" id="view" data-paymentID="<?=$row['Payment_ID']?>" data-invoiceID = "<?=$row['Invoice_ID']?>"><i class="far fa-eye"></i> View</button></td>
+                <td><button class="btn viewbtn" id="view" data-paymentID="<?=$row['Payment_ID']?>" data-invoiceID = "<?=$row['Invoice_ID']?>" data-orderStatus ='<?=$row['order_status']?>'><i class="far fa-eye"></i> View</button></td>
             </tr>
             <?php
         }
@@ -225,6 +272,17 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadOnCondition'){
         <tr><td colspan="4" class="label">No Records</td></tr>
         
         <?php
+    }
+}
+
+
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'updateOrderAdminStatus'){
+
+    $result = $orderObj->updateOrderStatusAdmin($_REQUEST['invoice'],$_REQUEST['oStat']);
+    if($result){
+        echo 1;
+    }else{
+        echo $result;
     }
 }
 ?>
