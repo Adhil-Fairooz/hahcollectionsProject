@@ -321,6 +321,13 @@ class ProductController{
         }
     }
 
+    public function addBackToStock($productID,$colorID,$sizeID,$orderQty){
+        $currentStock = $this->getcurrentStockQty($productID,$colorID,$sizeID);
+        $updatedStock = $currentStock+$orderQty;
+        $sql_update = "UPDATE product_variation SET Stock_Qty = '$updatedStock' WHERE Product_ID = '$productID' AND Size_ID = '$sizeID' AND Color_ID = '$colorID'";
+        $result = $this->conn->query($sql_update);
+    }
+
 }
 
 ?>
