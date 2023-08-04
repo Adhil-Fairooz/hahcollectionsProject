@@ -46,6 +46,17 @@ class CustomerController{
         }
     }
 
+    public function getCustomerInfo(){
+        $sql = "SELECT Customer_ID,FName,LName,Email,`Address`,Contact_NO FROM customer";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+
+    }
+
     public function getInfoForUpate($customerID){
         $sql_getData = "SELECT FName,LName,Email,`Address`,Contact_NO FROM customer WHERE Customer_ID = '$customerID';";
         $result = $this->conn->query($sql_getData);
@@ -89,6 +100,15 @@ class CustomerController{
         $result = $this->conn->query($sql_update);
         if($result){
             return true;
+        }else{
+            return false;
+        }
+    }
+    public function searchCustomer($category,$searchData){
+        $sql = "SELECT * FROM customer WHERE $category LIKE '%$searchData%'";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return $results;
         }else{
             return false;
         }
