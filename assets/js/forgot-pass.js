@@ -165,7 +165,7 @@ function generateOTP() {
     
     return otp;
 }
-function sendOTP(email,otpvalue){
+function sendOTP(email,otpvalue){     
     Swal.fire({
         title: 'Sending OTP...',
         html: '<div class="loading-spinner"></div>',
@@ -182,9 +182,21 @@ function sendOTP(email,otpvalue){
         success: function(response){
             if(parseInt(response)===1){
                 Swal.close();
-                console.log("OTP sent");
+                Swal.fire({
+                    icon: 'success',title: 'OTP sent',text: 'Check Your Mail',toast: true,position: 'top-end',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
             }else{
                 console.log(response);
+                Swal.fire({
+                    icon: 'error',title: 'OTP Sending Failed',text: 'please try again!',toast: true,position: 'top-end',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+                
             }
         }
     });
