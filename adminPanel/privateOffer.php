@@ -34,7 +34,6 @@ include "OfferManagement.php";
                             <th scope="col">For Bill Value</th>
                             <th scope="col">Valid From</th>
                             <th scope="col">Valid Till</th>
-                            <th scope="col">Claimed Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -53,7 +52,6 @@ include "OfferManagement.php";
                                         <td><?=$row['TotalBillValue']?></td>
                                         <td><?=$row['Valid_From_Date']?></td>
                                         <td><?=$row['Valid_To_Date']?></td>
-                                        <td><?=$row['claimed_Status']?></td>
                                         <td>
                                             <a class="btn btn-outline-danger" data-offerId="<?=$row['Promo_ID']?>" id="del-offer" onclick = "deletePrivate(this)"><i class="fas fa-trash-alt"></i></a>
                                             <button class="btn btn-outline-success" data-offerId="<?=$row['Promo_ID']?>" onclick = "showupdatePrivateOffer(this)" id="update-offer"><i class="fas fa-edit"></i></button>
@@ -111,7 +109,6 @@ if(isset($_POST['offer-private-update'])){
         "bill" => mysqli_real_escape_string($db->conn,$_POST['off_billValue']),
         "FDate" => mysqli_real_escape_string($db->conn,$_POST['off_from_Date']),
         "TDate" => mysqli_real_escape_string($db->conn,$_POST['off_to_Date']),
-        "status" => mysqli_real_escape_string($db->conn,$_POST['off_status'])
     ];
     $result = $offerObj->UpdatePrivateOffer($data);
     if($result){
