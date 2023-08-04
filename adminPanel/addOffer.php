@@ -378,18 +378,6 @@ if(isset($_POST['offer_id']) && $_POST['mode'] === 'private' && $_POST['task'] =
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="form-floating myFormFloating">
-                    <select class="form-select myselect" id="floatingSelect" name="off_status">
-                        <option value="0">Select</option>
-                        <option value="YES" <?php if ($row['claimed_Status'] === 'YES') echo 'selected'; ?>>Yes</option>
-                        <option value="NO" <?php if ($row['claimed_Status'] === 'NO') echo 'selected'; ?>>No</option>
-                    </select>
-                        <label for="floatingSelect">Claimed Status</label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
             <div class="col-md-12">
                 <div class="btn-col">
                     <button class="btn myBtn" id="btnAdd" type="submit" name="offer-private-update">Update</button>
