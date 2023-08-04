@@ -115,7 +115,7 @@ class OrderController{
     }
 
     public function getPaymentMethod($paymentID){
-        $sql_query = "SELECT 'COD' AS Payment_METHOD,Delivery_Address,Contact_NO FROM payment_cod WHERE Payment_ID = '$paymentID' UNION ALL SELECT 'BD' AS Payment_METHOD,Delivery_Address,Contact_NO FROM payment_bankdeposit WHERE Payment_ID = '$paymentID' UNION ALL SELECT 'Pick' AS Payment_METHOD,Contact_NO,`Total` FROM payment_pickup WHERE Payment_ID = '$paymentID'";
+        $sql_query = "SELECT 'COD' AS Payment_METHOD,Delivery_Address,Contact_NO FROM payment_cod WHERE Payment_ID = '$paymentID' UNION ALL SELECT 'BD' AS Payment_METHOD,Delivery_Address,Contact_NO FROM payment_bankdeposit WHERE Payment_ID = '$paymentID' UNION ALL SELECT 'Pick' AS Payment_METHOD,`Total`,Contact_NO FROM payment_pickup WHERE Payment_ID = '$paymentID'";
         $result = $this->conn->query($sql_query);
         if($result->num_rows > 0){
             return $result;
@@ -173,6 +173,69 @@ class OrderController{
             return false;
         }
     }
+
+    public function getInvoiceDataForCustomer($CustomerID,$status){
+        $sql = "SELECT i.* FROM invoice i, order_tbl o WHERE i.Invoice_ID = o.Invoice_ID AND o.Customer_ID = '$CustomerID' AND i.order_status <> '$status' GROUP BY o.Invoice_ID ORDER BY i.Invoice_ID ASC";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    private function imgDbFormat($file){
+        /*$imageTempName = $file['tmp_Name'];*/
+        $imageContent = addslashes(file_get_contents($file));
+        return $imageContent;
+    }
+
+    public function updatePaymentProof($image,$pid){
+        $imgProof = $this->imgDbFormat($image);
+        $sql = "UPDATE payment_bankdeposit SET Payment_Proof = '$imgProof' WHERE Payment_ID ='$pid'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
+    public function RemoveRecordsFromInvoice($invoiceId){
+        $sql = "DELETE FROM invoice WHERE Invoice_ID = '$invoiceId';";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+    public function RemovePaymentRecord($paymentID){
+        $result = $this->getPaymentMethod($paymentID);
+        $pmData = $result->fetch_assoc();
+        $pmValue = $pmData['Payment_METHOD'];
+        $sql="";
+        if($pmValue === 'COD'){
+            $sql = "DELETE FROM payment_cod WHERE Payment_ID = '$paymentID';";
+        }else if($pmValue === 'BD'){
+            $sql = "DELETE FROM payment_bankdeposit WHERE Payment_ID = '$paymentID';";
+        }else{
+            $sql = "DELETE FROM payment_pickup WHERE Payment_ID = '$paymentID';";
+        }
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+
+    }
+
+    public function updateOrderStatusAdmin($invoiceID,$status){
+        $sql = "UPDATE invoice SET order_status = '$status' WHERE Invoice_ID = '$invoiceID'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
     
 
 }
