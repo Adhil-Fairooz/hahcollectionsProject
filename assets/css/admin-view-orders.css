@@ -84,3 +84,52 @@ table thead{
     box-shadow: none;
     border : 1px solid #273c75;
 }
+
+.myBtn{
+    width: 25%;
+    font-size: 17px; 
+}
+.myBtn:hover{
+    font-weight: bold;    
+}
+.my-modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.confirmBtn{
+    background-color: #20bf6b;
+    color: white;
+}
+.confirmBtn:hover{
+    background-color: white;
+    color: #20bf6b;
+    border: 2px solid #20bf6b;
+}
+.cancelBtn{
+    background-color: #eb4d4b;
+    color: white;
+}
+.cancelBtn:hover{
+    background-color: white;
+    color: #eb4d4b;
+    border: 2px solid #eb4d4b;
+}
+.readybtn{
+    background-color: #686de0;
+    color: white;
+}
+.readybtn:hover{
+    background-color: white;
+    color: #686de0;
+    border: 2px solid #686de0;
+}
+.dispatchbtn{
+    background-color: #f0932b;
+    color: white;
+}
+.dispatchbtn:hover{
+    background-color: white;
+    color: #f0932b;
+    border: 2px solid #f0932b;
+}
