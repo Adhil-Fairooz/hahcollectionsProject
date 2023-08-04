@@ -19,6 +19,7 @@ include "OrderManagement.php";
                     <div class="form-floating myFormFloating">
                         <select class="form-select myselect" id="floatingSelect" name="orderStatus">
                             <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
                             <option value="Ready">Ready</option>
                             <option value="Dispatched">Dispatched</option>
                             <option value="Completed">Completed</option>
