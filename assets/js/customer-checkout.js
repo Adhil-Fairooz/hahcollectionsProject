@@ -11,6 +11,8 @@ var customerID;
 var emailAddress;
 var user;
 
+var offerID; // store private public offerID for update claim status
+
 $( document ).ready(function() {
     loadCarttbl();
     getCounttbl();
@@ -18,10 +20,12 @@ $( document ).ready(function() {
 
     $('input[name="offerTable"]').click(function(){
         var table = $('input[name="offerTable"]:checked').val();
+        console.log(table);
         loadOptions(table);
     });
     $('#discount').change(function(){
-        var offerID = $(this).val();
+        offerID = $(this).val();
+        console.log(offerID + "WHEN selecting");
         if(parseInt(offerID) === 0){
             $('#discountAmount').html("0.00");
             getTotaltbl();
@@ -94,6 +98,7 @@ $( document ).ready(function() {
                 Swal.showLoading();
             }
         });
+        console.log(offerID + "WHEN placing ORDER");
         $.ajax({
             url:"placeOrder.php",
             data:{
@@ -107,7 +112,8 @@ $( document ).ready(function() {
                 subtotal:subtotal,
                 discount:discountvalue,
                 email:emailAddress,
-                user:user
+                user:user,
+                offerID:offerID
             },
             success:function(response){
                 console.log("success: response");
