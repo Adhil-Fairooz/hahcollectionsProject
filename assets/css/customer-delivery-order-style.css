@@ -26,15 +26,15 @@
     box-shadow: none;
     border : 1px solid #273c75;    
 }
-
-.myBtn{
+.uploadbtn{
     background-color: #487eb0;
     color: white;
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
-.myBtn:hover{
+
+.uploadbtn:hover{
     background-color: white;
     color: #487eb0;
     font-weight: bold;
