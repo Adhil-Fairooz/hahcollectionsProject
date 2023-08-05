@@ -58,7 +58,9 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "subtotal" => $_REQUEST['subtotal'],
                         "invoiceNo" => $orderObj->getInvoiceID()
                     ];
-                    $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
+                    if(isset($_REQUEST['offerID'])){
+                        $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
+                    }
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
@@ -113,7 +115,9 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "subtotal" => $_REQUEST['subtotal'],
                         "invoiceNo" => $orderObj->getInvoiceID()
                     ];
-                    $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
+                    if(isset($_REQUEST['offerID'])){
+                        $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
+                    }
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
@@ -155,7 +159,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                     $emailbillingInfo=[
                         "payment"=> $paymentMethod,
                         "name" => $_REQUEST['user'],
-                        "address" => $_REQUEST['address'],
+                        "address" => 'None',
                         "contact" => $_REQUEST['contact'],
                         "charges" => $_REQUEST['charges'],
                         "discount" => $_REQUEST['discount'],
@@ -163,7 +167,9 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "subtotal" => $_REQUEST['subtotal'],
                         "invoiceNo" => $orderObj->getInvoiceID()
                     ];
-                    $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
+                    if(isset($_REQUEST['offerID'])){
+                        $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
+                    }
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
