@@ -155,13 +155,14 @@ class offerController{
         }
     }
 
-    public function loadPrivateOffer($sustomerID){
-        $sql_get_data = "SELECT * FROM public_offers";
+    public function loadPrivateOffer($customerID){
+        $currentDate = date('Y-m-d');
+        $sql_get_data = "SELECT p.Promo_ID, p.Offer_Name FROM private_offers p, customer_offer co WHERE co.Promo_ID=p.Promo_ID AND co.Customer_ID='$customerID' AND co.Claim_Status = 'NO' AND '$currentDate' BETWEEN Valid_From_Date AND Valid_To_Date";
         $results = $this->conn->query($sql_get_data);
         if($results->num_rows > 0){
-            return $results->num_rows;
+            return $results;
         }else{
-            return 0;
+            return false;
         }
     }
     public function loadPublicOffer(){
@@ -244,6 +245,31 @@ class offerController{
             }else{
                 return false;
             }
+    }
+
+    private function findPrivateOffer($promoID,$customerID){
+        $sql = "SELECT * FROM customer_offer WHERE Promo_ID = '$promoID' AND Customer_ID='$customerID'";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function UpdateclaimedStatus($promoID,$customerID){
+        $sql = "UPDATE customer_offer SET Claim_Status = 'YES' WHERE Promo_ID = '$promoID' AND Customer_ID='$customerID'";
+        if($this->findPrivateOffer($promoID,$customerID)){
+            $result = $this->conn->query($sql);
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false; 
+        }
+
     }
 
 
