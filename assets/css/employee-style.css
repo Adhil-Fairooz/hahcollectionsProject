@@ -66,7 +66,7 @@ label{
     border: 2px solid #487eb0;
     
 }
-#strNumberError,#strJobError,#strPasswordError,#strEmailError,#strLNameError,#strFNameError{
+#strNumberError,#strJobError,#strPasswordError,#strEmailError,#strLNameError,#strFNameError,#strVnumError{
     font-size: 12px;
     color: #c23616;
     margin-left: 10px;
