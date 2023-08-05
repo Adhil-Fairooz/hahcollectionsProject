@@ -236,6 +236,24 @@ class OrderController{
         }
     }
 
+    public function AssignEmp($invoiceID,$empID){
+        $sql = "UPDATE invoice SET Emp_ID = '$empID' WHERE Invoice_ID = '$invoiceID'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
+    public function AssignDriver($paymentId,$DriverID){
+        $sql = "UPDATE payment_cod SET Driver_ID = '$DriverID' WHERE Payment_ID = '$paymentId'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return $this->conn -> error;
+        }
+    }
+
     
 
 }
