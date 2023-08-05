@@ -30,7 +30,7 @@ $(document).ready(function(){
         var invoice = $(this).attr('data-invoiceID');
         var stat = "Ready";
         Swal.fire({
-            title: 'Do you wish to Confirm this Order ?',
+            title: 'Do you wish to Assign Ready Status to this Order ?',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -47,7 +47,7 @@ $(document).ready(function(){
         var invoice = $(this).attr('data-invoiceID');
         var stat = "Dispatched";
         Swal.fire({
-            title: 'Do you wish to Confirm this Order ?',
+            title: 'Do you wish to Dispatch this Order ?',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -57,8 +57,46 @@ $(document).ready(function(){
               if (result.isConfirmed) {
                 updateOrderStatus(invoice,stat);
               }
-          });
+        });
     });
+
+    $(document).on('submit','#AssignEMP',function(event){
+        event.preventDefault();
+        var empId = $('select[name="empIDSelect"]').val();
+        var invoice = $('input[name="invoiceID"]').val();
+        
+        Swal.fire({
+            title: 'Do you wish to Assign this Employee ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                assignEmp(empId,invoice);
+              }
+        });
+    });
+
+    $(document).on('submit','#AssignDriver',function(event){
+        event.preventDefault();
+        var driverID = $('select[name="DriverSelect"]').val();
+        var paymentID = $('input[name="paymentID"]').val();
+        console.log(driverID + " : " +paymentID);
+        Swal.fire({
+            title: 'Do you wish to Assign this Driver ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                assignDriver(driverID,paymentID);
+              }
+        });
+    })
 
     $('[name="orderStatus"]').change(function(){
         var orderStatus = $(this).val();
@@ -148,6 +186,36 @@ function updateOrderStatus(invoiceID,stat){
                     Swal.fire({icon:'success',title:'Done !',text:'Order '+invoiceID+' Status Updated'});
                 }
                 
+            }else{
+                console.log(response);
+                Swal.fire({icon:'warning',title:'Something is not right',text:''});
+            }
+        }
+    })
+}
+
+function assignEmp(EmpId,invoiceID){
+    $.ajax({
+        url : "orderAjaxCalls.php",
+        data : {task:"AssignEmp",EMPid:EmpId,invoiceID:invoiceID},
+        success : function (response){
+            if(parseInt(response)=== 1){
+                Swal.fire({icon:'success',title:'Done !',text:'Employee Assigned'});
+            }else{
+                console.log(response);
+                Swal.fire({icon:'warning',title:'Something is not right',text:''});
+            }
+        }
+    })
+}
+
+function assignDriver(DriverID,paymentId){
+    $.ajax({
+        url : "orderAjaxCalls.php",
+        data : {task:"AssignDriver",DriverId: DriverID,paymentId:paymentId},
+        success : function (response){
+            if(parseInt(response)=== 1){
+                Swal.fire({icon:'success',title:'Done !',text:'Driver Assigned'});
             }else{
                 console.log(response);
                 Swal.fire({icon:'warning',title:'Something is not right',text:''});
