@@ -49,7 +49,7 @@
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'orders' ? 'active' : '' ?>"  href="viewOrders.php">Order Management</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink"  href="#">Delivery Handling</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'delivery' ? 'active' : '' ?>"  href="addDeliveryDriver.php">Delivery Handling</a>
                     </li>
                 </ul>
             </div>
