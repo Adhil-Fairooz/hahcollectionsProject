@@ -53,12 +53,11 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='displayInvoice'){
                         <div class="row mt-2">
 
                             <form id="paymentProof">
+                                <input type="hidden" id="paymentID" value="<?=$row['Payment_ID']?>">
 
                                 <div class="col-12"><input type="file" name="proof" id="imgproof" class="form-control myChooseFile"></div>
 
-                                <input type="hidden" id="paymentID" value="<?=$row['Payment_ID']?>">
-
-                                <div class="col-12 mt-1"><button type="submit" class="btn btn-primary myBtn">Upload</button></div>
+                                <div class="col-md-12 mt-1 redda"><button type="submit" class="btn uploadbtn"> Upload </button></div>
 
                             </form>
 
