@@ -16,8 +16,16 @@ if(isset($_POST['table']) && isset($_POST['customer_id'])){
             echo "<option value='0'>None</option>";
         }
 
-    }else{
-        echo "<option value='0'>None</option>";
+    }else if($_POST['table'] === 'private'){
+        $pvtRes = $offerObj->loadPrivateOffer($_POST['customer_id']);
+        if($pvtRes){
+            echo "<option value='0'>Select</option>";
+            foreach($pvtRes as $row2){?>
+                <option value="<?=$row2['Promo_ID']?>"><?=$row2['Offer_Name']?></option>
+            <?php }
+        }else{
+            echo "<option value='0'>None</option>";
+        }
     }
 }
 
