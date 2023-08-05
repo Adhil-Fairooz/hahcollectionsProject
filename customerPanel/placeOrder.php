@@ -5,10 +5,12 @@ include "..\classes\CartController.php";
 include "..\classes\ProductController.php";
 include "..\classes\EmailController.php";
 include "..\classes\PDFController.php";
+include "..\classes\offerController.php";
 $db = new DatabaseConnection;
 $orderObj = new OrderController;
 $cartObj = new CartController;
 $productObj = new ProductController;
+$offerObj = new offerController;
 $emailObj = new EmailController();
 $pdfObj = new PDFController();
 if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
@@ -56,6 +58,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "subtotal" => $_REQUEST['subtotal'],
                         "invoiceNo" => $orderObj->getInvoiceID()
                     ];
+                    $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
@@ -110,6 +113,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "subtotal" => $_REQUEST['subtotal'],
                         "invoiceNo" => $orderObj->getInvoiceID()
                     ];
+                    $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
@@ -159,6 +163,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='placeOrder'){
                         "subtotal" => $_REQUEST['subtotal'],
                         "invoiceNo" => $orderObj->getInvoiceID()
                     ];
+                    $offerObj->UpdateclaimedStatus($_REQUEST['offerID'],$_REQUEST['customerID']);
                     $emailObj->setBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->setDocumentBillBody($emailbillingInfo,$cartResultForEmail);
                     $pdfObj->createBill($emailObj->getbillcontent(),$orderObj->getInvoiceID());
