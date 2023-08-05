@@ -2,10 +2,13 @@
 include "..\classes\DBConnect.php";
 include "..\classes\OrderController.php";
 include "..\classes\CartController.php";
+include "..\classes\EmployeeController.php";
+include "..\classes\DeliveryDriverController.php";
 $db = new DatabaseConnection;
 $orderObj = new OrderController;
 $cartObj = new CartController;
-
+$empObj = new EmployeeController;
+$DelDriverObj = new DeliveryDriverController;
 if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadTable'){
     $orderRes = $orderObj->DisplayOrders();
     if($orderRes){
@@ -88,24 +91,54 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 label">Assign Employee For Order</div>
-                                <div class="col-md-8">
-                                    <select name="Emp" id="emp" class="form-select">
-                                        <option value="0">Select</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4"><button class="btn btn-primary btn-sm" id = "assign">Assign</button></div>
+                                <form id="AssignEMP">
+                                    <div class="col-md-8">
+                                        <select name="empIDSelect" class="form-select">
+                                            <option value="0">Select</option>
+                                            <?php
+                                            $empRes = $empObj -> getEmpData();
+                                            if($empRes){
+                                                foreach($empRes as $row){
+                                                    ?>
+                                                    <option value="<?=$row['Emp_ID']?>"><?=$row['Emp_ID']?> : <?=$row['FName']?></option>
+                                                    <?php
+                                                }
+                                            }else{
+                                                echo "<option value='0'>None</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <input type="hidden" name="invoiceID" value="<?=$_REQUEST['invoiceID']?>">
+                                    </div>
+                                    <div class="col-md-4"><button class="btn btn-primary btn-sm" type='submit'>Assign</button></div>
+                                </form>
                             </div>
                             <?php 
                             if($pmValue === 'COD'){
                                 ?>
                                 <div class="row mt-3">
                                 <div class="col-md-12 label">Assign Delivery Driver</div>
-                                <div class="col-md-6">
-                                    <select name="Emp" id="drive" class="form-select">
-                                        <option value="0">Select</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6"><button class="btn btn-primary btn-sm" id = "assign">Assign</button></div>
+                                <form id="AssignDriver">
+                                    <div class="col-md-8">
+                                        <select name="DriverSelect" class="form-select">
+                                            <option value="0">Select</option>
+                                            <?php
+                                            $DELRes = $DelDriverObj -> getDeliveryDriverInfo();
+                                            if($DELRes){
+                                                foreach($DELRes as $row){
+                                                    ?>
+                                                    <option value="<?=$row['Driver_ID']?>"><?=$row['Driver_ID']?> : <?=$row['FName']?> :<?=$row['Vehicle_No']?> </option>
+                                                    <?php
+                                                }
+                                            }else{
+                                                echo "<option value='0'>None</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <input type="hidden" name="paymentID" value="<?=$_REQUEST['paymentID']?>">
+                                    </div>
+                                    <div class="col-md-4"><button class="btn btn-primary btn-sm" type='submit'>Assign</button></div>
+                                </form>
                             </div>
                                 <?php
                             }
@@ -285,4 +318,25 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'updateOrderAdminStatus'){
         echo $result;
     }
 }
+
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'AssignEmp'){
+
+    $result = $orderObj->AssignEmp($_REQUEST['invoiceID'],$_REQUEST['EMPid']);
+    if($result){
+        echo 1;
+    }else{
+        echo $result;
+    }
+}
+
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'AssignDriver'){
+
+    $result = $orderObj->AssignDriver($_REQUEST['paymentId'],$_REQUEST['DriverId']);
+    if($result){
+        echo 1;
+    }else{
+        echo $result;
+    }
+}
+
 ?>
