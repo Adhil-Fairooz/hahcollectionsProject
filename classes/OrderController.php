@@ -254,6 +254,36 @@ class OrderController{
         }
     }
 
+    public function getDispatchedOrderDriver($Driver){
+        $sql = "SELECT i.Invoice_ID,i.order_status,i.Payment_ID FROM invoice i,payment_cod pcod WHERE i.Payment_ID = pcod.`Payment_ID` AND i.order_status = 'Dispatched' AND pcod.`Driver_ID` = '$Driver'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function getCompleteOrderDriver($Driver){
+        $sql = "SELECT i.Invoice_ID,i.order_status,i.Payment_ID FROM invoice i,payment_cod pcod WHERE i.Payment_ID = pcod.`Payment_ID` AND i.order_status = 'Completed' AND pcod.`Driver_ID` = '$Driver'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    
+    public function getBillingInfoCOD($PaymentID){
+        $sql = "SELECT Delivery_Fee,Total FROM payment_cod WHERE Payment_ID = '$PaymentID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
     
 
 }
