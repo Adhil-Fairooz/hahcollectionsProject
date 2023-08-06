@@ -6,13 +6,15 @@ include "employeeManagement.php"; ?>
     <div class="card mt-3">
         <div class="card-header mycardheader">Add New Employee</div>
         <div class="card-body">
+
             <form id="AddEMP">
+
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating">
                             <input type="text" class="form-control myinputText" name="FName" id="floatingInput" placeholder=" ">
                             <label for="floatingInput">First Name</label>
-                            <div id="strFNameError"></div>
+                            <div id="strFNameError"></div> <!-- First Name validation error -->
                         </div>
                     </div>
                     <div class="col-md-6">
