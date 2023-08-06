@@ -1,5 +1,8 @@
 $(document).ready(function(){
-    displayALLEmpData();
+
+    displayALLEmpData(); // to Display empyoy records on a table
+
+    // Employee Search bar
     $('#empSearch').submit(function(event){
         event.preventDefault();
         var field = $('select[name="emp_col"]').val();
@@ -26,14 +29,18 @@ $(document).ready(function(){
 
     });
 
+    // Employee Registration Form
+
     $('#AddEMP').submit(function(event) {
-        event.preventDefault();
+        event.preventDefault(); // this prevent the form from default submission 
+
         var fname = $('input[name="FName"]');
         var lname = $('input[name="LName"]');
         var select_job = $('select[name="JobRole"]');
         var contact = $('input[name="contact"]');
         var email = $('input[name="email"]');
         var password = $('input[name="Password"]');
+
         // reset errors
         $('.myinputText').removeClass('is-invalid');
         $('.myselect').removeClass('is-invalid');
@@ -85,7 +92,7 @@ $(document).ready(function(){
                 isValid_contact = false;
             }
         }
-        // contact number
+        // Email number
         if($.trim(email.val()) == ''){
             $('#strEmailError').html('Please enter your email.');
             email.addClass('is-invalid');
