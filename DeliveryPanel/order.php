@@ -7,8 +7,8 @@ include "deliveryHeader.php"; ?>
 <!-- Sidebar -->
 <div class="bg-light border-right" id="sidebar">
   <ul>
-    <li><a href="#">New Delivery Orders</a></li>
-    <li><a href="#">Delivery History</a></li>
+    <li><a href="#" id="newOrders">New Delivery Orders</a></li>
+    <li><a href="#" id="orderHistory">Delivery History</a></li>
   </ul>
 
 </div>
@@ -33,14 +33,23 @@ include "deliveryHeader.php"; ?>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
-            <tbody>
-                        
+            <tbody id='showDispatchOrders' data-deliveryID = '<?=$driverID?>'>
+                  
             </tbody> 
         </table>
     </div>
     </div>
 </div>
+<div class="modal fade" id="viewEachOrder" data-bs-backdrop="static" data-bs-keyboard="false">     
+    <div class="modal-dialog modal-xl">
+        <link rel="stylesheet" href="..\assets\css\admin-view-orders.css">
+        <div class="modal-content">
+           
+        </div>
+    </div>
+</div>
 </div>
 <!-- /#wrapper -->
-<script src="..\assets\js\delivery-orderPage.js"></script>
+
+<script src="..\assets\js\deliveryPanel-order.js"></script>
 <?php include "deliveryFooter.php"; ?>
