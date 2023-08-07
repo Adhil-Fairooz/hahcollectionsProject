@@ -2,34 +2,34 @@
 $currentMainPage = "profile";
 include "deliveryHeader.php"; 
 include "..\classes\DBConnect.php";
-include "..\classes\CustomerController.php";
+include "..\classes\DeliveryDriverController.php";
 $db = new DatabaseConnection;
-$customerObj = new CustomerController();
+$deliveryObj = new DeliveryDriverController();
 ?>
 <link rel="stylesheet" href="..\assets\css\customer-profile-style.css">
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-6 mb-4">
             <div class="card">
-                <form id="saveCustomerINFO">
+                <form id="saveDriverINFO">
                     <?php 
-                        $result = $customerObj -> getInfoForUpate($customerID);
+                        $result = $deliveryObj -> getInfoForUpdate($driverID);
                         if($result){
-                           $customerData = $result -> fetch_assoc(); ?>
+                           $driverData = $result -> fetch_assoc(); ?>
                            <div class="card-header mycardheader">Your Infomation</div>
                 <div class="card-body">
-                    <input type="hidden" id="customerID" value="<?=$customerID?>">
+                    <input type="hidden" id="driverID" value="<?=$driverID?>">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating myFormFloating">
-                                <input type="text" class="form-control myinputText yourForm" name="fname" id="floatingInput" placeholder=" " value="<?=$customerData['FName']?>">
+                                <input type="text" class="form-control myinputText yourForm" name="FName" id="floatingInput" placeholder=" " value="<?=$driverData['FName']?>">
                                 <label for="floatingInput">First Name</label>
                                 <div id="strFnameError"></div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating myFormFloating">
-                                <input type="text" class="form-control myinputText yourForm" name="lname" id="floatingInput" placeholder=" " value="<?=$customerData['LName']?>">
+                                <input type="text" class="form-control myinputText yourForm" name="LName" id="floatingInput" placeholder=" " value="<?=$driverData['LName']?>">
                                 <label for="floatingInput">Last Name</label>
                                 <div id="strLnameError"></div>
                             </div>
@@ -38,8 +38,9 @@ $customerObj = new CustomerController();
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-floating myFormFloating">
-                                <input type="text" class="form-control myinputText yourForm" name="email" id="floatingInput" placeholder=" " value="<?=$customerData['Email']?>">
+                                <input type="text" class="form-control myinputText yourForm" name="email" id="floatingInput" placeholder=" " value="<?=$driverData['Email']?>">
                                 <label for="floatingInput">Email Address</label>
+                                <div id="strEmailError"></div>
 
                             </div>
                         </div>
@@ -47,19 +48,18 @@ $customerObj = new CustomerController();
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-floating myFormFloating">
-                                <input type="text" class="form-control myinputText yourForm" name="contact" id="floatingInput" placeholder=" " value="<?=$customerData['Contact_NO']?>">
+                                <input type="text" class="form-control myinputText yourForm" name="contact" id="floatingInput" placeholder=" " value="<?=$driverData['Contact_No']?>">
                                 <label for="floatingInput">Contact Number</label>
                                 <div id="strContactError"></div>
-
                             </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <div class="form-floating myFormFloating">
-                                <textarea class="form-control myinputTextArea yourForm" name="address"  placeholder=" " id="floatingTextarea"><?=$customerData['Address']?></textarea>
-                                <label for="floatingTextarea">Address</label>
-                                <div id="strAddressError"></div>
+                                <input type="text" class="form-control myinputText yourForm" name="VehicleNumber" id="floatingInput" placeholder=" " value="<?=$driverData['Vehicle_No']?>">
+                                <label for="floatingInput">Vehicle Number</label>
+                                <div id="strVehicleNumError"></div>
                             </div>
                         </div>
                     </div>
@@ -139,5 +139,5 @@ $customerObj = new CustomerController();
     </div>
 </div>
 
-<script src="..\assets\js\customer-profile.js"></script>
+<script src="..\assets\js\deliveryDriverProfile.js"></script>
 <?php include "deliveryFooter.php"; ?>
