@@ -135,7 +135,7 @@ $(document).ready(function(){
                         Swal.fire({icon:'warning',title:'Something is not right',text:''});
                     }
                 }
-              });
+            });
         }
 
     });
