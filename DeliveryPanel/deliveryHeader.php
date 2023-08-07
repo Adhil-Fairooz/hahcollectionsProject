@@ -1,5 +1,9 @@
-<?php 
-$driverID = 'D1';
+<?php
+session_start();
+if(!isset( $_SESSION['DriverID'])){
+    header("location:../login.php");
+} 
+$driverID = $_SESSION['DriverID'];
 
 ?>
 <!DOCTYPE html>
@@ -19,6 +23,7 @@ $driverID = 'D1';
     <!-- jQuery -->
     <script src="..\assets\sweetalert2\jquery-3.5.1.min.js"></script>
     <script src="..\assets\sweetalert2\sweetalert2.all.min.js"></script>
+    <script src="..\assets\js\logoutProccess.js"></script>
 </head>
 <body>  
     <nav class="navbar navbar-expand-lg myNavbar" >
