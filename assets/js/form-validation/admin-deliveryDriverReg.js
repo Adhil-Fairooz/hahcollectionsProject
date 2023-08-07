@@ -35,7 +35,7 @@ $(document).ready(function(){
             vNum.addClass('is-invalid');
             isValid_Vnum = false;
         }else{
-            var VehicleNumberPattern = /^[A-Z]{3}-\d{4}$/;
+            var VehicleNumberPattern = /^[A-Za-z]{2,3}-\d{4}$/;
             if (!VehicleNumberPattern.test($.trim(vNum.val()))) {
                 $('#strVnumError').html('Invalid valid Vehicle Number Format');
                 vNum.addClass('is-invalid');
