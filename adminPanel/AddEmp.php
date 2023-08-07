@@ -19,7 +19,7 @@ include "employeeManagement.php"; ?>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating myFormFloating">
-                            <input type="text" class="form-control myinputText" name="LName" id="floatingInput" placeholder=" ">
+                            <input type="text" class="form-control myinputText" name="LName" id="floatingInput" placeholder=" " >
                             <label for="floatingInput">Last Name</label>
                             <div id="strLNameError"></div>
                         </div>
