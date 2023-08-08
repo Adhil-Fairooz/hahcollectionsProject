@@ -60,5 +60,19 @@ class EmployeeController{
             return false;
         }
     }
+    public function getLoginData($username){
+        $sql_get_login_data = "SELECT * FROM employee WHERE Email = '$username';";
+        $result = $this->conn->query($sql_get_login_data);
+        if($result){
+            if($result->num_rows > 0){
+                return $result;
+            }else{
+                return false;
+            }
+            
+        }else{
+            return false;
+        }
+    }
 }
 ?>
