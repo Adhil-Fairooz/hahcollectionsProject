@@ -83,6 +83,83 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']==='displayInvoice'){
     }
 }
 
+if(isset($_REQUEST['task']) && $_REQUEST['task']==='displayCompletedInvoice'){
+    $OrderRes = $orderObj->getCompletedInvoiceDataForCustomer($_REQUEST['custID'],$_REQUEST['status']);
+    if($OrderRes){
+        foreach($OrderRes as $row){
+            $pmResult = $orderObj->getPaymentMethod($row['Payment_ID']);
+            $pmData = $pmResult->fetch_assoc();
+            $pmValue = $pmData['Payment_METHOD'];
+            ?>
+            <div class="card order-card">
+
+                <div class="card-header order-card-header">Invoice No : <?=$row['Invoice_ID']?></div>
+
+                <div class="card-body order-card-body">
+                    <?php 
+                    if($pmValue === 'COD'){
+                        ?>
+                        <span><Strong>Payment Method :</Strong> Cash on Delivery</span>
+                        <?php
+                        
+                    }else if($pmValue === 'BD'){
+                        ?>
+                        <span><Strong>Payment Method :</Strong> Bank Deposit</span>
+                        <?php
+                    }else{
+                        ?>
+                        <span><Strong>Payment Method :</Strong> Store Pick up</span>
+                        <?php
+                    }
+                    ?>
+                    
+
+                    <div class="row mt-2">
+
+                        <div class="col"><button class="btn btn-outline-primary" data-invoiceID = '<?=$row['Invoice_ID']?>' data-paymentID='<?=$row['Payment_ID']?>' id="cust-view-order">View Order</button></div>
+                        
+                        <?php if($row['order_status'] ==='Pending') {?>
+
+                        <div class="col"><button class="btn btn-outline-danger" data-invoiceID = '<?=$row['Invoice_ID']?>' data-paymentID='<?=$row['Payment_ID']?>' id="cust-cancel-order">Cancel Order</button></div>
+                        
+                        <?php } ?>
+                    </div>
+                    <?php 
+                    if($pmValue === 'BD'){
+                        ?>
+                        <div class="row mt-2">
+
+                            <form id="paymentProof">
+                                <input type="hidden" id="paymentID" value="<?=$row['Payment_ID']?>">
+
+                                <div class="col-12"><input type="file" name="proof" id="imgproof" class="form-control myChooseFile"></div>
+
+                                <div class="col-md-12 mt-1 redda"><button type="submit" class="btn uploadbtn"> Upload </button></div>
+
+                            </form>
+
+                        </div>
+                        <?php
+                    }
+                    ?>
+                    
+
+                </div>
+                <div class="card-footer order-card-footer <?=$row['order_status']?>">Order Status: <span><?=$row['order_status']?></span></div>
+
+            </div>
+
+            <?php
+        }
+    }else{
+        ?>
+        <div class="card">
+            <div class="card-body"><span class="h3">There is no any orders placed recently</span></div>
+        </div>
+        <?php
+    }
+}
+
 if(isset($_REQUEST['task'])&& isset($_REQUEST['invoice']) && $_REQUEST['task']==='viewCustomerOrder'){
     $pmResult = $orderObj->getPaymentMethod($_REQUEST['payment']);
     $pmData = $pmResult->fetch_assoc();
