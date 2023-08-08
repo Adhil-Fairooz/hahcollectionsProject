@@ -1,25 +1,25 @@
 $(document).ready(function () {
+    var cid = $('#displayInvoice').attr('data-customerid');
+    displayInvoice(cid);
     $("#sidebarCollapse").on("click", function () {
       $("#sidebar").toggleClass("active");
     });
 
     $('#currentOrders').on('click',function(event){
-      console.log("clicked");
+      displayInvoice(cid);
 
     });
     $('#completedOrders').on('click',function(event){
-      console.log("clicked");
-      
+      displayCompletedOrders(cid);
+            
     });
-
-    var cid = $('#displayInvoice').attr('data-customerid');
-    displayInvoice(cid);
-
+    
     $('#displayInvoice').on('click',"#cust-view-order",function(){
       var invoiceID = $(this).attr("data-invoiceID");
       var paymentID = $(this).attr("data-paymentID");
       viewCustOrder(invoiceID,paymentID);
     });
+
     $('#displayInvoice').on('click',"#cust-cancel-order",function(){
       var invoiceID = $(this).attr("data-invoiceID");
       var paymentID = $(this).attr("data-paymentID");
@@ -35,7 +35,6 @@ $(document).ready(function () {
             cancelOrder(invoiceID,paymentID);
           }
       });
-      var cid = $('#displayInvoice').attr('data-customerid');
       displayInvoice(cid);
       
     });
@@ -65,6 +64,7 @@ $(document).ready(function () {
         formData.append("paymentID", paymentID);
         updatePaymentProof(formData);
       }
+      displayInvoice(cid);
       
     });
 
@@ -75,6 +75,16 @@ function displayInvoice(cid){
   $.ajax({
     url: "invoiceAjax.php",
     data: {task:"displayInvoice",custID:cid,status:"Completed"},
+    success: function(response){
+      $('#displayInvoice').html(response);
+    }
+  });
+}
+
+function displayCompletedOrders(cid){
+  $.ajax({
+    url: "invoiceAjax.php",
+    data: {task:"displayCompletedInvoice",custID:cid,status:"Completed"},
     success: function(response){
       $('#displayInvoice').html(response);
     }
