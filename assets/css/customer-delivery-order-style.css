@@ -54,7 +54,7 @@
 }
 
 .Confirmed{
-    background-color: #00b894;
+    background-color: #55efc4;
     text-align: center;
 }
 
@@ -81,6 +81,17 @@
 }
 
 .Dispatched span{
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.Completed{
+    background-color: #00b894;
+    text-align: center;
+}
+
+.Completed span{
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
