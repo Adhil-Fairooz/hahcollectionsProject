@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(!isset( $_SESSION['DriverID'])){
+if(!isset( $_SESSION['empID'])){
     header("location:../login.php");
 } 
-$driverID = $_SESSION['DriverID'];
+$empID = $_SESSION['empID'];
 
 ?>
 <!DOCTYPE html>
@@ -40,10 +40,10 @@ $driverID = $_SESSION['DriverID'];
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'Home' ? 'active' : '' ?>"  href="index.php">Home</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'profile' ? 'active' : '' ?>"  href="profile.php">Profile</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'profile' ? 'active' : '' ?>"  href="staffProfile.php">Profile</a>
                     </li>
                     <li class="nav-item mynavitem">
-                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'delOrders' ? 'active' : '' ?>"  href="order.php">Orders</a>
+                        <a class="nav-link mynavLink <?php echo $currentMainPage == 'Orders' ? 'active' : '' ?>"  href="StaffOrders.php">Orders</a>
                     </li>
                 </ul>
                 <div class="btn-box">
