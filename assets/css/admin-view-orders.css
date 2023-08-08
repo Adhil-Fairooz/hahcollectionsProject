@@ -133,3 +133,43 @@ table thead{
     color: #f0932b;
     border: 2px solid #f0932b;
 }
+
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* Display stars from left to right */
+    align-items: center;
+  }
+  
+  .star-rating input[type="radio"] {
+    display: none;
+  }
+  
+  .star-rating label {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .star-rating input[type="radio"]:checked ~ label {
+    color: orange;
+  }
+  
+  .star-rating label:hover,
+  .star-rating label:hover ~ label {
+    color: orange;
+  }
+
+.my-modal-slider-img{
+    max-height: 390px;
+    max-width: 340px;
+    filter:brightness(1);
+}
+.slider-icon{
+    filter: invert(1);
+}
+.my-modal-slider{
+    box-shadow: 2.5px 2.5px 2.5px 2.5px #57606f;
+    border-radius: 10px;
+    
+}
