@@ -183,6 +183,15 @@ class OrderController{
             return false;
         }
     }
+    public function getCompletedInvoiceDataForCustomer($CustomerID,$status){
+        $sql = "SELECT i.* FROM invoice i, order_tbl o WHERE i.Invoice_ID = o.Invoice_ID AND o.Customer_ID = '$CustomerID' AND i.order_status = '$status' GROUP BY o.Invoice_ID ORDER BY i.Invoice_ID ASC";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
     private function imgDbFormat($file){
         /*$imageTempName = $file['tmp_Name'];*/
         $imageContent = addslashes(file_get_contents($file));
