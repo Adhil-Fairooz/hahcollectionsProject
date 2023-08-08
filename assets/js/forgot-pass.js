@@ -1,7 +1,9 @@
 var OTP;
 var EmailAddress;
 $(document).ready(function(){
+
     $('#passRecover').click(function(){
+
         $.ajax({
             url: "forgotPassword.php",
             type: "post",
@@ -58,6 +60,7 @@ $(document).ready(function(){
             $('#strEmailError').html('');
         }
     });
+    
     $(".modal-otp").on('submit',"#formOTP",function(event){
         event.preventDefault();
         var enteredOTP = $(this).find('input[name="forgot_pass_OTP"]');
