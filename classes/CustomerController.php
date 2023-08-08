@@ -40,9 +40,8 @@ class CustomerController{
             }else{
                 return false;
             }
-            
         }else{
-            false;
+            return false;
         }
     }
 
