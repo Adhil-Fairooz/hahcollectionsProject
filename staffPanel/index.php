@@ -69,4 +69,4 @@ include "staffHeader.php";
     </div>
 </div>
 
-<?php include "staffHeader.php";?>
+<?php include "staffFooter.php";?>
