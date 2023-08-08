@@ -32,6 +32,8 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'loadTable'){
 }
 
 if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']==='viewOrder'){
+    $orderEmpResult = $orderObj->getEmpOforder($_REQUEST['invoiceID']);
+    $up_row = $orderEmpResult -> fetch_assoc();
     $pmResult = $orderObj->getPaymentMethod($_REQUEST['paymentID']);
     $orderStatus = $_REQUEST['orderStatus'];
     $pmData = $pmResult->fetch_assoc();
@@ -100,7 +102,7 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                                             if($empRes){
                                                 foreach($empRes as $row){
                                                     ?>
-                                                    <option value="<?=$row['Emp_ID']?>"><?=$row['Emp_ID']?> : <?=$row['FName']?></option>
+                                                    <option value="<?=$row['Emp_ID']?>" <?php if ($up_row['Emp_ID'] === $row['Emp_ID'] ) echo 'selected'; ?> ><?=$row['Emp_ID']?> : <?=$row['FName']?></option>
                                                     <?php
                                                 }
                                             }else{
@@ -229,12 +231,12 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                 <?php
             }else if($orderStatus === 'Confirmed'){
                 ?>
-                <button class="btn myBtn readybtn" id="readyOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Ready</button>
+                <button class="btn myBtn readybtn " id="readyOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>" <?php if ($up_row['Emp_ID'] !== null ) echo 'disabled'; ?>>Ready</button>
                 <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
                 <?php
             }else if($orderStatus === 'Ready'){
                 ?>
-                <button class="btn myBtn confirmBtn" id="complete" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Compelete</button>
+                <button class="btn myBtn confirmBtn" id="complete" data-invoiceID = "<?=$_REQUEST['invoiceID']?>" >Compelete</button>
                 <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
                 <?php
             }else{
@@ -250,7 +252,7 @@ if(isset($_REQUEST['task'])&& isset($_REQUEST['invoiceID']) && $_REQUEST['task']
                 <?php
             }else if($orderStatus === 'Confirmed'){
                 ?>
-                <button class="btn myBtn readybtn" id="readyOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Ready</button>
+                <button class="btn myBtn readybtn" id="readyOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>" <?php if ($up_row['Emp_ID'] !== null ) echo 'disabled'; ?>>Ready</button>
                 <button class="btn myBtn cancelBtn" id="cancelOrder" data-invoiceID = "<?=$_REQUEST['invoiceID']?>">Cancel</button>
                 <?php
             }else if($orderStatus === 'Ready'){
