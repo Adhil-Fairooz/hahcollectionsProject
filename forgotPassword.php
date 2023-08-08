@@ -18,7 +18,7 @@ if(isset($_POST['task']) && $_POST['task'] == 'showEmailForm'){ ?>
                 <div class="modal-title My-regForm-title">Recover Your Account</div>
                 <button type="button" class="btn-close my-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-           <!-- header close -->
+    <!-- header close -->
 
            <!-- modal body -->
            <div class="modal-body">
@@ -137,7 +137,7 @@ if(isset($_POST['task']) && $_POST['task'] == 'showChangePassword'){ ?>
            </div>
            <!-- body close -->
 <?php }
-?>
+?> 
 <?php 
 if(isset($_POST['task']) && $_POST['task'] ==='ChangePass'){
     $data = [
