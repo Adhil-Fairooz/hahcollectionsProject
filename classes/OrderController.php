@@ -264,6 +264,26 @@ class OrderController{
         }
     }
 
+    public function getOrderStaff($id){
+        $sql = "SELECT Invoice_ID,order_status,Payment_ID FROM invoice WHERE order_status = 'Pending' OR order_status = 'Confirmed' AND Emp_ID = '$id'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function getREADYCOMPLETEOrderStaff($id){
+        $sql = "SELECT Invoice_ID,order_status,Payment_ID FROM invoice WHERE order_status = 'Ready' OR order_status = 'Completed' AND Emp_ID = '$id'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
     public function getCompleteOrderDriver($Driver){
         $sql = "SELECT i.Invoice_ID,i.order_status,i.Payment_ID FROM invoice i,payment_cod pcod WHERE i.Payment_ID = pcod.`Payment_ID` AND i.order_status = 'Completed' AND pcod.`Driver_ID` = '$Driver'";
         $result = $this->conn->query($sql);
@@ -276,6 +296,34 @@ class OrderController{
     
     public function getBillingInfoCOD($PaymentID){
         $sql = "SELECT Delivery_Fee,Total FROM payment_cod WHERE Payment_ID = '$PaymentID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    public function getBillingInfoPiCK($PaymentID){
+        $sql = "SELECT * FROM payment_pickup WHERE Payment_ID = '$PaymentID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+    public function getBillingInfoBD($PaymentID){
+        $sql = "SELECT * FROM payment_bankdeposit WHERE Payment_ID = '$PaymentID'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+    public function getEmpOforder($Id){
+        $sql = "SELECT Emp_ID FROM invoice WHERE Invoice_ID = '$Id'";
         $result = $this->conn->query($sql);
         if($result->num_rows > 0){
             return $result;
