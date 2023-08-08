@@ -7,10 +7,12 @@ $(document).ready(function () {
 
     $('#currentOrders').on('click',function(event){
       displayInvoice(cid);
+      $("#sidebar").toggleClass("active");
 
     });
     $('#completedOrders').on('click',function(event){
       displayCompletedOrders(cid);
+      $("#sidebar").toggleClass("active");
             
     });
     
@@ -68,8 +70,42 @@ $(document).ready(function () {
       
     });
 
+    //Rating
+    $('#displayInvoice').on('click',".rating-viewbtn",function(){
+      var invoiceID = $(this).attr("data-invoiceID");
+      var paymentID = $(this).attr("data-paymentID");
+      var orderStatus = $(this).attr("data-orderStatus");
+      viewOrderWithRating(invoiceID,paymentID,orderStatus);
+
+    });
+
+    $('.cust-order-content').on('click','#RateButton',function(){
+      var ProductID = $(this).attr("data-productID");
+      $('#product-rating-Modal').modal('show');
+    });
 
   });
+
+function viewRatingForm(pid){
+  $.ajax({
+    url:"",
+    data:{task:"view-rating-modal",productID:pid},
+    success: function(response){
+
+    }
+  })
+}
+
+function viewOrderWithRating(invoiceID,paymentID,orderStatus){
+  $.ajax({
+    url: "invoiceAjax.php",
+    data:{task:"viewCustomerOrderWithRating",invoice:invoiceID,payment:paymentID,orderStatus:orderStatus},
+    success: function(response){
+      $('.cust-order-content').html(response);
+      $('#view-customer-order').modal('show');
+    }
+  });
+}
 
 function displayInvoice(cid){
   $.ajax({
