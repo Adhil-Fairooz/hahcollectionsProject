@@ -2,7 +2,15 @@
 include "header.php"; ?>
 <?php
     session_start();
-    unset($_SESSION['customerID']);
+    if(isset($_SESSION['customerID'])){
+        unset($_SESSION['customerID']);
+    }
+    if(isset($_SESSION['empID'])){
+        unset($_SESSION['empID']);
+    }
+    if(isset($_SESSION['Driver_ID'])){
+        unset($_SESSION['Driver_ID']);
+    }
     session_destroy();
 
     echo"<meta http-equiv='refresh' content='2;url=login.php'>";
