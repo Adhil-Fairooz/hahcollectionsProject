@@ -20,7 +20,7 @@
                     <form method="POST" action = "loginProcess.php" id="login">
                         <div class="form-floating my-form  mb-4">
                             <input type="text" id="username" name="username" class="form-control my-input shadow-none" placeholder="Username"/>
-                            <label class="" for="username"><i class="fas fa-user me-2"></i>Username</label>
+                            <label class="" for="username"><i class="fas fa-user me-2"></i>Email Address</label>
                             <div id="strUserError"></div>
                         </div>
 
