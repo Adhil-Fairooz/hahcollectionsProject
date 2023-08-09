@@ -173,3 +173,16 @@ table thead{
     border-radius: 10px;
     
 }
+
+.label{
+    font-size: 17px;
+    letter-spacing: 1px;
+    font-weight: 600;
+
+}
+
+#strStarError,#strFeedbackError{
+    font-size: 12px;
+    color: #c23616;
+    margin-left: 10px;
+}
