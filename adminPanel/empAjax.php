@@ -42,7 +42,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'showAllData'){
                 <td><?=$row['Job_Role']?></td>
                 <td><?=$row['Contact_No']?></td>
                 <td>
-                <a class="btn btn-outline-danger" ><i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-outline-danger" data-EmpID = '<?=$row['Emp_ID']?>' id='delete-EMP'><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
             <?php
@@ -67,13 +67,24 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'search'){
                 <td><?=$row['Job_Role']?></td>
                 <td><?=$row['Contact_No']?></td>
                 <td>
-                <a class="btn btn-outline-danger" ><i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-outline-danger" data-EmpID = '<?=$row['Emp_ID']?>' id='delete-EMP'><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
             <?php
         }
     }else{
         echo "<tr><td colspan='7'><label>No Records Found</label></td></tr>";
+    }
+}
+?>
+
+<?php 
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'removeEmp'){
+    $result = $empObj -> DeleteFromEmployee($_REQUEST['id']);
+    if($result){
+        echo 1;
+    }else{
+        echo 0;
     }
 }
 ?>
