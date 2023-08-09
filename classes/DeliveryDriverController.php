@@ -115,5 +115,14 @@ class DeliveryDriverController{
             return 0;
         }
     }
+    public function DeleteFromDriver($id){
+        $sql = "DELETE FROM deliver_driver WHERE Driver_ID = '$id';";
+        $result = $this->conn->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
 }
