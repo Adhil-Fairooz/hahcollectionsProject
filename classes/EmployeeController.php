@@ -91,5 +91,14 @@ class EmployeeController{
             return false;
         }
     }
+    public function DeleteFromEmployee($id){
+        $sql = "DELETE FROM employee WHERE Emp_ID = '$id';";
+        $result = $this->conn->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 ?>
