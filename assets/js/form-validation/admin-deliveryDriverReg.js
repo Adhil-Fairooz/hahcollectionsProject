@@ -138,6 +138,24 @@ $(document).ready(function(){
 
 
     });
+    // DELETE Driver
+    $('#DelDriverDataShow').on('click','#delete-DD',function(){
+        var Driver = $(this).attr('data-Driver');
+        
+        Swal.fire({
+            title: 'Are you Sure',
+            text:'Yoy really want to delete it !',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#686de0',
+            cancelButtonColor: '#f46e50',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeDriver(Driver);
+            }
+        });
+    });
 });
 
 function resetError(){
@@ -155,6 +173,21 @@ function displayALLData(){
         data : {task:'showAllData'},
         success: function(response){
             $("#DelDriverDataShow").html(response);
+        }
+    });
+}
+
+function removeDriver(id){
+    $.ajax({
+        url: "deliveryDriverAjax.php",
+        data: {task:'removeDriver',id:id},
+        success: function(response){
+            if(parseInt(response) === 1){
+                Swal.fire({icon:'success',title:'Done !',text:'Driver Removed successfully'});
+            }else{
+                console.log(response);
+                Swal.fire({icon:'warning',title:'Sorry Cannot Delete',text:'There are Records associated with this Driver'});
+            }
         }
     });
 }
