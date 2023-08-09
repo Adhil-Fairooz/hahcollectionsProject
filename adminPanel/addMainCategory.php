@@ -13,12 +13,13 @@ $mainCatObj = new CategoryController;
                     <div class="card">
                         <div class="card-header mycardheader">Add New Main Category</div>
                         <div class="card-body">
-                            <form action="#" method="post">
+                            <form action="#" method="post" id = "AddmainCategory">
                                 <div class="row myrow">
                                     <div class="col ">
                                             <div class="form-floating myFormFloating">
                                                 <input type="text" class="form-control myinputText" name="CategoryName" id="floatingInput" placeholder=" ">
                                                 <label for="floatingInput">Enter Category Name</label>
+                                                <div id="strmainNameError"></div>
                                             </div>
                                     </div>
                                 </div>
@@ -41,7 +42,7 @@ $mainCatObj = new CategoryController;
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id = "main-tbody">
                             <?php 
                                     $results = $mainCatObj->getMainCategoryData();
                                     if($results){
@@ -51,8 +52,8 @@ $mainCatObj = new CategoryController;
                                             <th scope="row"><?=$row['Main_ID']?></th>
                                                 <td><?=$row['Name']?></td>
                                                 <td>
-                                                    <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                                                    <button class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-outline-danger" data-mainCat = '<?=$row['Main_ID']?>' id="del-Main"><i class="fas fa-trash-alt"></i></button>
+                                                    <button class="btn btn-outline-success" data-mainCat = '<?=$row['Main_ID']?>' id="update-Main"><i class="fas fa-edit"></i></button>
                                                 </td>
                                             </tr>
                                             <?php
@@ -70,6 +71,14 @@ $mainCatObj = new CategoryController;
        
     </div>
 </div>
+<div class="modal fade" id="Update-modal-mainCategory" data-bs-backdrop="static" data-bs-keyboard="false">     
+    <div class="modal-dialog modal-xl">
+        <link rel="stylesheet" href="..\assets\css\admin-modal-style.css">
+        <div class="modal-content main-content">
+           
+        </div>
+    </div>
+</div>
 <?php 
 if(isset($_POST['btnMain'])){
     $categoryName = mysqli_real_escape_string($db->conn,$_POST['CategoryName']);
@@ -82,4 +91,5 @@ if(isset($_POST['btnMain'])){
 }
 
 ?>
+<script src = "..\assets\js\form-validation\categoryHandlingFormValidation.js"></script>
 <?php include "adminFooter.php"; ?>
