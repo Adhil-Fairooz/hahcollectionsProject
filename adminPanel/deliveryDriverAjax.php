@@ -43,7 +43,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'showAllData'){
                 <td><?=$row['Contact_No']?></td>
                 <td><?=$row['Email']?></td>
                 <td>
-                <a class="btn btn-outline-danger" ><i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-outline-danger" data-Driver = '<?=$row['Driver_ID']?>' id='delete-DD'><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
             <?php
@@ -68,7 +68,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'search'){
                 <td><?=$row['Contact_No']?></td>
                 <td><?=$row['Email']?></td>
                 <td>
-                <a class="btn btn-outline-danger" ><i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-outline-danger" data-Driver = '<?=$row['Driver_ID']?>' id='delete-DD'><i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
             <?php
@@ -77,3 +77,15 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'search'){
         echo "<tr><td colspan='7'><label>No Records Found</label></td></tr>";
     }
 }
+?>
+
+<?php 
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'removeDriver'){
+    $result = $empObj -> DeleteFromDriver($_REQUEST['id']);
+    if($result){
+        echo 1;
+    }else{
+        echo 0;
+    }
+} 
+?>
