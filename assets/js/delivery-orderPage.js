@@ -81,17 +81,64 @@ $(document).ready(function () {
 
     $('.cust-order-content').on('click','#RateButton',function(){
       var ProductID = $(this).attr("data-productID");
-      $('#product-rating-Modal').modal('show');
+      viewRatingForm(ProductID,cid);
+      
+    });
+
+    $('.rating-content').on('submit',"#RateProduct",function(event){
+      event.preventDefault();
+      var productID = $(this).attr('data-ProductID');
+      var customerID = $(this).attr('data-CustomerID');
+      
+      // validation
+      var ratings = $('input[name="rating"]');
+      var feedback =$('textarea[name="feedback"]');
+      $('#strStarError').html('');
+      $('#strFeedbackError').html('');
+      feedback.removeClass('is-invalid');
+      var isRatingValid = true;
+      var isFeedbackValid = true;
+
+      if(!ratings.is(':checked')){
+        $('#strStarError').html('Please check Atleast One star to procced');
+        isRatingValid = false;
+      }
+
+      if($.trim(feedback.val()) === ''){
+        $('#strFeedbackError').html('This field is required');
+        feedback.addClass('is-invalid');
+        isFeedbackValid = false;
+      }
+
+      if(isRatingValid && isFeedbackValid){
+        var rate = ratings.filter(':checked').val();
+        
+        $.ajax({
+          url : "invoiceAjax.php",
+          data : {task:"AddReview",pid:productID,cid:customerID,rate:rate,feedback:feedback.val()},
+          success : function(response){
+            if(parseInt(response) === 1){
+              Swal.fire({icon:'success',title:'Done !',text:'Your review was submitted !'});
+            }else{
+              console.log(response);
+              Swal.fire({icon:'warning',title:'Something is not right',text:''});
+            }
+          }
+        });
+
+      }
+
     });
 
   });
 
-function viewRatingForm(pid){
+function viewRatingForm(pid,custID){
   $.ajax({
-    url:"",
-    data:{task:"view-rating-modal",productID:pid},
+    url:"invoiceAjax.php",
+    data:{task:"showRatingModal",productID:pid,customerID:custID},
     success: function(response){
-
+      $('.rating-content').html(response);
+      $('#product-rating-Modal').modal('show');
     }
   })
 }
