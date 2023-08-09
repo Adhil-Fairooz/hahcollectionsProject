@@ -48,5 +48,6 @@ include "employeeManagement.php"; ?>
         </div>
     </div>
 </div>
+
 <script src="..\assets\js\form-validation\admin-employeeRegistration.js"></script>
 <?php include "adminFooter.php"; ?>
