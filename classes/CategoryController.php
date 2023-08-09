@@ -27,6 +27,33 @@ class CategoryController{
             return false;
         }
     }
+    public function getMainCategoryDataForUpdate($id){
+        $sql_get_main_data = "SELECT * FROM main_category WHERE Main_ID = '$id';";
+        $results = $this->conn->query($sql_get_main_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function UpdateMainCategory($data){
+        $id = $data['id'];
+        $name = $data['name'];
+        $sql = "UPDATE main_category SET `Name` = '$name' WHERE Main_ID = '$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function deleteMainCategory($id){
+        $sql ="DELETE FROM main_category WHERE Main_ID = '$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /*Sub category*/
     public function addNewSubCategory($subName){
         $idType = "subCat";
@@ -48,6 +75,33 @@ class CategoryController{
             return false;
         }
     }
+    public function getSubCategoryDataForUpdate($id){
+        $sql_get_sub_data = "SELECT * FROM sub_category WHERE Sub_ID = '$id';";
+        $results = $this->conn->query($sql_get_sub_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function UpdateSubCategory($data){
+        $id = $data['id'];
+        $name = $data['name'];
+        $sql = "UPDATE sub_category SET `Name` = '$name' WHERE Sub_ID = '$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function deleteSubCategory($id){
+        $sql ="DELETE FROM sub_category WHERE Sub_ID = '$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /*brand category*/
     public function addNewBrand($brandName){
         $idType = "brand";
@@ -65,6 +119,33 @@ class CategoryController{
         $results = $this->conn->query($sql_get_brand_data);
         if($results->num_rows > 0){
             return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getBrandDataForUpdate($id){
+        $sql_get_brand_data = "SELECT * FROM brand WHERE Brand_ID = '$id';";
+        $results = $this->conn->query($sql_get_brand_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function UpdateBrand($data){
+        $id = $data['id'];
+        $name = $data['name'];
+        $sql = "UPDATE brand SET `Name` = '$name' WHERE Brand_ID = '$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function deleteBrandName($id){
+        $sql ="DELETE FROM brand WHERE Brand_ID = '$id'";
+        if($this->conn->query($sql)){
+            return true;
         }else{
             return false;
         }
