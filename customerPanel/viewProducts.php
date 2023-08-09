@@ -5,6 +5,24 @@ $productObj = new ProductController;
 session_start();
 if(isset($_GET['pId'])){
     $productResults = $productObj->getProductInfomation($_GET['pId']);
+    $ratingResults = $productObj->getRatingValue($_GET['pId']);
+    $rateValue = 0;
+    $FinalRateValue = 0;
+    $CustomerCount = 0;
+    $rateConditinVAlue = 0;
+    if($ratingResults){
+        foreach($ratingResults as $rateRow){
+            $rateValue += floatval($rateRow['AVG_Ratings']);
+            $CustomerCount = $CustomerCount + 1;
+        }
+        $FinalRateValue = $rateValue / $CustomerCount;
+        if($FinalRateValue < 5){
+            $rateConditinVAlue = floor($FinalRateValue);
+        }else{
+            $rateConditinVAlue = ceil($FinalRateValue / 5);
+        }
+        
+    }
     if($productResults){
         foreach($productResults as $row){ ?>
         <!-- Header section -->
@@ -16,11 +34,17 @@ if(isset($_GET['pId'])){
                 <div class="col-lg-8">
                     <!-- product Rating part -->
                     <div class="rating">
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
+                        <?php 
+                            for ($i = 0; $i < $rateConditinVAlue; $i++){
+                                echo '<span class="fa fa-star checked"></span>';
+                            }
+                            if($rateConditinVAlue !== 5){
+                                for ($i = 0; $i < 5 -$rateConditinVAlue; $i++){
+                                echo '<span class="fa fa-star"></span>';
+                            }
+                        }
+                        ?>
+                        (<?=$CustomerCount?>)
                     </div>
                 <!-- product Rating end -->
                 </div>
