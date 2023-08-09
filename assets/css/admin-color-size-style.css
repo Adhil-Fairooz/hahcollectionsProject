@@ -81,3 +81,9 @@ table tbody .colorValue{
    border-left:5px solid white;
    border-right:5px solid white;
 }
+
+#strmainNameError,#strSubNameError,#strBrandError{
+  font-size: 12px;
+  color: #c23616;
+  margin-left: 10px;
+}
