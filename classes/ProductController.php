@@ -328,6 +328,42 @@ class ProductController{
         $result = $this->conn->query($sql_update);
     }
 
+    public function getProdutInFoRating($pid){
+        $Sql = "SELECT Product_ID,Pro_Name,Pro_IMG_1,Pro_IMG_2,Pro_IMG_3 FROM product WHERE Product_ID = '$pid'";
+        $results = $this->conn->query($Sql);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
+    public function addProductReview($data){
+        $idType = "rate";
+        $cid = $data['cid'];
+        $pid = $data['pid'];
+        $rate = $data['rate'];
+        $feedback = $data['feedback'];
+        $rateID = $this->generateId->getNewID($idType);
+        $sql = "INSERT INTO review VALUES('$rateID','$pid','$cid','$feedback','$rate')";
+        if($this->conn->query($sql)){
+            $this->generateId->updatetID($idType);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getRatingValue($pid){
+        $sql = "SELECT AVG(Ratings) as AVG_Ratings FROM review WHERE `Product_ID` = '$pid' GROUP BY(`Customer_ID`)";
+        $results = $this->conn->query($sql);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+
 }
 
 ?>
