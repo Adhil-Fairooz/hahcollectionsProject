@@ -81,7 +81,7 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'search'){
 
 <?php 
 if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'removeDriver'){
-    $result = $empObj -> DeleteFromDriver($_REQUEST['id']);
+    $result = $delDriverObj -> DeleteFromDriver($_REQUEST['id']);
     if($result){
         echo 1;
     }else{
