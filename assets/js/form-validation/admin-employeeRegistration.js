@@ -28,6 +28,24 @@ $(document).ready(function(){
 
 
     });
+    // DELETE Employee
+    $('#empDataShow').on('click','#delete-EMP',function(){
+        var empID = $(this).attr('data-EmpID');
+        
+        Swal.fire({
+            title: 'Are you Sure',
+            text:'Yoy really want to delete it !',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#686de0',
+            cancelButtonColor: '#f46e50',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                removeEmployee(empID);
+            }
+        });
+    });
 
     // Employee Registration Form
 
@@ -155,6 +173,21 @@ function displayALLEmpData(){
         data : {task:'showAllData'},
         success: function(response){
             $("#empDataShow").html(response);
+        }
+    });
+}
+
+function removeEmployee(id){
+    $.ajax({
+        url: "empAjax.php",
+        data: {task:'removeEmp',id:id},
+        success: function(response){
+            if(parseInt(response) === 1){
+                Swal.fire({icon:'success',title:'Done !',text:'Employee Removed successfully'});
+            }else{
+                console.log(response);
+                Swal.fire({icon:'warning',title:'Sorry Cannot Delete',text:'There are Records associated with this Employee'});
+            }
         }
     });
 }
