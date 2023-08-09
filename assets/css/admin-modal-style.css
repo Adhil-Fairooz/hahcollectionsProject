@@ -101,3 +101,8 @@ label{
     color: #c23616;
     margin-left: 10px;
 }
+#strmainNameErrorUP,#strSubNameErrorUP,#strBrandErrorUP{
+    font-size: 12px;
+    color: #c23616;
+    margin-left: 10px;
+}
