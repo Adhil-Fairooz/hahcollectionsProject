@@ -80,4 +80,5 @@
 </div>
 <script src="assets\js\account-creation.js"></script>
 <script src="assets\js\forgot-pass.js"></script>
+<script src="assets\js\form-validation\customer-register-form-validation.js"></script>
 <?php include "footer.php"; ?>
