@@ -79,11 +79,12 @@ if(isset($_GET['mainCatOnlyId'])){
 
 <?php 
 if(isset($_GET['pId']) && isset($_GET['sId']) && isset($_GET['cId'])){
+    $requriedQTY = intval($_GET['qty']);
     $resStock = $productObj-> getStockQuantity($_GET['pId'],$_GET['sId'],$_GET['cId']);
     if($resStock){
         $data = $resStock -> fetch_assoc();
         $qty = $data['Stock_Qty'];
-        if($qty > 0){
+        if($qty > 0 && $qty >= $requriedQTY){
             echo "0";
         }else{
             echo "1";
