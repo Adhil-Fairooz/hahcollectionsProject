@@ -13,12 +13,13 @@ include "ProductManagement.php";
                     <div class="card">
                         <div class="card-header mycardheader">Add New Color</div>
                         <div class="card-body">
-                            <form action="#" method="post">
+                            <form action="#" method="post" id="addProductColors">
                             <div class="row myrow">
                                     <div class="col">
                                         <div class="form-floating myFormFloating">
                                             <input type="text" class="form-control myinputText" name="colorName" id="floatingInput" placeholder=" ">
                                             <label for="floatingInput">Color Name</label>
+                                            <div id="strNameEror"></div>
                                         </div>
                                     </div>
                                     <div class="col">
@@ -59,8 +60,8 @@ include "ProductManagement.php";
                                             <td><?=$row['Color_Name']?></td>
                                             <td class="colorValue" style="background-color: <?=$row['Color_Value']?>;"></td>
                                             <td>
-                                                <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                                                <button class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-outline-danger" data-id='<?=$row['Color_ID']?>' id="del-color"><i class="fas fa-trash-alt"></i></button>
+                                                <button class="btn btn-outline-success" data-id='<?=$row['Color_ID']?>' id="update"><i class="fas fa-edit"></i></button>
                                             </td>
                                         </tr>
                                         <?php
@@ -80,7 +81,14 @@ include "ProductManagement.php";
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="Update-modal-color" data-bs-backdrop="static" data-bs-keyboard="false">     
+    <div class="modal-dialog modal-xl">
+        <link rel="stylesheet" href="..\assets\css\admin-modal-style.css">
+        <div class="modal-content">
+           
+        </div>
+    </div>
+</div>
 <?php 
 if(isset($_POST['btnColor'])){
     $colordata = [
@@ -98,4 +106,5 @@ if(isset($_POST['btnColor'])){
 
 
 ?>
+<script src="..\assets\js\form-validation\validatecolorForm.js"></script>
 <?php include "adminFooter.php"; ?>
