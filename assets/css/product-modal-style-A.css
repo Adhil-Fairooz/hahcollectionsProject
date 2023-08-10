@@ -53,9 +53,9 @@
 .size-box{
     display:inline-block;
     vertical-align: middle;
-    height: 30px;
-    width:30px;
-    margin: 0 5px 0 0 ;
+    height: 40px;
+    width:40px;
+    margin: 0 15px 0 0 ;
     border: 1px solid #d4d4d4;
     background-color: #718093;
     color: white;
