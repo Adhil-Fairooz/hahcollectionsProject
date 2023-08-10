@@ -139,7 +139,7 @@ include "ProductManagement.php"; ?>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="btn-col">
-                            <button class="btn myBtn" type="submit" name="btnProduct">Add Product</button>
+                            <button class="btn myBtn" type="submit" name="btnProduct" id="btnAdd">Add Product</button>
                         </div>
                         
                     </div>
