@@ -13,7 +13,7 @@ include "ProductManagement.php";
                     <div class="card">
                         <div class="card-header mycardheader">Add New Size</div>
                         <div class="card-body">
-                            <form action="#" method="post">
+                            <form action="#" method="post" id="addProductSize">
                                 <div class="row myrow">
                                     <div class="col">
                                         <div class="form-floating myFormFloating"> 
@@ -34,12 +34,14 @@ include "ProductManagement.php";
                                                 ?>
                                                 
                                             </datalist>
+                                            <div id="strTypeError"></div>
                                         </div>
                                     </div>
                                     <div class="col ">
                                         <div class="form-floating myFormFloating">
                                             <input type="text" class="form-control myinputText" name="value" id="floatingInput" placeholder=" ">
                                             <label for="floatingInput">Value</label>
+                                            <div id="strValueError"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +77,8 @@ include "ProductManagement.php";
                                                 <td><?=$row['Size_Type']?></td>
                                                 <td><?=$row['Size_Value']?></td>
                                                 <td>
-                                                    <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                                                    <button class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-outline-danger" data-id='<?=$row['Size_ID']?>' id='delete'><i class="fas fa-trash-alt"></i></button>
+                                                    <button class="btn btn-outline-success" data-id='<?=$row['Size_ID']?>' id='update'><i class="fas fa-edit"></i></button>
                                                 </td>
                                             </tr>
                                             <?php
@@ -94,6 +96,15 @@ include "ProductManagement.php";
                                 </div>
                                 </div>
                                 <div>
+                                <div class="modal fade" id="Update-modal-color" data-bs-backdrop="static" data-bs-keyboard="false">     
+    <div class="modal-dialog modal-xl">
+        <link rel="stylesheet" href="..\assets\css\admin-modal-style.css">
+        <script type="module" src="../assets/js/datalist-css.min.js"></script>
+        <div class="modal-content">
+           
+        </div>
+    </div>
+</div>
 <?php 
 
 if(isset($_POST['btnSize'])){
@@ -110,4 +121,5 @@ if(isset($_POST['btnSize'])){
 }
 
 ?>
+<script src="..\assets\js\form-validation\validateSizeForm.js"></script>
 <?php include "adminFooter.php"; ?>
