@@ -4,10 +4,12 @@ include "classes\DBConnect.php";
 include "classes\CustomerController.php";
 include "classes\DeliveryDriverController.php";
 include "classes\EmployeeController.php";
+include "classes\AdminController.php";
 $db = new DatabaseConnection;
 $customerObj = new CustomerController();
 $driverObj = new DeliveryDriverController();
 $employeeObj = new EmployeeController();
+$adminObj = new AdminController();
 
 if(isset($_POST['login'])){
     $user_unsafe=$_POST['username'];
@@ -107,14 +109,46 @@ if(isset($_POST['login'])){
                 }
             }else{
                 /*Admin Login*/
-                $status="Incorrect Username !";
-                header("Location: login.php?status=$status");
+                $adminRes = $adminObj -> getAdminLogin($user);
+                if($adminRes){
+                    $data = $adminRes -> fetch_assoc();
+                    $adminID = $data['Admin_ID'];
+                    $fname = $data['Fname'];
+                    $lname = $data['LName'];
+                    $password = $data['Password'];
+                    $verify_admin = password_verify($pass, $password);
+                    if($verify_admin){
+                        session_start();
+                        $_SESSION['Admin_ID']=$adminID;
+                        $_SESSION['Name']=$fname." ".$lname;
+                        $_SESSION['CurrentPassword'] = $password;
+                        $_SESSION['USerEmail'] = $user;
+                        echo"<meta http-equiv='refresh' content='2;url=adminPanel\DashHome.php'>";
+                        echo"<div class='container mt-5'>
+                                <div class='progress'>
+                                    <div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'>
+                                    <span class='itext'>Please Admin !...</span>
+                                    </div>
+                                </div>
+                            <br>
+                        </div>";
+                    }else{
+                        $status="Incorrect Password Admin !";
+                        header("Location: login.php?status=$status");
+                    }
+                }else{
+                    $status="Incorrect Username !";
+                    header("Location: login.php?status=$status");
+                }
+                
             }
             
         }
     }
 }
+/*
 
+*/
 
 
 include "footer.php";
