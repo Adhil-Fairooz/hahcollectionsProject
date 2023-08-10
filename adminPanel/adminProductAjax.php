@@ -121,14 +121,16 @@ if(isset($_REQUEST['task']) && $_REQUEST['task']=== 'view'){
                             <tbody>
                                 <?php 
                                 $productRes = $productObj->getProductVariationOnID($_REQUEST['pid']);
-                                foreach($productRes as $record){
-                                    ?>
-                                    <tr>
-                                        <td><?=$record['Color_ID']?> : <i class="fas fa-square" style="color: <?=$record['Color_Value']?>"></i> : <?=$record['Color_Name']?> </td>
-                                        <td><?=$record['Size_ID']?> : <?=$record['Size_Value']?> </td>
-                                        <td><?=$record['Stock_Qty']?></td>
-                                    </tr>
-                                    <?php
+                                if($productRes){
+                                    foreach($productRes as $record){
+                                        ?>
+                                        <tr>
+                                            <td><?=$record['Color_ID']?> : <i class="fas fa-square" style="color: <?=$record['Color_Value']?>"></i> : <?=$record['Color_Name']?> </td>
+                                            <td><?=$record['Size_ID']?> : <?=$record['Size_Value']?> </td>
+                                            <td><?=$record['Stock_Qty']?></td>
+                                        </tr>
+                                        <?php
+                                    }
                                 }
                                 ?>
                                 
