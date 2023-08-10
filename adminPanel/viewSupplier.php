@@ -17,7 +17,7 @@ include "SupplierHandling.php";
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="suppTbl">
                         <?php 
                             $results = $supplierObj->getsupplierData();
                             if($results){
@@ -28,8 +28,8 @@ include "SupplierHandling.php";
                                     <td><?=$row['Sup_contact']?></td>
                                     <td><?=$row['Email']?></td>
                                     <td>
-                                        <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-outline-danger" data-id="<?=$row['Sup_ID']?>" id="supDelete"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-outline-success" data-id="<?=$row['Sup_ID']?>" id="supUpdate"><i class="fas fa-edit"></i></button>
                                     </td>
                                     </tr>
                             <?php
@@ -44,4 +44,13 @@ include "SupplierHandling.php";
         </div>
     </div>
 </div>
+<div class="modal fade" id="Update-modal-supplier" data-bs-backdrop="static" data-bs-keyboard="false">     
+    <div class="modal-dialog modal-xl">
+        <link rel="stylesheet" href="..\assets\css\admin-modal-style.css">
+        <div class="modal-content">
+           
+        </div>
+    </div>
+</div>
+<script src="..\assets\js\form-validation\admin-supplierValidation.js"></script>
 <?php include "adminFooter.php"; ?>
