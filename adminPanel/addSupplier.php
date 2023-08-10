@@ -7,24 +7,27 @@ include "SupplierHandling.php";
     <div class="card mt-3">
         <div class="card-header mycardheader">Add New Suppliers</div>
         <div class="card-body">
-            <form action="#" method="post">
+            <form action="#" method="post" id="AddSupplier">
                 <div class="row mt-3">
                         <div class="col-md-4">
                             <div class="form-floating myFormFloating">
                                 <input type="text" class="form-control myinputText" name="supName" id="floatingInput" placeholder=" ">
                                 <label for="floatingInput">Supplier Name</label>
+                                <div id="strSupNameERROR"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating myFormFloating">
                                     <input type="text" class="form-control myinputText" name="supContact" id="floatingInput" placeholder=" ">
                                     <label for="floatingInput">Contact Number</label>
+                                    <div id="strSupContactERROR"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating myFormFloating">
                                     <input type="text" class="form-control myinputText" name="supEmail" id="floatingInput" placeholder=" ">
                                     <label for="floatingInput">Email Address</label>
+                                    <div id="strSupEmailERROR"></div>
                             </div>
                         </div>
                 </div>
@@ -37,6 +40,7 @@ include "SupplierHandling.php";
         </div>
     </div>
 </div>
+
 <?php 
 if(isset($_POST['btnSup'])){
     $supplierData = [
@@ -52,4 +56,5 @@ if(isset($_POST['btnSup'])){
     }
 }
 ?>
+<script src="..\assets\js\form-validation\admin-supplierValidation.js"></script>
 <?php include "adminFooter.php"; ?>
