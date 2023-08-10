@@ -5,16 +5,16 @@ function preview(){
     let strError = document.getElementById("strErr");
     strError.style.color = "red";
     if(fileInput.files.length < 3){
-        document.getElementById("btnAdd").disabled = true;
+        btnAdd.disabled = true;
         fileInput.setAttribute("class","form-control myChooseFile is-invalid ");
         strError.innerHTML = "you must select 3 images";
         
     }else if(fileInput.files.length > 3){
-        document.getElementById("btnAdd").disabled = true;
+        btnAdd.disabled = true;
         fileInput.setAttribute("class","form-control myChooseFile is-invalid ");
         strError.innerHTML = "Maximum images you could select is 3";
     }else{
-        document.getElementById("btnAdd").disabled = false;
+        btnAdd.disabled = false;
         fileInput.setAttribute("class","form-control myChooseFile");
         strError.style.color = "green";
         strError.innerHTML = "looks good !";
