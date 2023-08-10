@@ -5,16 +5,18 @@ form.addEventListener('change', function() {
   const size = document.querySelector('input[name="size"]:checked');
   const color = document.querySelector('input[name="color"]:checked');
   const product = document.querySelector('input[name="productId"]');
+  const Qty = document.querySelector('input[name="quantity"]');
 
   if (size && color) {
     const sizeId = size.value;
     const colorId = color.value;
     const productId = product.value;
+    const reqQty = Qty.value;
     //displayElement.textContent = `Selected size: ${sizeValue}, Selected color: ${colorValue}`;
-    console.log(productId);
+    console.log(reqQty);
     $.ajax({
       url: "loadProducts.php",
-      data:{pId:productId,sId:sizeId,cId:colorId},
+      data:{pId:productId,sId:sizeId,cId:colorId,qty:reqQty},
       success: function(result){
         //$("#stockStatus").html(result);
         if (parseInt(result) === 0) {
@@ -30,7 +32,7 @@ form.addEventListener('change', function() {
           $('#stockOut').show();
           $("#stockStatus").html("<p class='stock-out'>Sorry, Not in stock yet !</p>");
         } else {
-          console.log('Unexpected server response.');
+          console.log('Unexpected server response.'+result);
         }
       }
     });
