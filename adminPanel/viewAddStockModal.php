@@ -85,51 +85,54 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'showUpdateForm'){
                 <div class="col">Quantity</div>
             </div>
             <input type="hidden" name="productId" value="<?=$_REQUEST['productID']?>">
-            <?php 
-            foreach($result as $datarow){
-                ?>
-                <div class="row mb-2 ">
-                    <div class="col">
-                            <select class="form-select" name="updatecolor[]" id="color">
-                                <option value="0" selected>Select</option>
-                                <?php
-                                    $colors = $productObj->getColorData();
-                                        if($colors){
-                                            foreach($colors as $row){?>
-                                                <option value="<?=$row['Color_ID']?>" style="background-color:<?=$row['Color_Value']?>;font-size:22px;" <?php if ($datarow['Color_ID'] === $row['Color_ID'] ) echo 'selected'; ?>><?=$row['Color_Name']?></option>
-                                                <?php
+            <?php
+            if($result){
+                foreach($result as $datarow){
+                    ?>
+                    <div class="row mb-2 ">
+                        <div class="col">
+                                <select class="form-select" name="updatecolor[]" id="color">
+                                    <option value="0" selected>Select</option>
+                                    <?php
+                                        $colors = $productObj->getColorData();
+                                            if($colors){
+                                                foreach($colors as $row){?>
+                                                    <option value="<?=$row['Color_ID']?>" style="background-color:<?=$row['Color_Value']?>;font-size:22px;" <?php if ($datarow['Color_ID'] === $row['Color_ID'] ) echo 'selected'; ?>><?=$row['Color_Name']?></option>
+                                                    <?php
+                                                }
+                                            }else{
+                                                echo "<option></option>";
                                             }
-                                        }else{
-                                            echo "<option></option>";
-                                        }
-                                ?>
-                            </select>
-                    </div>
-                    <div class="col">
-                        <input type="text"  class="form-control" disabled value ='<?=$datarow['Size_Type']?>'>
-                    </div>
-                    <div class="col">
-                            <select class="form-select" name="updatesizevalue[]" id="sizevalue">
-                                <option value="0" selected>Select</option>
-                                <?php
-                                    $sizes = $productObj->getSizeValue($datarow['Size_Type']);
-                                        if($sizes){
-                                            foreach($sizes as $row){?>
-                                                <option value="<?=$row['Size_ID']?>" <?php if ($datarow['Size_ID'] === $row['Size_ID'] ) echo 'selected'; ?>><?=$row['Size_Value']?></option>
-                                                <?php
+                                    ?>
+                                </select>
+                        </div>
+                        <div class="col">
+                            <input type="text"  class="form-control" disabled value ='<?=$datarow['Size_Type']?>'>
+                        </div>
+                        <div class="col">
+                                <select class="form-select" name="updatesizevalue[]" id="sizevalue">
+                                    <option value="0" selected>Select</option>
+                                    <?php
+                                        $sizes = $productObj->getSizeValue($datarow['Size_Type']);
+                                            if($sizes){
+                                                foreach($sizes as $row){?>
+                                                    <option value="<?=$row['Size_ID']?>" <?php if ($datarow['Size_ID'] === $row['Size_ID'] ) echo 'selected'; ?>><?=$row['Size_Value']?></option>
+                                                    <?php
+                                                }
+                                            }else{
+                                                echo "<option></option>";
                                             }
-                                        }else{
-                                            echo "<option></option>";
-                                        }
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
+                        </div>
+                        <div class="col">
+                            <input type="number" name="qty[]" class="form-control" value="<?=$datarow['Stock_Qty']?>">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="number" name="qty[]" class="form-control" value="<?=$datarow['Stock_Qty']?>">
-                    </div>
-                </div>
-                <?php
+                    <?php
+                }
             }
+            
             ?>
         </div>
         <div class="modal-footer">
