@@ -341,6 +341,16 @@ class OrderController{
         }
     }
 
+    public function getAllHighestDemandingProduct(){
+        $sql = "SELECT p.`Product_ID`,p.Pro_Name,SUM(o.`Order_Qty`) AS orderOTY FROM product p, order_tbl o WHERE p.Product_ID = o.Product_ID GROUP BY(p.Product_ID)";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
     
 
 }
