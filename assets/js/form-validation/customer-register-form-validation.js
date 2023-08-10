@@ -19,7 +19,7 @@ function checkEmailinDB(email,callback){
     });
 }
 $(document).ready(function() {
-    $('#customerRegisterForm').submit(function(event) {
+    $('.regForm').on('submit','#customerRegisterForm',function(event) {
       event.preventDefault(); // Prevent the default form submission
   
       // Perform validation
@@ -108,6 +108,11 @@ $(document).ready(function() {
                         icon: 'success',
                         title: 'Done!',
                         text: 'Your Account was created successfully',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $('#register-form-modal').modal('hide');
+                        }
                     });
                 }else{
                     console.log(response);
