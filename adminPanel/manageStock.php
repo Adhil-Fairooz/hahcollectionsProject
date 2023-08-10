@@ -2,11 +2,12 @@
 $currentSubPage="stock";
 include "ProductManagement.php"; ?>
 <link rel="stylesheet" href="..\assets\css\admin-color-size-style.css">
+<link rel="stylesheet" href="..\assets\css\manage-stock-table-style.css">
 <div class="container">
     <div class="card mt-3">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table main-tbl">
                     <thead>
                         <tr>
                         <th scope="col">Product ID</th>
