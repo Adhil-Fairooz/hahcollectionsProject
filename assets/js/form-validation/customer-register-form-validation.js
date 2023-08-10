@@ -104,7 +104,11 @@ $(document).ready(function() {
             data:{fname:fname,lname:lname,email:email,pass:password},
             success: function(response){
                 if(parseInt(response) === 1){
-                    Swal.fire({icon:'success',title:'Done !',text:'Your Account was created successfully'});
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Done!',
+                        text: 'Your Account was created successfully',
+                    });
                 }else{
                     console.log(response);
                     Swal.fire({icon:'warning',title:'Something is not right',text:''});
