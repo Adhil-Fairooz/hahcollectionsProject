@@ -33,7 +33,7 @@ $(document).ready(function(){
         // Regular expression for email validation
             var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailPattern.test(username)) {
-                $('#strUserError').html('Invalid valid email entered.');
+                $('#strUserError').html('Invalid email entered.');
                 $('#username').addClass('is-invalid');
                 isUsernameValid = false;
             }
