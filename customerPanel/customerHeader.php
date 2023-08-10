@@ -60,7 +60,7 @@ $_SESSION['cart_customerID'] = $customerID;
                     <span class="badge rounded-pill bg-danger" id="cartBadge">
                         
                     </span>
-                </button>
+                    </button>
                 </div>
             </div>
         </div>
