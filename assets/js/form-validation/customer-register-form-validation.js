@@ -72,8 +72,7 @@ $(document).ready(function() {
                         $('#email').addClass('is-valid');
                     }
                 });
-        
-          }
+            }
       }
   
       // Validate password
@@ -98,28 +97,39 @@ $(document).ready(function() {
       if (isFnameValid && isLnameValid && isEmailValid && isPasswordValid && isRePasswordValid) {
           $('.myinputText').removeClass('is-invalid')
           resetStrError();
-         $.ajax({
-            url: "customerRegForm.php",
-            type:"post",
-            data:{fname:fname,lname:lname,email:email,pass:password},
-            success: function(response){
-                if(parseInt(response) === 1){
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Done!',
-                        text: 'Your Account was created successfully',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $('#register-form-modal').modal('hide');
+          isEmailValid = false;
+          checkEmailinDB(email, function(exists) {
+            if (exists) {
+                $('#strEmailError').html('Email already exists.');
+                $('#email').addClass('is-invalid');
+                isEmailValid = false;
+            } else {
+                $('#email').addClass('is-valid');
+                $.ajax({
+                    url: "customerRegForm.php",
+                    type:"post",
+                    data:{fname:fname,lname:lname,email:email,pass:password},
+                    success: function(response){
+                        if(parseInt(response) === 1){
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Done!',
+                                text: 'Your Account was created successfully',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    $('#register-form-modal').modal('hide');
+                                }
+                            });
+                        }else{
+                            console.log(response);
+                            Swal.fire({icon:'warning',title:'Something is not right',text:''});
                         }
-                    });
-                }else{
-                    console.log(response);
-                    Swal.fire({icon:'warning',title:'Something is not right',text:''});
-                }
+                    }
+                 });
             }
-         });
+        });
+         
       }
     });
   });
