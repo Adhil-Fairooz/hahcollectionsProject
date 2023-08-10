@@ -87,3 +87,13 @@ table tbody .colorValue{
   color: #c23616;
   margin-left: 10px;
 }
+#strSupNameERROR,#strSupContactERROR,#strSupEmailERROR{
+  font-size: 12px;
+  color: #c23616;
+  margin-left: 10px;
+}
+#strSupNameERRORUP,#strSupContactERRORUP,#strSupEmailERRORUP{
+  font-size: 12px;
+  color: #c23616;
+  margin-left: 10px;
+}
