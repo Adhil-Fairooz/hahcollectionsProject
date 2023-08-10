@@ -67,7 +67,7 @@ if(isset($_POST['task']) && $_POST['task'] == 'create'){ ?>
                     </div>
                 </div>
            </div>
-           <script src="assets\js\form-validation\customer-register-form-validation.js"></script>
+           
            <!-- body close -->
 <?php }
 ?>
