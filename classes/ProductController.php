@@ -31,6 +31,34 @@ class ProductController{
             return false;
         }
     }
+    public function getColorDataForUpdate($id){
+        $sql_get_color_data = "SELECT * FROM color WHERE Color_ID='$id';";
+        $results = $this->conn->query($sql_get_color_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function updateColorvalues($data){
+        $name = $data['name'];
+        $value = $data['value'];
+        $id = $data['id'];
+        $sql = "UPDATE color SET Color_Name = '$name',Color_Value='$value' WHERE Color_ID='$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function DeleteColorFromDB($id){
+        $sql = "DELETE FROM color WHERE Color_ID='$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /*product size*/
     public function addNewSize($sizeData){
         $generateId = new GenerateID;
@@ -60,6 +88,34 @@ class ProductController{
         $results = $this->conn->query($sql_get_size_Data);
         if($results->num_rows > 0){
             return $results;
+        }else{
+            return false;
+        }
+    }
+    public function getSizeDataForUpdate($id){
+        $sql_get_color_data = "SELECT * FROM size WHERE Size_ID='$id';";
+        $results = $this->conn->query($sql_get_color_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
+    public function updateSizevalues($data){
+        $name = $data['name'];
+        $value = $data['value'];
+        $id = $data['id'];
+        $sql = "UPDATE size SET Size_Type = '$name',Size_Value='$value' WHERE Size_ID='$id'";
+        if($this->conn->query($sql)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function DeleteSizeFromDB($id){
+        $sql = "DELETE FROM size WHERE Size_ID='$id'";
+        if($this->conn->query($sql)){
+            return true;
         }else{
             return false;
         }
