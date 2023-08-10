@@ -102,4 +102,5 @@ if(isset($_POST['addToCart'])){
 
 <script src="..\assets\js\customer-viewProduct.js"></script>
 <script src="..\assets\js\customer-product-page.js"></script>
+<script src="..\assets\js\customer-productQtyClickStock.js"></script>
 <?php include "customerFooter.php"; ?>
