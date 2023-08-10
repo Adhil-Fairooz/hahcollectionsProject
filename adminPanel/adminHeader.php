@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if(!isset( $_SESSION['Admin_ID'])){
+    header("location:../login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +22,7 @@
     <!-- Sweet Alert 2-->
     <script src="..\assets\sweetalert2\jquery-3.5.1.min.js"></script>
     <script src="..\assets\sweetalert2\sweetalert2.all.min.js"></script>
+    <script src="..\assets\js\logoutProccess.js"></script>
 </head>
 <body>  
     <nav class="navbar navbar-expand-lg myNavbar" >
@@ -52,6 +60,9 @@
                         <a class="nav-link mynavLink <?php echo $currentMainPage == 'delivery' ? 'active' : '' ?>"  href="addDeliveryDriver.php">Delivery Handling</a>
                     </li>
                 </ul>
+                <div class="btn-box">
+                <a class="btn btn-outline my-btn my-btn-signout" href="" id="signout"><i class="far fa-user-circle fa-lg" ></i> Sign out</a>
+                </div>
             </div>
         </div>
         
