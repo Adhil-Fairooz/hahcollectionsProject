@@ -85,7 +85,7 @@ $_SESSION['cart_customerID'] = $customerID;
                             <span class="h5">Your Total is : Rs 0.00</span>
                         </div>
                         <div class="row">
-                        <a class="btn btn-primary" href="checkout.php"><i class="far fa-arrow-alt-circle-right"></i> Checkout</a>
+                        <a class="btn btn-primary" href="checkout.php" id="chkoutbtn"><i class="far fa-arrow-alt-circle-right"></i> Checkout</a>
                         </div>
                     </div>
                 </div>

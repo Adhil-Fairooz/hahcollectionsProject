@@ -172,6 +172,16 @@ class ProductController{
             return false;
         }
     }
+    /* Get for search */
+    public function getallProductsByName($searchData){
+        $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_IMG_1, SUM(s.Stock_Qty) FROM product p, product_variation s WHERE p.Product_ID = s.Product_ID AND p.Pro_Name LIKE '%$searchData%' GROUP BY(p.Product_ID)";
+        $results = $this->conn->query($sql_get_data);
+        if($results->num_rows > 0){
+            return $results;
+        }else{
+            return false;
+        }
+    }
     public function getallProductsOnMainSub($main,$sub){
         $sql_get_data = "SELECT p.Product_ID,p.Pro_Name,p.Pro_IMG_1, SUM(s.Stock_Qty) FROM product p, product_variation s, categorization c WHERE p.Product_ID = s.Product_ID AND p.Product_ID = c.Product_ID AND c.Main_ID ='$main' AND c.Sub_ID = '$sub' GROUP BY(p.Product_ID)";
         $results = $this->conn->query($sql_get_data);

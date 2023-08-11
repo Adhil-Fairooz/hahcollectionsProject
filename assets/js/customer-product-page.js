@@ -42,3 +42,29 @@ function loadAllProducts(){
       }
   });
 }
+$(document).ready(function(){
+  $('#customerSearchBox').submit(function(event){
+      event.preventDefault();
+      var searchData = $('input[name="search"]').val();
+
+      Swal.fire({
+          title: 'Please Wait...',
+          html: '<div class="loading-spinner"></div>',
+          text: '',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          willOpen: () => {
+              Swal.showLoading();
+          }
+      });
+
+      $.ajax({
+          url:"loadProducts.php",
+          data:{task:"searchProductCustomer",searchData:searchData},
+          success: function(response){
+              Swal.close();
+              $('#items').html(response);
+          },
+      });
+  });
+});

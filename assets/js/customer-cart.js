@@ -85,8 +85,10 @@ function addtoCart(element){
         success: function(response){
             if(parseInt(response) === 0){
                 $('#cartTotal').html("<span class='h5'>Your Total is : Rs 0.00</span>");
+                $("#chkoutbtn").hide();
             }else{
                 $('#cartTotal').html(response);
+                $("#chkoutbtn").show();
             }
         }
     })

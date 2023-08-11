@@ -15,8 +15,8 @@ $cartObj = new CartController;
 <div class="container-fluid mycontainer">
     <nav class="navbar ">
         <div class="container">
-            <form class="d-flex search-box">
-                <input class="form-control search-input " type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex search-box" id = "customerSearchBox">
+                <input class="form-control search-input " type="search" name="search" placeholder="Search" aria-label="Search">
                 <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
             </form>
         </div>
@@ -93,12 +93,7 @@ $cartObj = new CartController;
       
     </div>
 </div>
-<?php /* 
-if(isset($_POST['addToCart'])){
 
-
-}*/
-?>
 
 <script src="..\assets\js\customer-viewProduct.js"></script>
 <script src="..\assets\js\customer-product-page.js"></script>

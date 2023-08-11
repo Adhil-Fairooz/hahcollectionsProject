@@ -95,3 +95,36 @@ if(isset($_GET['pId']) && isset($_GET['sId']) && isset($_GET['cId'])){
 }
 
 ?>
+<?php 
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'searchProductCustomer'){
+    $resProducts = $productObj -> getallProductsByName($_REQUEST['searchData']);
+    if($resProducts){
+        foreach($resProducts as $row){ ?>
+        <div class="card items" >
+        <img src="data:image/jpg;charset=utf8;base64,<?=base64_encode($row['Pro_IMG_1'])?>" class="card-img-top card-img" alt="...">
+        <div class="card-body">
+            <h5 class="card-title item-title"><?=$row['Pro_Name']?></h5>
+                <?php 
+                if($row['SUM(s.Stock_Qty)'] > 0){
+                    echo "<p class='card-text item-stockIn'>Available</p>";
+                }else{
+                    echo "<p class='card-text item-stockout'>Sold out!</p>";
+                }
+                ?>
+            
+            <a class="btn btn-primary card-btn viewProductModalBtn" data-productId="<?=$row['Product_ID']?>" onclick="showModal(this)">View</a>
+        </div>
+    </div>
+
+      <?php  }
+    }else{
+        ?>
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title item-title">No Results Found for : <?=$_REQUEST['searchData']?></h5>
+            </div>
+        </div>
+        <?php
+    }
+}
+?>
