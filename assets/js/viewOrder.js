@@ -109,6 +109,31 @@ $(document).ready(function(){
         loadOrderOnCondition(paymentMethods,os);
     });
 
+    $('#adminInvoiceSearch').submit(function(event){
+        event.preventDefault();
+        var id = $('input[name="InvoiceID"]').val();
+
+        Swal.fire({
+            title: 'Please Wait...',
+            html: '<div class="loading-spinner"></div>',
+            text: '',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            willOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        $.ajax({
+            url:"orderAjaxCalls.php",
+            data:{task:"searchInvoice",searchData:id},
+            success: function(response){
+                Swal.close();
+                $('tbody').html(response);
+            },
+        });
+
+    });
+
 });
 
 function loadOrderOnCondition(pm,os){

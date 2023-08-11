@@ -8,6 +8,7 @@ $offerObj = new offerController;
 ?>
 <link rel="stylesheet" href="../assets/css/customer-home-style.css">
 <div class="container-fluid">
+
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators c-indi">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active c-indi" aria-current="true" aria-label="Slide 1"></button>
@@ -57,5 +58,6 @@ $offerObj = new offerController;
       
     </div>
   </div>
+  
 </div>
 <?php include "customerFooter.php"; ?>

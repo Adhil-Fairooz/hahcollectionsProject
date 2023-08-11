@@ -103,6 +103,15 @@ class OrderController{
             return false;
         }
     }
+    public function DisplayOrdersByID($id){
+        $sql = "SELECT * FROM invoice WHERE Invoice_ID = '$id'";
+        $result = $this->conn->query($sql);
+        if($result->num_rows > 0){
+            return $result;
+        }else{
+            return false;
+        }
+    }
     
     public function getOrderInFoTable($invoiceID){
         $sql = "SELECT p.Product_ID,s.Size_ID,c.Color_ID,p.Pro_Name,s.Size_Value,c.Color_Value,c.Color_Name,o.Order_Qty FROM product p, size s, color c, order_tbl o WHERE p.Product_ID = o.Product_ID AND s.Size_ID = o.Size_ID AND c.Color_ID = o.Color_ID AND o.Invoice_ID = '$invoiceID'";

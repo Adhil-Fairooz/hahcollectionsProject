@@ -342,3 +342,28 @@ if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'AssignDriver'){
 }
 
 ?>
+
+<?php 
+
+if(isset($_REQUEST['task']) && $_REQUEST['task'] === 'searchInvoice'){
+    $orderRes = $orderObj->DisplayOrdersByID($_REQUEST['searchData']);
+    if($orderRes){
+        foreach($orderRes as $row){
+            ?>
+            <tr>
+                <th scope="col"><?=$row['Invoice_ID']?></th>
+                <td><?=$row['Order_Date']?></td>
+                <td><?=$row['order_status']?></td>
+                <td><button class="btn viewbtn" id="view" data-paymentID="<?=$row['Payment_ID']?>" data-invoiceID = "<?=$row['Invoice_ID']?>" data-orderStatus ='<?=$row['order_status']?>'><i class="far fa-eye"></i> View</button></td>
+            </tr>
+            <?php
+        }
+    }else{
+        ?>
+        
+        <tr><td colspan="4" class="label">No Orders Yet</td></tr>
+        
+        <?php
+    }
+}
+?>

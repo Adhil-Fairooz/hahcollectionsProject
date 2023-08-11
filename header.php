@@ -31,8 +31,8 @@
                 <li class="nav-item mynavitem">
                 <a class="nav-link mynavLink"  href="index.php">Home</a>
                 </li>
-                <form class="d-flex search-box">
-                    <input class="form-control search-input " type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex search-box" id="homeSearch">
+                    <input class="form-control search-input " name="search" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
                  </form>
             </ul>

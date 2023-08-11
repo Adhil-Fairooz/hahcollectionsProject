@@ -10,8 +10,8 @@ include "OrderManagement.php";
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 off-my-col">
-                    <form class="d-flex search-box">
-                        <input class="form-control search-input " type="search" placeholder="Invoice ID" aria-label="Search">
+                    <form class="d-flex search-box" id="adminInvoiceSearch">
+                        <input class="form-control search-input " name='InvoiceID' type="search" placeholder="Invoice ID" aria-label="Search">
                         <button class="btn search-btn" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                 </div>
