@@ -60,10 +60,10 @@ $offerObj = new offerController;
   </div>
 
 
-
+  <link rel="stylesheet" href="assets/css/customer-product-style.css">
 
   <div class="card main-container">
-    <div class="card-header main-container-title"><span>MENS Wear</span> <button class="btn btn-outline btn-seemore" href="login.php">See More >></button></div>
+    <div class="card-header main-container-title"><span id="title">MENS Wear</span> <a class="btn btn-outline btn-seemore" href="login.php">See More >></a></div>
     <div class="card-body main-container-body">
         <div class="row" id="items">
 
@@ -72,6 +72,18 @@ $offerObj = new offerController;
   </div>
 </div>
 
+<div class="modal fade my-product-modal" id="viewProduct" aria-labelledby="staticBackdropLabel" data-bs-backdrop="static" data-bs-keyboard="false"> 
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <link rel="stylesheet" href="assets\css\product-modal-style-A.css">
+    <script src="..\assets\js\product-view-quantity.js"></script>
+      <div class="modal-content my-modal-content">
+        
+      </div>
+      
+    </div>
+</div>
 </section>
 <script src="assets\js\home-page.js"></script>
+
+<script src="assets\js\customer-productQtyClickStock.js"></script>
 <?php include "footer.php"?>

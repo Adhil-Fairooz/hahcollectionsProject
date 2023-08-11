@@ -38,22 +38,11 @@
             </ul>
             
                 <a class="btn btn-outline my-btn" href="login.php"><i class="far fa-user-circle fa-lg"></i> Sign In</a>
-                <button class="btn btn-outline my-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fas fa-cart-plus fa-lg"></i> Cart</button>
+                <a class="btn btn-outline my-btn" href="login.php"><i class="fas fa-cart-plus fa-lg"></i> Cart</a>
             
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="offcanvas offcanvas-end my-canvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Your Cart</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body my-canvas-body">
-
-    </div>
-    </div>
-</div>
 
 
 

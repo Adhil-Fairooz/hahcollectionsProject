@@ -14,7 +14,7 @@ include "OfferManagement.php";
                         </form>
                 </div>
                 <div class="col-lg-3"><button class="btn my-Btn add-offer-private">Add New Offer Item</button></div>
-                <div class="col-lg-3"><span>No of Private Offers: 0</span></div>
+                <div class="col-lg-3"><span></span></div>
             </div>
         </div>
     </div>

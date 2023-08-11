@@ -16,12 +16,13 @@ include "adminHeader.php";
             <li class="nav-item mynavitemSub">
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'sales' ? 'active' : '' ?>"  href="sales.php">Sales Progress</a>
             </li>
+            <!--
             <li class="nav-item mynavitemSub">
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'manageAdmin' ? 'active' : '' ?>"  href="ManageAdmin.php">Manage Admin</a>
             </li>
             <li class="nav-item mynavitemSub">
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'adminPass' ? 'active' : '' ?>"  href="adminChangePassword.php">Change Password</a>
-            </li>
+            </li> -->
         </ul>
 
     </div>

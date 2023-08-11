@@ -1,6 +1,11 @@
 <?php 
 $currentSubPage="adminHome";
-include "admin.php"; ?>
+include "admin.php"; 
+include "..\classes\DBConnect.php";
+include "..\classes\AdminController.php";
+$db = new DatabaseConnection;
+$adminObj = new AdminController;
+?>
 <link rel="stylesheet" href="..\assets\css\admin-dashboard-home-style-A.css">
 
 <div class="card main-container">
@@ -27,7 +32,7 @@ include "admin.php"; ?>
 
                                         <div class="card-title my-content-box-title">Main</div>
 
-                                        <div class="card-text my-content-box-text">4</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountMainCategory()?></div>
                                         
                                     </div>
 
@@ -43,7 +48,7 @@ include "admin.php"; ?>
 
                                         <div class="card-title my-content-box-title">Sub</div>
 
-                                        <div class="card-text my-content-box-text">16</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountSubCategory()?></div>
 
                                     </div>
 
@@ -59,7 +64,7 @@ include "admin.php"; ?>
 
                                         <div class="card-title my-content-box-title">Brand</div>
 
-                                        <div class="card-text my-content-box-text">5</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountBrand()?></div>
                                         
                                     </div>
 
@@ -75,7 +80,7 @@ include "admin.php"; ?>
 
                                         <div class="card-title my-content-box-title">Supplier</div>
 
-                                        <div class="card-text my-content-box-text">5</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountSupplier()?></div>
                                         
                                     </div>
 
@@ -99,7 +104,7 @@ include "admin.php"; ?>
                             <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
                                         <div class="card-title my-content-box-title">New Orders</div>
-                                        <div class="card-text my-content-box-text">4</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountNewOrders()?></div>
                                         
                                     </div>
                                 </div>
@@ -108,7 +113,7 @@ include "admin.php"; ?>
                                 <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
                                         <div class="card-title my-content-box-title">Ready Orders</div>
-                                        <div class="card-text my-content-box-text">16</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountReadyOrders()?></div>
                                         
                                     </div>
                                 </div>
@@ -117,7 +122,7 @@ include "admin.php"; ?>
                             <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
                                         <div class="card-title my-content-box-title">Completed Orders</div>
-                                        <div class="card-text my-content-box-text">4</div>
+                                        <div class="card-text my-content-box-text"><?=$adminObj->getCountCompleted()?></div>
                                         
                                     </div>
                                 </div>
@@ -130,14 +135,14 @@ include "admin.php"; ?>
         <div class="row main-row">
             <div class="col main-col">
                 <div class="card sub-card">
-                    <div class="card-header my-card-header">Product Returns</div>
+                    <div class="card-header my-card-header">Product Offers</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
                             <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
-                                        <div class="card-title my-content-box-title">Return Requests</div>
-                                        <div class="card-text my-content-box-text">4</div>
+                                        <div class="card-title my-content-box-title">Public Offers</div>
+                                        <div class="card-text my-content-box-text">1</div>
                                         
                                     </div>
                                 </div>
@@ -145,22 +150,11 @@ include "admin.php"; ?>
                             <div class="col">
                                 <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
-                                        <div class="card-title my-content-box-title">Rejected Requests</div>
-                                        <div class="card-text my-content-box-text">5</div>
+                                        <div class="card-title my-content-box-title">Private Offers</div>
+                                        <div class="card-text my-content-box-text">1</div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="card my-card-content-box">
-                                    <div class="card-body my-content-box-body">
-                                        <div class="card-title my-content-box-title">Approved Requests</div>
-                                        <div class="card-text my-content-box-text">5</div>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            
+                            </div>                         
                         </div>
                     </div>
                 </div>
@@ -174,7 +168,7 @@ include "admin.php"; ?>
                                 <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
                                         <div class="card-title my-content-box-title">Instock</div>
-                                        <div class="card-text my-content-box-text">4</div>
+                                        <div class="card-text my-content-box-text">5</div>
                                         
                                     </div>
                                 </div>
@@ -183,7 +177,7 @@ include "admin.php"; ?>
                                 <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
                                         <div class="card-title my-content-box-title">Out of stock</div>
-                                        <div class="card-text my-content-box-text">4</div>
+                                        <div class="card-text my-content-box-text">0</div>
                                         
                                     </div>
                                 </div>
@@ -192,7 +186,7 @@ include "admin.php"; ?>
                                 <div class="card my-card-content-box">
                                     <div class="card-body my-content-box-body">
                                         <div class="card-title my-content-box-title">Low in Stock</div>
-                                        <div class="card-text my-content-box-text">5</div>
+                                        <div class="card-text my-content-box-text">0</div>
                                         
                                     </div>
                                 </div>

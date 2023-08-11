@@ -20,9 +20,10 @@ $supplierObj = new SupplierController;
             <li class="nav-item mynavitemSub">
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'addSup' ? 'active' : '' ?>"  href="addSupplier.php">Add New Suppliers</a>
             </li>
+            <!--
             <li class="nav-item mynavitemSub">
                 <a class="nav-link mynavLinkSub <?php echo $currentSubPage == 'reOrderStock' ? 'active' : '' ?>"  href="reOrder.php">Reorder stock</a>
-            </li>
+            </li> -->
         </ul>
 
     </div>
